@@ -1,11 +1,21 @@
 package com.phasesdiscord;
 
-import com.phasesdiscord.discordstuff.DiscordMain;
+import club.minnced.discord.rpc.DiscordEventHandlers;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.MinecraftClient;
 
 public class PhaseDiscordClient implements ClientModInitializer {
+
+	MinecraftClient client = MinecraftClient.getInstance();
+
+
+	String appID = "1147361100929708053"; //app id for discord
+
+	DiscordEventHandlers handlers = new DiscordEventHandlers();
 	@Override
 	public void onInitializeClient() {
-		DiscordMain.DiscordBootup();
+		handlers.ready = (user) -> System.out.println("Ready!");
+
 	}
+
 }
