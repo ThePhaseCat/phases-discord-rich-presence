@@ -11,7 +11,13 @@ base {
 }
 
 repositories {
-	maven { url 'https://jitpack.io' }
+	jcenter()
+	maven {
+		url = "https://jitpack.io/"
+		content {
+			includeGroup("com.github.MinnDevelopment")
+		}
+	}
 }
 
 loom {
@@ -35,7 +41,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	implementation 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'
+	//implementation 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'
+	//implementation 'club.minnced:discord-rpc-release:v3.4.0'
+	include(implementation ('club.minnced:discord-rpc-release:v3.4.0'))
+	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 }
 
 processResources {
