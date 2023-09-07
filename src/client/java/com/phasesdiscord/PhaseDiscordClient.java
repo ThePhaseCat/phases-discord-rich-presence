@@ -23,7 +23,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
 	DiscordEventHandlers handlers = new DiscordEventHandlers(); //discord event handler
 
-	Integer times = 0;
 	Timer t = new Timer();
 	Long start_time = System.currentTimeMillis() / 1000;
 	@Override
@@ -72,9 +71,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 			boolean inSingleplayer = client.isInSingleplayer();
 			String worldName = client.world.getRegistryKey().getValue().toString();
 			DimensionType dimensionType = client.world.getDimension();
-			String dimensionEffect = dimensionType.effects().toString();
-
-			System.out.println(dimensionEffect);
+			String dimensionName = dimensionType.effects().toString();
 
 			DiscordRichPresence presence = new DiscordRichPresence();
 
@@ -94,10 +91,10 @@ public class PhaseDiscordClient implements ClientModInitializer {
 			presence.instance = 1; //still no clue what this means
 
 			//all of this stuff here is useless
-			presence.partyId = "priv_party"; //this is useless, but i'm keeping it here
-			presence.matchSecret = "doesthismatter"; //this is also useless, but i'm keeping it here
-			presence.joinSecret = "stillno";
-			presence.spectateSecret = "stillno";
+			presence.partyId = "priv_party";
+			presence.matchSecret = "abXyyz";
+			presence.joinSecret = "moonSqikCklaw";
+			presence.spectateSecret = "moonSqikCklawkLopalwdNq";
 
 			//presence state checks
 			if(!inSingleplayer)
@@ -113,12 +110,28 @@ public class PhaseDiscordClient implements ClientModInitializer {
 			}
 			else //means in singeplayer
 			{
-				presence.state = "Playing Singleplayer on " + worldName;
-				presence.partyId = worldName;
-				presence.matchSecret = worldName.toLowerCase();
+				presence.state = "Playing Singleplayer";
+				presence.partySize = 1;
+				presence.partyMax = 1;
 			}
 
+
 			//dimension checks
+			if(dimensionName.equals("minecraft:overworld"))
+			{
+				presence.smallImageKey = "testicon2";
+				presence.smallImageText = "In The Overworld";
+			}
+			if(dimensionName.equals("minecraft:the_nether"))
+			{
+				presence.smallImageKey = "testicon3";
+				presence.smallImageText = "In The Nether";
+			}
+			if(dimensionName.equals("minecraft:the_end"))
+			{
+				presence.smallImageKey = "testicon4";
+				presence.smallImageText = "In The End";
+			}
 
 			discord.Discord_UpdatePresence(presence);
 		}
