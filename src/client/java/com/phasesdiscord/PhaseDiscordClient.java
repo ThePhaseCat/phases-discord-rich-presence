@@ -4,6 +4,14 @@ import club.minnced.discord.rpc.*;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.dimension.DimensionType;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PhaseDiscordClient implements ClientModInitializer {
 	DiscordRPC discord = DiscordRPC.INSTANCE; //discord rich presence instance
@@ -14,13 +22,33 @@ public class PhaseDiscordClient implements ClientModInitializer {
 	MinecraftClient client = MinecraftClient.getInstance(); //client instance
 
 	DiscordEventHandlers handlers = new DiscordEventHandlers(); //discord event handler
+
+	Integer times = 0;
+	Timer t = new Timer();
+	Long start_time = System.currentTimeMillis() / 1000;
 	@Override
 	public void onInitializeClient() {
 		handlers.ready = (user) -> System.out.println("Ready!");
 		discord.Discord_Initialize(appID, handlers, true, steamId);
 
 		basicDiscordPresence();
+		new Thread(() -> {
+			while (!Thread.currentThread().isInterrupted()) {
+				discord.Discord_RunCallbacks();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException ignored) {
+				}
+			}
+		}, "RPC-Callback-Handler").start();
 
+		t.scheduleAtFixedRate(new TimerTask() {
+
+			@Override
+			public void run() {
+				updateDiscordPresence();
+			}
+		}, 5000, 5000);
 	}
 
 
@@ -35,5 +63,68 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
 		presence.instance = 1; //i'm going to be honest, idk what this does
 		discord.Discord_UpdatePresence(presence); //update discord presence
+	}
+
+	private void updateDiscordPresence()
+	{
+		if(client.world != null)
+		{
+			boolean inSingleplayer = client.isInSingleplayer();
+			String worldName = client.world.getRegistryKey().getValue().toString();
+			DimensionType dimensionType = client.world.getDimension();
+			String dimensionEffect = dimensionType.effects().toString();
+
+			System.out.println(dimensionEffect);
+
+			DiscordRichPresence presence = new DiscordRichPresence();
+
+			//check if player holds something, update presence from there
+			if(client.player!=null){
+				ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
+				String item_name = held_item.getName().getString();
+				if (!item_name.equals("Air")) {
+					presence.details = "Holding " + item_name;
+				}
+			}
+
+			//presence start stuff
+			presence.startTimestamp = start_time;
+			presence.largeImageKey = "testicon1"; //change icon for when in a world
+			presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
+			presence.instance = 1; //still no clue what this means
+
+			//all of this stuff here is useless
+			presence.partyId = "priv_party"; //this is useless, but i'm keeping it here
+			presence.matchSecret = "doesthismatter"; //this is also useless, but i'm keeping it here
+			presence.joinSecret = "stillno";
+			presence.spectateSecret = "stillno";
+
+			//presence state checks
+			if(!inSingleplayer)
+			{
+				String serverIP = "";
+				if(client.getCurrentServerEntry() != null)
+				{
+					serverIP = client.getCurrentServerEntry().address;
+				}
+				presence.state = "Playing Multiplayer on " + serverIP;
+				presence.partyId = serverIP;
+				presence.matchSecret = serverIP.toLowerCase();
+			}
+			else //means in singeplayer
+			{
+				presence.state = "Playing Singleplayer on " + worldName;
+				presence.partyId = worldName;
+				presence.matchSecret = worldName.toLowerCase();
+			}
+
+			//dimension checks
+
+			discord.Discord_UpdatePresence(presence);
+		}
+		else
+		{
+			basicDiscordPresence();
+		}
 	}
 }
