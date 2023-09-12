@@ -69,7 +69,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 		if(client.world != null)
 		{
 			boolean inSingleplayer = client.isInSingleplayer();
-			String worldName = client.world.getRegistryKey().getValue().toString();
 			DimensionType dimensionType = client.world.getDimension();
 			String dimensionName = dimensionType.effects().toString();
 
