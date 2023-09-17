@@ -18,6 +18,9 @@ repositories {
 			includeGroup("com.github.MinnDevelopment")
 		}
 	}
+	maven {
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 loom {
@@ -45,6 +48,8 @@ dependencies {
 	//implementation 'club.minnced:discord-rpc-release:v3.4.0'
 	include(implementation ('club.minnced:discord-rpc-release:v3.4.0'))
 	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
+
+	modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 }
 
 processResources {
