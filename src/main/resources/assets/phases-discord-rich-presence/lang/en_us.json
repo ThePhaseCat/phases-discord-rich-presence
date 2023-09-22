@@ -1,5 +1,7 @@
 {
   "phases-discord-rich-presence.midnightconfig.title":"Discord Rich Presence Config",
   "phases-discord-rich-presence.midnightconfig.text2":"Settings",
-  "phases-discord-rich-presence.midnightconfig.discordEnable":"Enable Presence"
+  "phases-discord-rich-presence.midnightconfig.discordEnable":"Enable Presence",
+  "phases-discord-rich-presence.midnightconfig.enableServerIP":"Show Server IP in Presence",
+  "phases-discord-rich-presence.midnightconfig.enableItem": "Show item in Presence"
 }

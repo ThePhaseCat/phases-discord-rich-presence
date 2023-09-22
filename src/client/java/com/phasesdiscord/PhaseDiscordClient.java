@@ -85,11 +85,18 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //check if player holds something, update presence from there
             if (client.player != null) {
-                ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
-                String item_name = held_item.getName().getString();
-                if (!item_name.equals("Air")) {
-                    presence.details = "Holding " + item_name;
+                if(phasesdiscordConfig.enableItem == false) {
+                    presence.details = "Playing Minecraft";
                 }
+                else
+                {
+                    ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
+                    String item_name = held_item.getName().getString();
+                    if (!item_name.equals("Air")) {
+                        presence.details = "Holding " + item_name;
+                    }
+                }
+
             }
 
             //presence start stuff
@@ -106,13 +113,23 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //presence state checks
             if (!inSingleplayer) {
-                String serverIP = "";
-                if (client.getCurrentServerEntry() != null) {
-                    serverIP = client.getCurrentServerEntry().address;
+                if(phasesdiscordConfig.enableServerIP == false) {
+                    presence.state = "Playing Multiplayer";
+                    presence.partySize = 1;
+                    presence.partyMax = 1;
+                    discord.Discord_UpdatePresence(presence);
                 }
-                presence.state = "Playing Multiplayer on " + serverIP;
-                presence.partyId = serverIP;
-                presence.matchSecret = serverIP.toLowerCase();
+                else
+                {
+                    String serverIP = "";
+                    if (client.getCurrentServerEntry() != null) {
+                        serverIP = client.getCurrentServerEntry().address;
+                    }
+                    presence.state = "Playing Multiplayer on " + serverIP;
+                    presence.partyId = serverIP;
+                    presence.matchSecret = serverIP.toLowerCase();
+                }
+
             } else //means in singeplayer
             {
                 presence.state = "Playing Singleplayer";
