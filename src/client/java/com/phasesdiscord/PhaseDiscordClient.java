@@ -140,16 +140,37 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //dimension checks
             if (dimensionName.equals("minecraft:overworld")) {
-                presence.smallImageKey = "testicon2";
-                presence.smallImageText = "In The Overworld";
+                if(phasesdiscordConfig.enableDimension == false)
+                {
+                    //empty
+                }
+                else
+                {
+                    presence.smallImageKey = "testicon2";
+                    presence.smallImageText = "In The Overworld";
+                }
             }
             if (dimensionName.equals("minecraft:the_nether")) {
-                presence.smallImageKey = "testicon3";
-                presence.smallImageText = "In The Nether";
+                if(phasesdiscordConfig.enableDimension == false)
+                {
+                    //empty
+                }
+                else
+                {
+                    presence.smallImageKey = "testicon3";
+                    presence.smallImageText = "In The Nether";
+                }
             }
             if (dimensionName.equals("minecraft:the_end")) {
-                presence.smallImageKey = "testicon4";
-                presence.smallImageText = "In The End";
+                if(phasesdiscordConfig.enableDimension == false)
+                {
+                    //empty
+                }
+                else
+                {
+                    presence.smallImageKey = "testicon4";
+                    presence.smallImageText = "In The End";
+                }
             }
 
             discord.Discord_UpdatePresence(presence);
