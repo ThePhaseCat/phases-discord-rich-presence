@@ -101,7 +101,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //presence start stuff
             presence.startTimestamp = start_time;
-            presence.largeImageKey = "testicon1"; //change icon for when in a world
+            presence.largeImageKey = "base"; //change icon for when in a world
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
             presence.instance = 1; //still no clue what this means
 
@@ -146,7 +146,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 else
                 {
-                    presence.smallImageKey = "testicon2";
+                    presence.smallImageKey = "overworld";
                     presence.smallImageText = "In The Overworld";
                 }
             }
@@ -157,7 +157,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 else
                 {
-                    presence.smallImageKey = "testicon3";
+                    presence.smallImageKey = "nether";
                     presence.smallImageText = "In The Nether";
                 }
             }
@@ -168,7 +168,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 else
                 {
-                    presence.smallImageKey = "testicon4";
+                    presence.smallImageKey = "the_end";
                     presence.smallImageText = "In The End";
                 }
             }

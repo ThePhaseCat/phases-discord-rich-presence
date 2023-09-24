@@ -9,5 +9,5 @@
   "phases-discord-rich-presence.midnightconfig.enableDimension": "Show dimension in Presence",
   "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Enable or disable the dimension you're located in from showing in the Presence",
   "phases-discord-rich-presence.midnightconfig.category.basic": "Basic Settings",
-  "phases-discord-rich-presence.midnightconfig.category.test": "Test Settings"
+  "phases-discord-rich-presence.midnightconfig.category.test": "Advanced Settings"
 }
