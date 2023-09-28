@@ -12,6 +12,4 @@ public class phasesdiscordConfig extends MidnightConfig {
     @Entry(category = "basic") public static boolean enableItem = true;
 
     @Entry(category = "basic") public static boolean enableDimension = true;
-
-    @Entry(category = "test") public static String test = "test";
 }

@@ -9,5 +9,8 @@
   "phases-discord-rich-presence.midnightconfig.enableDimension": "Show dimension in Presence",
   "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Enable or disable the dimension you're located in from showing in the Presence",
   "phases-discord-rich-presence.midnightconfig.category.basic": "Basic Settings",
-  "phases-discord-rich-presence.midnightconfig.category.test": "Advanced Settings"
+  "phases-discord-rich-presence.midnightconfig.category.test": "The Advanced Settings",
+  "phases-discord-rich-presence.midnightconfig.info1": "This section is for changing the text of the Rich Presence!",
+  "phases-discord-rich-presence.midnightconfig.info2": "Server IP: {ip} \nItem Name: {item_name}",
+  "phases-discord-rich-presence.midnightconfig.multiplayerState": "Multiplayer State"
 }

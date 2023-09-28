@@ -72,7 +72,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     private void updateDiscordPresence() {
         if(phasesdiscordConfig.discordEnable == false) {
-            System.out.println("not active");
             discord.Discord_ClearPresence();
             return;
         }
