@@ -1,17 +1,15 @@
 # Phase's Discord Rich Presence
 
-A mod that adds simple Discord Rich Presence into Minecraft!
+A mod that adds simple and light Discord Rich Presence into Minecraft!
 
 # Requirements
 Minecraft `1.20.2`
 
-(CHANGE) Fabric Loader `>=0.14.21`
-
-(CHANGE) Fabric API `>=0.83.0+1.20,>=0.83.0+1.21`
+Fabric Loader `>=0.14.22`
 
 # How to use
 
-To start, simply have Discord open, either in the background or on your desktop and as long as the config is set to be turned on, then you should see Discord Rich Presence!
+To start, simply have Discord open, either in the background or on your desktop and as long as the config is set to be turned on, then you should see Discord Rich Presence using this mod!
 
 ## Config
 TO DO
