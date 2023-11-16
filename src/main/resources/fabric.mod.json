@@ -3,7 +3,7 @@
 	"id": "phases-discord-rich-presence",
 	"version": "${version}",
 	"name": "Phase's Discord Rich Presence",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Adding Discord Rich Presence to Minecraft in a simple and light way!",
 	"authors": [
 		"ThePhaseCat"
 	],
