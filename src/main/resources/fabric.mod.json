@@ -11,7 +11,7 @@
 		"homepage": "https://github.com/ThePhaseCat/phases-discord-rich-presence",
 		"sources": "https://github.com/ThePhaseCat/phases-discord-rich-presence"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/phases-discord-rich-presence/icon.png",
 	"environment": "*",
 	"entrypoints": {
