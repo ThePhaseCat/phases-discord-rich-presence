@@ -14,7 +14,10 @@ Fabric API `>=0.90.7`
 To start, simply have Discord open, either in the background or on your desktop and as long as the config is set to be turned on, then you should see Discord Rich Presence using this mod!
 
 ## Config
-TO DO
+The config is short and simple while trying to be as flexable as possible for you!
+
+The config screen can be accessed in your Minecraft options using the MidnightLib icon! (If you are using ModMenu, the config may not appear. To fix this, go in your ModMenu settings and turn on visability for libraries and then go to the MidnightLib Library and switch the config setting from ModMenu to Yes)
+![image_config](https://github.com/ThePhaseCat/phases-discord-rich-presence/assets/84151006/e38fbf13-251f-4a83-aa78-32c3e95f9f6f)
 
 ## Contributing
 
