@@ -112,26 +112,10 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //presence state checks
             if (!inSingleplayer) {
-                if(phasesdiscordConfig.enableServerIP == false) {
-                    System.out.println("serverIP setting is false, this is a debug message");
-                    presence.state = "Playing Multiplayer";
-                    presence.partySize = 1;
-                    presence.partyMax = 1;
-                    discord.Discord_UpdatePresence(presence);
-                }
-                else
-                {
-                    String serverIP = "";
-                    if (client.getCurrentServerEntry() != null) {
-                        System.out.println("serverIP setting is true, rest of stuff is related to the setting being true");
-                        System.out.println("serverIP is " + client.getCurrentServerEntry().address);
-                        serverIP = client.getCurrentServerEntry().address;
-                    }
-                    presence.state = "Playing Multiplayer on " + serverIP;
-                    presence.partyId = serverIP;
-                    presence.matchSecret = serverIP.toLowerCase();
-                }
-
+                presence.state = "Playing Multiplayer";
+                presence.partySize = 1;
+                presence.partyMax = 1;
+                discord.Discord_UpdatePresence(presence);
             } else //means in singeplayer
             {
                 presence.state = "Playing Singleplayer";
