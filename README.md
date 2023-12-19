@@ -5,9 +5,11 @@ A mod that adds simple and light Discord Rich Presence into Minecraft!
 # Requirements
 Minecraft `1.20.4`
 
-Fabric Loader `>=0.15.0`
+Fabric Loader `>=0.15.3`
 
-Fabric API `>=0.91.2`
+Fabric API `>=0.91.3`
+
+MidnightLib (if you want to change settings) `>=1.5.3`
 
 # How to use
 
