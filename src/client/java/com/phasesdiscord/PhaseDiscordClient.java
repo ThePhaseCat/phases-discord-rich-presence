@@ -112,7 +112,18 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //presence state checks
             if (!inSingleplayer) {
-                presence.state = "Playing Multiplayer";
+                String serverip = "";
+                if (client.getCurrentServerEntry() != null) {
+                    serverip = client.getCurrentServerEntry().address.toUpperCase();
+                }
+                if(phasesdiscordConfig.enableServerIP == false)
+                {
+                    presence.state = "Playing Multiplayer";
+                }
+                else
+                {
+                    presence.state = "Playing Multiplayer on " + serverip;
+                }
                 presence.partySize = 1;
                 presence.partyMax = 1;
                 discord.Discord_UpdatePresence(presence);

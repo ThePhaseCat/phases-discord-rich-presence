@@ -9,4 +9,6 @@ public class phasesdiscordConfig extends MidnightConfig
     @Entry public static boolean enableItem = true;
 
     @Entry public static boolean enableDimension = true;
+
+    @Entry public static boolean enableServerIP = true;
 }
