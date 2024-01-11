@@ -32,7 +32,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         //config
         MidnightConfig.init("phases-discord-rich-presence", phasesdiscordConfig.class);
 
