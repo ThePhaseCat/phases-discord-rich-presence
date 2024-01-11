@@ -1,11 +1,13 @@
 {
   "phases-discord-rich-presence.midnightconfig.title":"Discord Rich Presence Config",
   "phases-discord-rich-presence.midnightconfig.discordEnable":"Enable Presence",
-  "phases-discord-rich-presence.midnightconfig.discordEnable.tooltip":"Enable or disable the Discord Rich Presence",
+  "phases-discord-rich-presence.midnightconfig.discordEnable.tooltip":"Toggles the Discord Rich Presence",
   "phases-discord-rich-presence.midnightconfig.enableItem": "Show item in Presence",
-  "phases-discord-rich-presence.midnightconfig.enableItem.tooltip": "Enable or disable the item you're holding from showing in the Presence",
-  "phases-discord-rich-presence.midnightconfig.enableDimension": "Show dimension in Presence",
-  "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Enable or disable the dimension you're located in from showing in the Presence",
+  "phases-discord-rich-presence.midnightconfig.enableItem.tooltip": "Toggles the item you're holding from showing in the Presence",
+  "phases-discord-rich-presence.midnightconfig.enableDimension": "Show Dimension in Presence",
+  "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Toggles the dimension you're located in from showing in the Presence",
   "phases-discord-rich-presence.midnightconfig.enableServerIP": "Show server IP when playing multiplayer",
-  "phases-discord-rich-presence.midnightconfig.enableServerIP.tooltip": "Enable or disable the server IP from showing in the Presence when playing multiplayer"
+  "phases-discord-rich-presence.midnightconfig.enableServerIP.tooltip": "Toggles server IP from showing in the Presence when playing multiplayer",
+  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension Rich Presence",
+  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles support for modded dimensions"
 }

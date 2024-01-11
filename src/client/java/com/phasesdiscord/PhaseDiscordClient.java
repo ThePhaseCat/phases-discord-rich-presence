@@ -28,6 +28,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
     Timer t = new Timer();
     Long start_time = System.currentTimeMillis() / 1000;
 
+    String customDimensionName;
+
     @Override
     public void onInitializeClient() {
         //config
@@ -147,6 +149,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Overworld";
                 }
             }
+            /*
             if (dimensionName.equals("minecraft:the_nether")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
@@ -158,6 +161,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Nether";
                 }
             }
+            */
             if (dimensionName.equals("minecraft:the_end")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
@@ -167,6 +171,25 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 {
                     presence.smallImageKey = "the_end";
                     presence.smallImageText = "In The End";
+                }
+            }
+            else{
+                if(phasesdiscordConfig.enableDimension == false)
+                {
+                    //empty
+                }
+                else
+                {
+                    if(phasesdiscordConfig.enableCustomDimensionSupport == false)
+                    {
+                        //empty
+                    }
+                    else
+                    {
+                        customDimensionName = dimensionName.replace("minecraft:", "");
+                        presence.smallImageKey = "void";
+                        presence.smallImageText = "In " + customDimensionName + " Dimension";
+                    }
                 }
             }
 
