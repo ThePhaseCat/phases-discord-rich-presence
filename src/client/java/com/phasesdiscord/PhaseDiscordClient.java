@@ -32,6 +32,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        System.out.println(client.getVersionType());
+
         //config
         MidnightConfig.init("phases-discord-rich-presence", phasesdiscordConfig.class);
 
@@ -149,7 +151,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Overworld";
                 }
             }
-            /*
             if (dimensionName.equals("minecraft:the_nether")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
@@ -161,7 +162,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Nether";
                 }
             }
-            */
             if (dimensionName.equals("minecraft:the_end")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
