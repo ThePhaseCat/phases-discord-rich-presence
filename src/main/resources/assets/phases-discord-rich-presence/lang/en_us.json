@@ -9,5 +9,8 @@
   "phases-discord-rich-presence.midnightconfig.enableServerIP": "Show server IP when playing multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableServerIP.tooltip": "Toggles server IP from showing in the Presence when playing multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension Rich Presence",
-  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles support for modded dimensions"
+  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles support for modded dimensions",
+  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip2": "This will only work if the modded dimension has a custom dimension type",
+  "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in Presence",
+    "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Presence"
 }

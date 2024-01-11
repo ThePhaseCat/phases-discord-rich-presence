@@ -32,7 +32,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        System.out.println(client.getVersionType());
 
         //config
         MidnightConfig.init("phases-discord-rich-presence", phasesdiscordConfig.class);
@@ -122,18 +121,64 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 if(phasesdiscordConfig.enableServerIP == false)
                 {
+                    if(phasesdiscordConfig.showPaused == false)
+                    {
+                        presence.state = "Playing Multiplayer";
+                    }
+                    else
+                    {
+                        if(client.isPaused())
+                        {
+                            presence.state = "Playing Multiplayer - Paused";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer";
+                        }
+                    }
                     presence.state = "Playing Multiplayer";
                 }
                 else
                 {
-                    presence.state = "Playing Multiplayer on " + serverip;
+                    if(phasesdiscordConfig.showPaused == false)
+                    {
+                        presence.state = "Playing Multiplayer on " + serverip;
+                    }
+                    else
+                    {
+                        if(client.isPaused())
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip + " - Paused";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip;
+                        }
+                    }
+                    //presence.state = "Playing Multiplayer on " + serverip;
                 }
                 presence.partySize = 1;
                 presence.partyMax = 1;
                 discord.Discord_UpdatePresence(presence);
-            } else //means in singeplayer
+            }
+            else //means in singeplayer
             {
-                presence.state = "Playing Singleplayer";
+                if(phasesdiscordConfig.showPaused == false)
+                {
+                    presence.state = "Playing Singleplayer";
+                }
+                else
+                {
+                    if(client.isPaused())
+                    {
+                        presence.state = "Playing Singleplayer - Paused";
+                    }
+                    else
+                    {
+                        presence.state = "Playing Singleplayer";
+                    }
+                }
+                //presence.state = "Playing Singleplayer";
                 presence.partySize = 1;
                 presence.partyMax = 1;
             }
