@@ -195,7 +195,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Overworld";
                 }
             }
-            if (dimensionName.equals("minecraft:the_nether")) {
+            else if (dimensionName.equals("minecraft:the_nether")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
                     //empty
@@ -206,7 +206,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.smallImageText = "In The Nether";
                 }
             }
-            if (dimensionName.equals("minecraft:the_end")) {
+            else if (dimensionName.equals("minecraft:the_end")) {
                 if(phasesdiscordConfig.enableDimension == false)
                 {
                     //empty
@@ -230,6 +230,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     }
                     else
                     {
+                        //System.out.println(dimensionName + " why is this not working");
                         customDimensionName = dimensionName.replace("minecraft:", "");
                         presence.smallImageKey = "void";
                         presence.smallImageText = "In " + customDimensionName + " Dimension";

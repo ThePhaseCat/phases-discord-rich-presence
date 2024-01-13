@@ -2,15 +2,14 @@
   "phases-discord-rich-presence.midnightconfig.title":"Discord Rich Presence Config",
   "phases-discord-rich-presence.midnightconfig.discordEnable":"Enable Presence",
   "phases-discord-rich-presence.midnightconfig.discordEnable.tooltip":"Toggles the Discord Rich Presence",
-  "phases-discord-rich-presence.midnightconfig.enableItem": "Show item in Presence",
+  "phases-discord-rich-presence.midnightconfig.enableItem": "Show held item in Presence",
   "phases-discord-rich-presence.midnightconfig.enableItem.tooltip": "Toggles the item you're holding from showing in the Presence",
   "phases-discord-rich-presence.midnightconfig.enableDimension": "Show Dimension in Presence",
   "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Toggles the dimension you're located in from showing in the Presence",
-  "phases-discord-rich-presence.midnightconfig.enableServerIP": "Show server IP when playing multiplayer",
+  "phases-discord-rich-presence.midnightconfig.enableServerIP": "Show server IP in multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableServerIP.tooltip": "Toggles server IP from showing in the Presence when playing multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension Rich Presence",
-  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles support for modded dimensions",
-  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip2": "This will only work if the modded dimension has a custom dimension type",
+  "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles basic support for modded dimensions",
   "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in Presence",
-    "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Presence"
+  "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Presence"
 }
