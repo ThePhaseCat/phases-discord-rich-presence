@@ -1,5 +1,6 @@
 {
-  "phases-discord-rich-presence.midnightconfig.title":"Discord Rich Presence Config",
+  "phases-discord-rich-presence.midnightconfig.title":"Phase's Discord Rich Presence Config",
+    "phases-discord-rich-presence.midnightconfig.text1":"Basic Settings",
   "phases-discord-rich-presence.midnightconfig.discordEnable":"Enable Presence",
   "phases-discord-rich-presence.midnightconfig.discordEnable.tooltip":"Toggles the Discord Rich Presence",
   "phases-discord-rich-presence.midnightconfig.enableItem": "Show held item in Presence",
@@ -11,5 +12,6 @@
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension Rich Presence",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles basic support for modded dimensions",
   "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in Presence",
-  "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Presence"
+  "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Presence",
+    "phases-discord-rich-presence.midnightconfig.text2": "Advanced Settings"
 }
