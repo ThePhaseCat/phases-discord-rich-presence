@@ -18,4 +18,5 @@ public class phasesdiscordConfig extends MidnightConfig
     @Entry public static boolean showPaused = true;
 
     @Comment(centered = true) public static Comment text2;
+    @Entry public static boolean enableAdvancedMode = false;
 }
