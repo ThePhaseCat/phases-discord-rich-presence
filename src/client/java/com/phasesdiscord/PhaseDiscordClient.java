@@ -77,6 +77,20 @@ public class PhaseDiscordClient implements ClientModInitializer {
             discord.Discord_ClearPresence();
             return;
         }
+        else if(phasesdiscordConfig.enableAdvancedMode == true)
+        {
+            advancedDiscordPresence();
+        }
+        else if (phasesdiscordConfig.enableAdvancedMode == false) {
+            simpleDiscordPresence();
+        }
+        else {
+            basicDiscordPresence();
+        }
+    }
+
+    private void simpleDiscordPresence()
+    {
         if (client.world != null) {
             boolean inSingleplayer = client.isInSingleplayer();
             DimensionType dimensionType = client.world.getDimension();
@@ -86,11 +100,9 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //check if player holds something, update presence from there
             if (client.player != null) {
-                if(phasesdiscordConfig.enableItem == false) {
+                if (phasesdiscordConfig.enableItem == false) {
                     presence.details = "Playing Minecraft";
-                }
-                else
-                {
+                } else {
                     ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
                     String item_name = held_item.getName().getString();
                     if (!item_name.equals("Air")) {
@@ -118,39 +130,24 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 if (client.getCurrentServerEntry() != null) {
                     serverip = client.getCurrentServerEntry().address.toUpperCase();
                 }
-                if(phasesdiscordConfig.enableServerIP == false)
-                {
-                    if(phasesdiscordConfig.showPaused == false)
-                    {
+                if (phasesdiscordConfig.enableServerIP == false) {
+                    if (phasesdiscordConfig.showPaused == false) {
                         presence.state = "Playing Multiplayer";
-                    }
-                    else
-                    {
-                        if(client.isPaused())
-                        {
+                    } else {
+                        if (client.isPaused()) {
                             presence.state = "Playing Multiplayer - Paused";
-                        }
-                        else
-                        {
+                        } else {
                             presence.state = "Playing Multiplayer";
                         }
                     }
                     presence.state = "Playing Multiplayer";
-                }
-                else
-                {
-                    if(phasesdiscordConfig.showPaused == false)
-                    {
+                } else {
+                    if (phasesdiscordConfig.showPaused == false) {
                         presence.state = "Playing Multiplayer on " + serverip;
-                    }
-                    else
-                    {
-                        if(client.isPaused())
-                        {
+                    } else {
+                        if (client.isPaused()) {
                             presence.state = "Playing Multiplayer on " + serverip + " - Paused";
-                        }
-                        else
-                        {
+                        } else {
                             presence.state = "Playing Multiplayer on " + serverip;
                         }
                     }
@@ -159,21 +156,14 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 presence.partySize = 1;
                 presence.partyMax = 1;
                 discord.Discord_UpdatePresence(presence);
-            }
-            else //means in singeplayer
+            } else //means in singeplayer
             {
-                if(phasesdiscordConfig.showPaused == false)
-                {
+                if (phasesdiscordConfig.showPaused == false) {
                     presence.state = "Playing Singleplayer";
-                }
-                else
-                {
-                    if(client.isPaused())
-                    {
+                } else {
+                    if (client.isPaused()) {
                         presence.state = "Playing Singleplayer - Paused";
-                    }
-                    else
-                    {
+                    } else {
                         presence.state = "Playing Singleplayer";
                     }
                 }
@@ -185,51 +175,33 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //dimension checks
             if (dimensionName.equals("minecraft:overworld")) {
-                if(phasesdiscordConfig.enableDimension == false)
-                {
+                if (phasesdiscordConfig.enableDimension == false) {
                     //empty
-                }
-                else
-                {
+                } else {
                     presence.smallImageKey = "overworld";
                     presence.smallImageText = "In The Overworld";
                 }
-            }
-            else if (dimensionName.equals("minecraft:the_nether")) {
-                if(phasesdiscordConfig.enableDimension == false)
-                {
+            } else if (dimensionName.equals("minecraft:the_nether")) {
+                if (phasesdiscordConfig.enableDimension == false) {
                     //empty
-                }
-                else
-                {
+                } else {
                     presence.smallImageKey = "nether";
                     presence.smallImageText = "In The Nether";
                 }
-            }
-            else if (dimensionName.equals("minecraft:the_end")) {
-                if(phasesdiscordConfig.enableDimension == false)
-                {
+            } else if (dimensionName.equals("minecraft:the_end")) {
+                if (phasesdiscordConfig.enableDimension == false) {
                     //empty
-                }
-                else
-                {
+                } else {
                     presence.smallImageKey = "the_end";
                     presence.smallImageText = "In The End";
                 }
-            }
-            else{
-                if(phasesdiscordConfig.enableDimension == false)
-                {
+            } else {
+                if (phasesdiscordConfig.enableDimension == false) {
                     //empty
-                }
-                else
-                {
-                    if(phasesdiscordConfig.enableCustomDimensionSupport == false)
-                    {
+                } else {
+                    if (phasesdiscordConfig.enableCustomDimensionSupport == false) {
                         //empty
-                    }
-                    else
-                    {
+                    } else {
                         //System.out.println(dimensionName + " why is this not working");
                         customDimensionName = dimensionName.replace("minecraft:", "");
                         presence.smallImageKey = "void";
@@ -239,8 +211,11 @@ public class PhaseDiscordClient implements ClientModInitializer {
             }
 
             discord.Discord_UpdatePresence(presence);
-        } else {
-            basicDiscordPresence();
         }
+    }
+
+    private void advancedDiscordPresence()
+    {
+        System.out.println("advanced mode on, not implemented yet");
     }
 }
