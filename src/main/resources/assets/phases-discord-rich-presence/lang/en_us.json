@@ -17,11 +17,20 @@
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode": "Enable Advanced Mode",
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode.tooltip": "Toggles advanced mode, allowing more customization and control over the Discord Rich Presence. \n (This overrides all basic settings)",
   "phases-discord-rich-presence.midnightconfig.text3": "Typing any of the following in the fields below will replace the default text with the following:",
-  "phases-discord-rich-presence.midnightconfig.text4": "{item_name} - Name of the Item you're currently holding \n{server_ip} - Server IP you're currently playing on",
+  "phases-discord-rich-presence.midnightconfig.text4": "{item_name} - Name of the Item you're currently holding",
+  "phases-discord-rich-presence.midnightconfig.text5": "{server_ip} - Server IP you're currently playing on",
+  "phases-discord-rich-presence.midnightconfig.text6": "\n{dimension_name} - Name/ID of the dimension you're currently in",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetail": "Presence Details",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItem": "Presence Details when holding an item",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayer": "Presence State when you're playing multiplayer",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPause": "Presence State when you're playing multiplayer and you're paused",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayer": "Presence State when you're playing singleplayer",
-  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPause": "Presence State when you're playing singleplayer and you're paused"
+  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPause": "Presence State when you're playing singleplayer and you're paused",
+  "phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworld": "Changes the text from the small image in the Presence when you're in the Overworld",
+  "phases-discord-rich-presence.midnightconfig.advancedModeDimensionNether": "Changes the text from the small image in the Presence when you're in the Nether",
+  "phases-discord-rich-presence.midnightconfig.advancedModeDimensionEnd": "Changes the text from the small image in the Presence when you're in the End",
+  "phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustom": "Changes the text from the small image in the Presence when you're in a custom dimension",
+  "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
+  "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
+  "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)"
 }

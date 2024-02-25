@@ -2,7 +2,7 @@ package phasesdiscordConfigStuff;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
-public class phasesdiscordConfig extends MidnightConfig
+public class PhaseDiscordConfig extends MidnightConfig
 {
     @Comment(centered = true) public static Comment text1;
     @Entry public static boolean discordEnable = true;
@@ -22,6 +22,8 @@ public class phasesdiscordConfig extends MidnightConfig
 
     @Comment public static Comment text3;
     @Comment public static Comment text4;
+    @Comment public static Comment text5;
+    @Comment public static Comment text6;
     @Entry public static String mainAdvancedModeDetail = "Playing Minecraft";
     @Entry public static String mainAdvancedModeDetailWhenHoldingItem = "Holding {item_name}";
 
@@ -30,4 +32,13 @@ public class phasesdiscordConfig extends MidnightConfig
 
     @Entry public static String mainAdvancedModeStateSingleplayer = "Playing Singleplayer";
     @Entry public static String mainAdvancedModeStateSingleplayerPause = "Playing Singleplayer - Paused";
+
+    @Entry public static String advancedModeDimensionOverworld = "In The Overworld";
+    @Entry public static String advancedModeDimensionNether = "In The Nether";
+    @Entry public static String advancedModeDimensionEnd = "In The End";
+    @Entry public static String advancedModeDimensionCustom = "In {dimension_name} Dimension";
+
+    @Comment(centered = true) public static Comment otherOptions;
+
+    @Entry public static boolean enableDebug = false;
 }

@@ -6,11 +6,9 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.dimension.DimensionType;
-import phasesdiscordConfigStuff.phasesdiscordConfig;
+import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,7 +31,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         //config
-        MidnightConfig.init("phases-discord-rich-presence", phasesdiscordConfig.class);
+        MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
 
         handlers.ready = (user) -> System.out.println("Ready!");
         discord.Discord_Initialize(appID, handlers, true, steamId);
@@ -73,15 +71,15 @@ public class PhaseDiscordClient implements ClientModInitializer {
     }
 
     private void updateDiscordPresence() {
-        if(phasesdiscordConfig.discordEnable == false) {
+        if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
             return;
         }
-        else if(phasesdiscordConfig.enableAdvancedMode == true)
+        else if(PhaseDiscordConfig.enableAdvancedMode == true)
         {
             advancedDiscordPresence();
         }
-        else if (phasesdiscordConfig.enableAdvancedMode == false) {
+        else if (PhaseDiscordConfig.enableAdvancedMode == false) {
             simpleDiscordPresence();
         }
         else {
@@ -100,7 +98,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //check if player holds something, update presence from there
             if (client.player != null) {
-                if (phasesdiscordConfig.enableItem == false) {
+                if (PhaseDiscordConfig.enableItem == false) {
                     presence.details = "Playing Minecraft";
                 } else {
                     ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
@@ -130,8 +128,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 if (client.getCurrentServerEntry() != null) {
                     serverip = client.getCurrentServerEntry().address.toUpperCase();
                 }
-                if (phasesdiscordConfig.enableServerIP == false) {
-                    if (phasesdiscordConfig.showPaused == false) {
+                if (PhaseDiscordConfig.enableServerIP == false) {
+                    if (PhaseDiscordConfig.showPaused == false) {
                         presence.state = "Playing Multiplayer";
                     } else {
                         if (client.isPaused()) {
@@ -142,7 +140,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     }
                     presence.state = "Playing Multiplayer";
                 } else {
-                    if (phasesdiscordConfig.showPaused == false) {
+                    if (PhaseDiscordConfig.showPaused == false) {
                         presence.state = "Playing Multiplayer on " + serverip;
                     } else {
                         if (client.isPaused()) {
@@ -158,7 +156,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 discord.Discord_UpdatePresence(presence);
             } else //means in singeplayer
             {
-                if (phasesdiscordConfig.showPaused == false) {
+                if (PhaseDiscordConfig.showPaused == false) {
                     presence.state = "Playing Singleplayer";
                 } else {
                     if (client.isPaused()) {
@@ -175,31 +173,31 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //dimension checks
             if (dimensionName.equals("minecraft:overworld")) {
-                if (phasesdiscordConfig.enableDimension == false) {
+                if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
                     presence.smallImageKey = "overworld";
                     presence.smallImageText = "In The Overworld";
                 }
             } else if (dimensionName.equals("minecraft:the_nether")) {
-                if (phasesdiscordConfig.enableDimension == false) {
+                if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
                     presence.smallImageKey = "nether";
                     presence.smallImageText = "In The Nether";
                 }
             } else if (dimensionName.equals("minecraft:the_end")) {
-                if (phasesdiscordConfig.enableDimension == false) {
+                if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
                     presence.smallImageKey = "the_end";
                     presence.smallImageText = "In The End";
                 }
             } else {
-                if (phasesdiscordConfig.enableDimension == false) {
+                if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
-                    if (phasesdiscordConfig.enableCustomDimensionSupport == false) {
+                    if (PhaseDiscordConfig.enableCustomDimensionSupport == false) {
                         //empty
                     } else {
                         //System.out.println(dimensionName + " why is this not working");
@@ -211,12 +209,21 @@ public class PhaseDiscordClient implements ClientModInitializer {
             }
 
             discord.Discord_UpdatePresence(presence);
+
+            if(PhaseDiscordConfig.enableDebug == true)
+            {
+                System.out.println("Basic Presence Updated");
+            }
         }
     }
 
     private void advancedDiscordPresence()
     {
         System.out.println("advanced mode on, not implemented yet, but is being worked on as we speak!");
+        if(PhaseDiscordConfig.enableDebug == true)
+        {
+            System.out.println("Advanced Mode Presence Updated, make variables print here lol");
+        }
     }
 
 
