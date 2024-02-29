@@ -222,7 +222,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         System.out.println("advanced mode on, not implemented yet, but is being worked on as we speak!");
         if(PhaseDiscordConfig.enableDebug == true)
         {
-            System.out.println("Advanced Mode Presence Updated, make variables print here lol");
+            System.out.println("Advanced Mode Presence Updated, make variables print");
         }
     }
 
