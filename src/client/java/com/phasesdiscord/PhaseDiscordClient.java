@@ -224,6 +224,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
         {
             System.out.println("Advanced Mode Presence Updated, make variables print");
         }
+
+        if(client.world != null)
+        {
+            boolean inSingleplayer = client.isInSingleplayer();
+            DimensionType dimensionType = client.world.getDimension();
+            String dimensionName = dimensionType.effects().toString();
+
+            DiscordRichPresence presence = new DiscordRichPresence();
+
+
+        }
     }
 
 
