@@ -255,25 +255,23 @@ public class PhaseDiscordClient implements ClientModInitializer {
             presence.joinSecret = "moonSqikCklaw";
             presence.spectateSecret = "moonSqikCklawkLopalwdNq";
 
-            if(!inSingleplayer)
+            if(!inSingleplayer) //in multiplayer
             {
+                //serverip = client.getCurrentServerEntry().address.toUpperCase();
                 if(client.getCurrentServerEntry() != null)
                 {
                     serverip = client.getCurrentServerEntry().address.toUpperCase();
                 }
+                if(client.isPaused())
+                {
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("{server_ip}", serverip);
+                }
                 else
                 {
-                    if(client.isPaused())
-                    {
-                        presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("{server_ip}", serverip);
-                    }
-                    else
-                    {
-                        presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("{server_ip}", serverip);
-                    }
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("{server_ip}", serverip);
                 }
             }
-            else
+            else //in singleplayer
             {
                 if(client.isPaused())
                 {
@@ -284,6 +282,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateSingleplayer;
                 }
             }
+
+
 
             if(dimensionName.equals("minecraft:overworld"))
             {
