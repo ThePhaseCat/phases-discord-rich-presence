@@ -12,8 +12,7 @@ public class PhaseDiscord implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Hello Fabric world!");
-
-
+		LOGGER.info("Phases Discord Rich Presence is initializing...");
+		LOGGER.info("Phases Discord Rich Presence has been initialized!");
 	}
 }

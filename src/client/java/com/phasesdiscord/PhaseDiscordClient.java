@@ -33,7 +33,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         //config
         MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
 
-        handlers.ready = (user) -> System.out.println("Ready!");
+        handlers.ready = (user) -> System.out.println("Phase's Discord Rich Presence is ready!");
         discord.Discord_Initialize(appID, handlers, true, steamId);
 
         basicDiscordPresence();
@@ -219,21 +219,103 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     private void advancedDiscordPresence()
     {
-        System.out.println("advanced mode on, not implemented yet, but is being worked on as we speak!");
-        if(PhaseDiscordConfig.enableDebug == true)
-        {
-            System.out.println("Advanced Mode Presence Updated, make variables print");
-        }
-
         if(client.world != null)
         {
             boolean inSingleplayer = client.isInSingleplayer();
             DimensionType dimensionType = client.world.getDimension();
             String dimensionName = dimensionType.effects().toString();
+            String item_name = "";
+            String serverip = "";
 
             DiscordRichPresence presence = new DiscordRichPresence();
 
+            if(client.player != null)
+            {
+                ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
+                item_name = held_item.getName().getString();
+                if(!item_name.equals("Air"))
+                {
+                    presence.details = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("{item_name}", item_name);
+                }
+                else
+                {
+                    presence.details = PhaseDiscordConfig.mainAdvancedModeDetail;
+                }
+            }
 
+            //presence start stuff
+            presence.startTimestamp = start_time;
+            presence.largeImageKey = "base"; //change icon for when in a world
+            presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
+            presence.instance = 1; //still no clue what this means
+
+            //all of this stuff here is useless
+            presence.partyId = "priv_party";
+            presence.matchSecret = "abXyyz";
+            presence.joinSecret = "moonSqikCklaw";
+            presence.spectateSecret = "moonSqikCklawkLopalwdNq";
+
+            if(!inSingleplayer)
+            {
+                if(client.getCurrentServerEntry() != null)
+                {
+                    serverip = client.getCurrentServerEntry().address.toUpperCase();
+                }
+                else
+                {
+                    if(client.isPaused())
+                    {
+                        presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("{server_ip}", serverip);
+                    }
+                    else
+                    {
+                        presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("{server_ip}", serverip);
+                    }
+                }
+            }
+            else
+            {
+                if(client.isPaused())
+                {
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause;
+                }
+                else
+                {
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateSingleplayer;
+                }
+            }
+
+            if(dimensionName.equals("minecraft:overworld"))
+            {
+                presence.smallImageKey = "overworld";
+                presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionOverworld;
+            }
+            else if(dimensionName.equals("minecraft:the_nether"))
+            {
+                presence.smallImageKey = "nether";
+                presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionNether;
+            }
+            else if(dimensionName.equals("minecraft:the_end"))
+            {
+                presence.smallImageKey = "the_end";
+                presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionEnd;
+            }
+            else
+            {
+                customDimensionName = dimensionName.replace("minecraft:", "");
+                presence.smallImageKey = "void";
+                presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName);
+            }
+
+            if(PhaseDiscordConfig.enableDebug == true)
+            {
+                System.out.println("Advanced Mode Variables");
+                System.out.println("Dimension Name - " + dimensionName);
+                System.out.println("Item Name - " + item_name);
+                System.out.println("Server IP - " + serverip);
+            }
+
+            discord.Discord_UpdatePresence(presence);
         }
     }
 
