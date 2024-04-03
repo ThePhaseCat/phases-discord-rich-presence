@@ -38,6 +38,10 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry public static String advancedModeDimensionEnd = "In The End";
     @Entry public static String advancedModeDimensionCustom = "In {dimension_name} Dimension";
 
+    @Entry public static boolean advancedModeChangeMainMenuText = false;
+
+    @Entry public static String advancedModeMainMenuText = "Main Menu";
+
     @Comment(centered = true) public static Comment otherOptions;
 
     @Entry public static boolean enableDebug = false;

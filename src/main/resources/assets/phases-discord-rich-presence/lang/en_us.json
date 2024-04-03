@@ -32,5 +32,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustom": "Changes the text from the small image in the Presence when you're in a custom dimension",
   "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
   "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
-  "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)"
+  "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)",
+  "phases-discord-rich-presence.midnightconfig.advancedModeChangeMainMenuText": "Enable this to show custom text in the Presence when you're in the Main Menu",
+  "phases-discord-rich-presence.midnightconfig.advancedModeMainMenuText": "Changes the text in the Presence when you're in the Main Menu"
 }

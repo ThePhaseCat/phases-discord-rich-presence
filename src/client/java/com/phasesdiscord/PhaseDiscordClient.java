@@ -317,6 +317,20 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             discord.Discord_UpdatePresence(presence);
         }
+        else
+        {
+            System.out.println("World is null, cannot update presence.");
+            DiscordRichPresence presence = new DiscordRichPresence();
+
+            presence.details = PhaseDiscordConfig.advancedModeMainMenuText;
+            presence.largeImageKey = "testicon1"; //large image key for an icon, the thing inside must be uploaded
+            // to discord application's rich presence assets
+            presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
+
+            presence.instance = 1; //i'm going to be honest, idk what this does
+
+            discord.Discord_UpdatePresence(presence); //update discord presence
+        }
     }
 
 
