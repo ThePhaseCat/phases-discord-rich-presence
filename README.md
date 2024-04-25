@@ -3,13 +3,11 @@
 A mod that adds simple and light Discord Rich Presence into Minecraft!
 
 # Requirements
-Minecraft `1.20.4`
+Minecraft `1.20.5`
 
-Fabric Loader `>=0.15.3`
+Fabric Loader `>=0.15.10`
 
-Fabric API `>=0.91.3`
-
-MidnightLib (if you want to change settings) `>=1.5.3`
+Fabric API `>=0.97.6`
 
 # How to use
 
@@ -30,3 +28,5 @@ Feel free to contribute to this project as it's available under the MIT license.
 Thanks to [MidnightLib](https://github.com/TeamMidnightDust/MidnightLib) for the GUI Library!
 
 Thanks to [Amitojs-Minecraft-RPC-Fabric](https://github.com/amitojsingh366/Amitojs-Minecraft-RPC-Fabric/tree/main) for the base for this mod! This was so helpful!
+
+
