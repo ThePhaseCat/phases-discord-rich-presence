@@ -28,6 +28,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String customDimensionName;
 
+    String imageNameOverworld;
+
+    String imageNameNether;
+
+    String imageNameEnd;
+
+    String imageNameCustom;
+
+    String largeImageKey;
+
+
     @Override
     public void onInitializeClient() {
         //config
@@ -71,6 +82,9 @@ public class PhaseDiscordClient implements ClientModInitializer {
     }
 
     private void updateDiscordPresence() {
+
+        imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
+
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
             return;
@@ -292,7 +306,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             }
             else if(dimensionName.equals("minecraft:the_nether"))
             {
-                presence.smallImageKey = "nether";
+                presence.smallImageKey = imageNameNether;
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionNether;
             }
             else if(dimensionName.equals("minecraft:the_end"))

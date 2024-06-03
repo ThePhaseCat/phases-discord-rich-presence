@@ -35,5 +35,8 @@
   "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)",
   "phases-discord-rich-presence.midnightconfig.advancedModeChangeMainMenuText": "Enable this to show custom text in the Presence when you're in the Main Menu",
   "phases-discord-rich-presence.midnightconfig.advancedModeMainMenuText": "Changes the text in the Presence when you're in the Main Menu",
-  "phases-discord-rich-presence.midnightconfig.advancedModePicDetail1": "These next few settings relate to the small image in the Presence (WHEN TYPED, THESE MUST BE *EXACTLY* AS SHOWN OR ELSE IT WON'T WORK)"
+  "phases-discord-rich-presence.midnightconfig.advancedModePicDetail1": "These next few settings relate to the images in the Presence (WHEN TYPED, THESE MUST BE *EXACTLY* AS SHOWN OR ELSE IT WON'T WORK)",
+  "phases-discord-rich-presence.midnightconfig.advancedModeNetherPic": "Changes the image in the Presence when you're in the Nether",
+  "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "Overworld Image Keys:",
+  "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3"
 }

@@ -42,7 +42,13 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry public static String advancedModeMainMenuText = "Main Menu";
 
-    //@Comment public static Comment advancedModePicDetail1;
+    @Comment public static Comment advancedModePicDetail1;
+
+    @Comment public static Comment advancedModeOverworldPicDetail;
+
+    @Comment public static Comment advancedModeNetherPicDetail;
+
+    @Entry public static String advancedModeNetherPic = "nether";
 
     @Comment(centered = true) public static Comment otherOptions;
 
