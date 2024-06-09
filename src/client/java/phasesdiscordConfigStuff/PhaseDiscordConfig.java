@@ -52,11 +52,15 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment public static Comment advancedModeEndPicDetail;
 
+    @Comment public static Comment advancedModeOtherPicDetail;
+
     @Entry public static String advancedModeOverworldPic = "overworld";
 
     @Entry public static String advancedModeNetherPic = "nether";
 
     @Entry public static String advancedModeEndPic = "the_end";
+
+    @Entry public static String advancedModeCustomPic = "void";
 
     @Comment(centered = true) public static Comment otherOptions;
 
