@@ -36,8 +36,11 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeChangeMainMenuText": "Enable this to show custom text in the Presence when you're in the Main Menu",
   "phases-discord-rich-presence.midnightconfig.advancedModeMainMenuText": "Changes the text in the Presence when you're in the Main Menu",
   "phases-discord-rich-presence.midnightconfig.advancedModePicDetail1": "These next few settings relate to the images in the Presence (WHEN TYPED, THESE MUST BE *EXACTLY* AS SHOWN OR ELSE IT WON'T WORK)",
+  "phases-discord-rich-presence.midnightconfig.advancedModePicDetail2": "You can mix and match images from different dimensions into other dimensions btw!",
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPic": "Changes the image in the Presence when you're in the Overworld",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPic": "Changes the image in the Presence when you're in the Nether",
+  "phases-discord-rich-presence.midnightconfig.advancedModeEndPic": "Changes the image in the Presence when you're in the End",
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "Overworld Image Keys: \n overworld, mountain, swamp",
-  "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3"
+  "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3",
+  "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "End Image Keys: \n the_end, end2, end3"
 }

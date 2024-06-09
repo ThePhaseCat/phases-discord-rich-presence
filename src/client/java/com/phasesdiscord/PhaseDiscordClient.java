@@ -85,6 +85,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
         imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
         imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
+        imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
@@ -312,7 +313,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             }
             else if(dimensionName.equals("minecraft:the_end"))
             {
-                presence.smallImageKey = "the_end";
+                presence.smallImageKey = imageNameEnd;
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionEnd;
             }
             else
