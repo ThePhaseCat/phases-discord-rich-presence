@@ -83,6 +83,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     private void updateDiscordPresence() {
 
+        imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
         imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
 
         if(PhaseDiscordConfig.discordEnable == false) {
@@ -301,7 +302,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(dimensionName.equals("minecraft:overworld"))
             {
-                presence.smallImageKey = "overworld";
+                presence.smallImageKey = imageNameOverworld;
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionOverworld;
             }
             else if(dimensionName.equals("minecraft:the_nether"))
