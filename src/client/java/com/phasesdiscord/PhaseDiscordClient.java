@@ -87,6 +87,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
         imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
         imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
+        largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
@@ -262,7 +263,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             //presence start stuff
             presence.startTimestamp = start_time;
-            presence.largeImageKey = "base"; //change icon for when in a world
+            presence.largeImageKey = largeImageKey; //change icon for when in a world
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
             presence.instance = 1; //still no clue what this means
 

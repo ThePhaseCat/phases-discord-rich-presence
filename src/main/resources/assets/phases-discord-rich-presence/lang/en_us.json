@@ -41,6 +41,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPic": "Changes the image in the Presence when you're in the Nether",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPic": "Changes the image in the Presence when you're in the End",
   "phases-discord-rich-presence.midnightconfig.advancedModeCustomPic": "Changes the image in the Presence when you're in a custom/modded dimension",
+  "phases-discord-rich-prescene.midnightconfig.advancedModeLargePic": "Changes the large image in the Presence, which can be seen at all times!",
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "Overworld Image Keys: \n overworld, mountain, swamp",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "End Image Keys: \n the_end, end2, end3",

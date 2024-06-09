@@ -62,6 +62,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry public static String advancedModeCustomPic = "void";
 
+    @Entry public static String advancedModeLargePic = "base";
+
     @Comment(centered = true) public static Comment otherOptions;
 
     @Entry public static boolean enableDebug = false;
