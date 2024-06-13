@@ -71,8 +71,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
     private void basicDiscordPresence() {
         DiscordRichPresence presence = new DiscordRichPresence();
 
+        if(PhaseDiscordConfig.discordEnable == true)
+        {
+            presence.largeImageKey = largeImageKey;
+        }
+        else
+        {
+            presence.largeImageKey = "testicon1";
+        }
+
         presence.details = "Main Menu"; //presence details
-        presence.largeImageKey = "testicon1"; //large image key for an icon, the thing inside must be uploaded
+         //large image key for an icon, the thing inside must be uploaded
         // to discord application's rich presence assets
         presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
 
@@ -88,6 +97,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
         imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
         largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
+        //System.out.println(largeImageKey);
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
@@ -341,7 +351,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             DiscordRichPresence presence = new DiscordRichPresence();
 
             presence.details = PhaseDiscordConfig.advancedModeMainMenuText;
-            presence.largeImageKey = "testicon1"; //large image key for an icon, the thing inside must be uploaded
+            presence.largeImageKey = largeImageKey; //large image key for an icon, the thing inside must be uploaded
             // to discord application's rich presence assets
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
 
