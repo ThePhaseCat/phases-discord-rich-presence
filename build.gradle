@@ -22,6 +22,10 @@ repositories {
 		url = "https://api.modrinth.com/maven"
 
 	}
+
+	// Maven for ModMenu
+	maven { url "https://maven.terraformersmc.com/releases/" }
+
 }
 
 loom {
@@ -55,6 +59,8 @@ dependencies {
 	//modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 	include(modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}"))
 
+	// ModMenu is optional, but it's a nice to have for quality of life.
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
