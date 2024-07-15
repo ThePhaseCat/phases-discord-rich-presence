@@ -22,6 +22,8 @@ repositories {
 		url = "https://api.modrinth.com/maven"
 
 	}
+	maven { url "https://maven.terraformersmc.com/releases/" }
+
 }
 
 loom {
@@ -55,6 +57,7 @@ dependencies {
 	//modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 	include(modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}"))
 
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
@@ -66,7 +69,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
 }
 
 java {
@@ -75,8 +78,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
