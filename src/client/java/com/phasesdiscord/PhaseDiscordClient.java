@@ -179,8 +179,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     }
                     //presence.state = "Playing Multiplayer on " + serverip;
                 }
-                presence.partySize = 1;
-                presence.partyMax = 1;
                 discord.Discord_UpdatePresence(presence);
             } else //means in singeplayer
             {
@@ -194,8 +192,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     }
                 }
                 //presence.state = "Playing Singleplayer";
-                presence.partySize = 1;
-                presence.partyMax = 1;
             }
 
 
