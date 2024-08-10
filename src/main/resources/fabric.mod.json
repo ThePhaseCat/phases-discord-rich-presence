@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"com.phasesdiscord.PhaseDiscordClient"
+		],
+		"modmenu": [
+			"com.phasesdiscord.MenuIntegration"
 		]
 	},
 	"mixins": [
@@ -36,6 +39,6 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"modmenu": "*"
 	}
 }
