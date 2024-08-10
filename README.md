@@ -9,6 +9,8 @@ Fabric Loader `>=0.15.11`
 
 Fabric API `>=0.100.1`
 
+(there is a 1.20.4 version, the above requirements are not for this version)
+
 # How to use
 
 To start, simply have Discord open, either in the background or on your desktop and as long as the config is set to be turned on, then you should see Discord Rich Presence using this mod!
