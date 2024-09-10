@@ -67,4 +67,6 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(centered = true) public static Comment otherOptions;
 
     @Entry public static boolean enableDebug = false;
+    
+    @Entry public static String discordAppID = "1147361100929708053";
 }
