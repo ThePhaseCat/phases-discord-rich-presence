@@ -12,12 +12,16 @@ base {
 
 repositories {
 	jcenter()
+
+	maven { url 'https://jitpack.io' }
+	/*
 	maven {
 		url = "https://jitpack.io/"
 		content {
 			includeGroup("com.github.MinnDevelopment")
 		}
 	}
+	*/
 	maven {
 		url = "https://api.modrinth.com/maven"
 
@@ -51,7 +55,7 @@ dependencies {
 
 	//implementation 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'
 	//implementation 'club.minnced:discord-rpc-release:v3.4.0'
-	include(implementation ('club.minnced:discord-rpc-release:v3.4.0'))
+	include(implementation ('club.minnced:discord-rpc-release:v3.3.0'))
 	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 	//include(implementation('com.jagrosh:DiscordIPC:LATEST'))
