@@ -8,6 +8,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.world.dimension.DimensionType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
 import java.util.Timer;
@@ -38,15 +40,20 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String largeImageKey;
 
+    //this gets changed at runtime
     int discordPresenceUpdateRate = 5000;
 
+    //logger
+    public static final Logger LOGGER = LoggerFactory.getLogger("phases-discord-rich-presence");
 
     @Override
     public void onInitializeClient() {
         //config
         MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
 
-        handlers.ready = (user) -> System.out.println("Phase's Discord Rich Presence is ready!");
+        handlers.ready = (user) -> LOGGER.info(
+                "Phase's Discord Rich Presence Client is ready!"
+                        );
         discord.Discord_Initialize(appID, handlers, true, steamId);
 
         discordPresenceUpdateRate = PhaseDiscordConfig.discordRichPresenceUpdateRate;
@@ -91,7 +98,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
         presence.instance = 1; //i'm going to be honest, idk what this does
         discord.Discord_UpdatePresence(presence); //update discord presence
-
     }
 
     private void updateDiscordPresence() {
@@ -241,7 +247,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(PhaseDiscordConfig.enableDebug == true)
             {
-                System.out.println("Basic Presence Updated");
+                LOGGER.info("Basic Presence Updated");
             }
         }
     }
@@ -338,17 +344,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(PhaseDiscordConfig.enableDebug == true)
             {
-                System.out.println("Advanced Mode Variables");
-                System.out.println("Dimension Name - " + dimensionName);
-                System.out.println("Item Name - " + item_name);
-                System.out.println("Server IP - " + serverip);
+                LOGGER.info("Advanced Mode Variables");
+                LOGGER.info("Dimension Name - " + dimensionName);
+                LOGGER.info("Item Name - " + item_name);
+                LOGGER.info("Server IP - " + serverip);
             }
 
             discord.Discord_UpdatePresence(presence);
         }
         else
         {
-            System.out.println("World is null, cannot update presence.");
+            LOGGER.info("World is null, cannot update presence.");
             DiscordRichPresence presence = new DiscordRichPresence();
 
             presence.details = PhaseDiscordConfig.advancedModeMainMenuText;
