@@ -38,6 +38,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String largeImageKey;
 
+    int discordPresenceUpdateRate = 5000;
+
 
     @Override
     public void onInitializeClient() {
@@ -46,6 +48,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
         handlers.ready = (user) -> System.out.println("Phase's Discord Rich Presence is ready!");
         discord.Discord_Initialize(appID, handlers, true, steamId);
+
+        discordPresenceUpdateRate = PhaseDiscordConfig.discordRichPresenceUpdateRate;
 
         basicDiscordPresence();
         new Thread(() -> {
@@ -64,7 +68,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             public void run() {
                 updateDiscordPresence();
             }
-        }, 5000, 5000);
+        }, discordPresenceUpdateRate, discordPresenceUpdateRate);
     }
 
 

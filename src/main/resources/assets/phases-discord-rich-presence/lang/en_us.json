@@ -30,11 +30,6 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeDimensionNether": "Changes the text from the small image in the Presence when you're in the Nether",
   "phases-discord-rich-presence.midnightconfig.advancedModeDimensionEnd": "Changes the text from the small image in the Presence when you're in the End",
   "phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustom": "Changes the text from the small image in the Presence when you're in a custom dimension",
-  "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
-  "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
-  "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)",
-  "phases-discord-rich-presence.midnightconfig.discordAppID": "Discord Application ID",
-    "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "The Application ID for the Discord Rich Presence. If you want to do your own thing, then change this. Otherwise, don't touch this.",
   "phases-discord-rich-presence.midnightconfig.advancedModeChangeMainMenuText": "Enable this to show custom text in the Presence when you're in the Main Menu",
   "phases-discord-rich-presence.midnightconfig.advancedModeMainMenuText": "Changes the text in the Presence when you're in the Main Menu",
   "phases-discord-rich-presence.midnightconfig.advancedModePicDetail1": "These next few settings relate to the images in the Presence (WHEN TYPED, THESE MUST BE *EXACTLY* AS SHOWN OR ELSE IT WON'T WORK)",
@@ -47,5 +42,12 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "Overworld Image Keys: \n overworld, mountain, swamp",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "End Image Keys: \n the_end, end2, end3",
-  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "Other Images Keys: \n void, base"
+  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "Other Images Keys: \n void, base",
+  "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
+  "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
+  "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)",
+  "phases-discord-rich-presence.midnightconfig.discordAppID": "Discord Application ID",
+  "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "The Application ID for the Discord Rich Presence. If you want to do your own thing, then change this. Otherwise, don't touch this.",
+  "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate": "Discord Rich Presence Update Rate",
+    "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate.tooltip": "The rate at which the Discord Rich Presence updates. This value is in milliseconds. Please restart after changing for it to take effect!"
 }

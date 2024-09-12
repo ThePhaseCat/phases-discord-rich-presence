@@ -69,4 +69,6 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry public static boolean enableDebug = false;
     
     @Entry public static String discordAppID = "1147361100929708053";
+
+    @Entry public static int discordRichPresenceUpdateRate = 5000;
 }
