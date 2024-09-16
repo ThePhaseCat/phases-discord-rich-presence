@@ -431,6 +431,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
         }
         else
         {
+            LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
+            LOGGER.info("Invalid Image Key - " + imageKey);
             return false;
         }
     }
