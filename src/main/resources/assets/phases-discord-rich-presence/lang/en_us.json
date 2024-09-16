@@ -60,7 +60,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "Overworld Image Keys: \n overworld, mountain, swamp",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "Nether Image Keys: \n nether, nether2, nether3",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "End Image Keys: \n the_end, end2, end3",
-  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "Other Images Keys: \n void, base",
+  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "Other Images Keys: \n void, base, fallback",
   "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
   "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
   "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "Toggles debug mode, which will print information to the console (Probably leave this turned off lol)",

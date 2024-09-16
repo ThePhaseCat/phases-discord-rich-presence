@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,6 +44,13 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     //this gets changed at runtime
     int discordPresenceUpdateRate = 5000;
+
+    String imageKeyArray[] = {
+            "overworld", "mountain", "swamp",
+            "nether", "nether2", "nether3",
+            "the_end", "end2", "end3",
+            "void", "base", "fallback"
+    };
 
     //logger
     public static final Logger LOGGER = LoggerFactory.getLogger("phases-discord-rich-presence");
@@ -278,9 +287,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
             }
 
+
             //presence start stuff
             presence.startTimestamp = start_time;
-            presence.largeImageKey = largeImageKey; //change icon for when in a world
+            if(checkIfImageKeyIsValid(largeImageKey) == false)
+            {
+                presence.largeImageKey = "fallback"; //change icon for when in a world
+            }
+            else
+            {
+                presence.largeImageKey = largeImageKey; //change icon for when in a world
+            }
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
             presence.instance = 1; //still no clue what this means
 
@@ -322,23 +339,54 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(dimensionName.equals("minecraft:overworld"))
             {
-                presence.smallImageKey = imageNameOverworld;
+                if(checkIfImageKeyIsValid(imageNameOverworld) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameOverworld;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionOverworld;
             }
             else if(dimensionName.equals("minecraft:the_nether"))
             {
-                presence.smallImageKey = imageNameNether;
+                if(checkIfImageKeyIsValid(imageNameNether) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameNether;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionNether;
             }
             else if(dimensionName.equals("minecraft:the_end"))
             {
-                presence.smallImageKey = imageNameEnd;
+                if(checkIfImageKeyIsValid(imageNameEnd) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameEnd;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionEnd;
             }
             else
             {
                 customDimensionName = dimensionName.replace("minecraft:", "");
-                presence.smallImageKey = imageNameCustom;
+                if(checkIfImageKeyIsValid(imageNameCustom) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameCustom;
+                }
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName);
             }
 
@@ -358,7 +406,14 @@ public class PhaseDiscordClient implements ClientModInitializer {
             DiscordRichPresence presence = new DiscordRichPresence();
 
             presence.details = PhaseDiscordConfig.advancedModeMainMenuText;
-            presence.largeImageKey = largeImageKey; //large image key for an icon, the thing inside must be uploaded
+            if(checkIfImageKeyIsValid(largeImageKey) == false) {
+                presence.largeImageKey = "fallback";
+            }
+            else
+            {
+                presence.largeImageKey = largeImageKey; //large image key for an icon, the thing inside must be uploaded
+            }
+
             // to discord application's rich presence assets
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
 
@@ -368,7 +423,15 @@ public class PhaseDiscordClient implements ClientModInitializer {
         }
     }
 
-
-
-
+    public boolean checkIfImageKeyIsValid(String imageKey)
+    {
+        if(Arrays.stream(imageKeyArray).anyMatch(imageKey::equals))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
