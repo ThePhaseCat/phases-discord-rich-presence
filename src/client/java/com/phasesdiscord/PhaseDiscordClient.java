@@ -120,7 +120,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
-            return;
         }
         else if(PhaseDiscordConfig.enableAdvancedMode == true)
         {
