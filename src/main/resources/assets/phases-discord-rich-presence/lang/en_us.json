@@ -49,5 +49,6 @@
   "phases-discord-rich-presence.midnightconfig.discordAppID": "Discord Application ID",
   "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "The Application ID for the Discord Rich Presence. If you want to do your own thing, then change this. Otherwise, don't touch this.",
   "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate": "Discord Rich Presence Update Rate",
-    "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate.tooltip": "The rate at which the Discord Rich Presence updates. This value is in milliseconds. Please restart after changing for it to take effect!"
+  "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate.tooltip": "The rate at which the Discord Rich Presence updates. This value is in milliseconds. Please restart after changing for it to take effect!",
+  "phases-discord-rich-presence.midnightconfig.category.basic": "Basic Settings"
 }
