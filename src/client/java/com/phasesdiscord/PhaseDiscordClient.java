@@ -353,10 +353,12 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 if(client.isPaused())
                 {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("{server_ip}", serverip);
+                    presence.state = presence.state.replace("{player_count}", String.valueOf(amountOfPlayers));
                 }
                 else
                 {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("{server_ip}", serverip);
+                    presence.state = presence.state.replace("{player_count}", String.valueOf(amountOfPlayers));
                 }
             }
             else //in singleplayer

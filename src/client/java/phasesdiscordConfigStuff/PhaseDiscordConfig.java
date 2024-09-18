@@ -30,6 +30,7 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(category = ADVANCED) public static Comment text4;
     @Comment(category = ADVANCED) public static Comment text5;
     @Comment(category = ADVANCED) public static Comment text6;
+    @Comment(category = ADVANCED) public static Comment text7;
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = "Playing Minecraft";
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = "Holding {item_name}";
 

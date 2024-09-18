@@ -22,6 +22,7 @@
   "phases-discord-rich-presence.midnightconfig.text4": "{item_name} - Name of the Item you're currently holding",
   "phases-discord-rich-presence.midnightconfig.text5": "{server_ip} - Server IP you're currently playing on",
   "phases-discord-rich-presence.midnightconfig.text6": "{dimension_name} - Name/ID of the dimension you're currently in",
+  "phases-discord-rich-presence.midnightconfig.text7": "{player_count} - Amount of players online in the server. This only works in Multiplayer",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetail": "Presence Details - Not Holding Item",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetail.tooltip": "Presence Details text when you're not holding an item",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItem": "Presence Details when holding an item",
