@@ -42,6 +42,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String largeImageKey;
 
+    int amountOfPlayers;
+
     //this gets changed at runtime
     int discordPresenceUpdateRate = 5000;
 
@@ -116,7 +118,18 @@ public class PhaseDiscordClient implements ClientModInitializer {
         imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
         imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
         largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
-        //System.out.println(largeImageKey);
+
+        //get the amount of players
+        if(client.world != null)
+        {
+            amountOfPlayers = client.world.getPlayers().size();
+        }
+        else
+        {
+            amountOfPlayers = 0;
+        }
+        //amountOfPlayers = client.world.getPlayers().size();
+        //LOGGER.info("Amount of players: " + amountOfPlayers);
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
