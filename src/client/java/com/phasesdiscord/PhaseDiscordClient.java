@@ -46,9 +46,9 @@ public class PhaseDiscordClient implements ClientModInitializer {
     int discordPresenceUpdateRate = 5000;
 
     String imageKeyArray[] = {
-            "overworld", "mountain", "swamp",
-            "nether", "nether2", "nether3",
-            "the_end", "end2", "end3",
+            "overworld", "mountain", "swamp", "blankplains", "caveoverlookview", "mountainview",
+            "nether", "nether2", "nether3", "nethercool",
+            "the_end", "end2", "end3", "actualendbg",
             "void", "base", "fallback"
     };
 
