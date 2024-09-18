@@ -128,8 +128,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
         {
             amountOfPlayers = 0;
         }
-        //amountOfPlayers = client.world.getPlayers().size();
-        //LOGGER.info("Amount of players: " + amountOfPlayers);
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
@@ -189,23 +187,49 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 if (PhaseDiscordConfig.enableServerIP == false) {
                     if (PhaseDiscordConfig.showPaused == false) {
-                        presence.state = "Playing Multiplayer";
+                        if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                        {
+                            presence.state = "Playing Multiplayer with " + amountOfPlayers + " Players";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer";
+                        }
                     } else {
                         if (client.isPaused()) {
                             presence.state = "Playing Multiplayer - Paused";
                         } else {
-                            presence.state = "Playing Multiplayer";
+                            if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                            {
+                                presence.state = "Playing Multiplayer with " + amountOfPlayers + " Players";
+                            }
+                            else {
+                                presence.state = "Playing Multiplayer";
+                            }
                         }
                     }
                     presence.state = "Playing Multiplayer";
                 } else {
                     if (PhaseDiscordConfig.showPaused == false) {
-                        presence.state = "Playing Multiplayer on " + serverip;
+                        if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " Players";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip;
+                        }
                     } else {
                         if (client.isPaused()) {
                             presence.state = "Playing Multiplayer on " + serverip + " - Paused";
                         } else {
-                            presence.state = "Playing Multiplayer on " + serverip;
+                            if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                            {
+                                presence.state = "Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " Players";
+                            }
+                            else {
+                                presence.state = "Playing Multiplayer on " + serverip;
+                            }
                         }
                     }
                     //presence.state = "Playing Multiplayer on " + serverip;

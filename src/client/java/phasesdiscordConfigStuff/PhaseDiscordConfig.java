@@ -19,6 +19,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
 
+    @Entry(category = BASIC) public static boolean enableServerPlayerCount = true;
+
     @Entry(category = BASIC) public static boolean showPaused = true;
 
     @Comment(category = ADVANCED, centered = true) public static Comment text2;

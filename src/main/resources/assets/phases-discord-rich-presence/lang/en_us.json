@@ -9,6 +9,8 @@
   "phases-discord-rich-presence.midnightconfig.enableDimension.tooltip": "Toggles the dimension you're located in from showing in the Presence. This is done via a small image located in the bottom right of the Discord Rich Presence",
   "phases-discord-rich-presence.midnightconfig.enableServerIP": "Show server IP in Multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableServerIP.tooltip": "Toggles server IP from showing in the Discord Rich Presence when playing Multiplayer",
+  "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount": "Show player count in Multiplayer",
+  "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount.tooltip": "Toggles player count showing in the Discord Rich Presence when playing Multiplayer. This will only show amount of players online.",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension DRP Support",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles basic support for modded dimensions. Please note this looks awful in the Discord Rich Presence, but if it works, it works.",
   "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in DRP",
