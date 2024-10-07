@@ -8,8 +8,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.world.dimension.DimensionType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,14 +42,32 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String largeImageKey;
 
+    int amountOfPlayers;
+
+    //this gets changed at runtime
+    int discordPresenceUpdateRate = 5000;
+
+    String imageKeyArray[] = {
+            "overworld", "mountain", "swamp", "blankplains", "caveoverlookview", "mountainview",
+            "nether", "nether2", "nether3", "nethercool",
+            "the_end", "end2", "end3", "actualendbg",
+            "void", "base", "fallback"
+    };
+
+    //logger
+    public static final Logger LOGGER = LoggerFactory.getLogger("phases-discord-rich-presence");
 
     @Override
     public void onInitializeClient() {
         //config
         MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
 
-        handlers.ready = (user) -> System.out.println("Phase's Discord Rich Presence is ready!");
+        handlers.ready = (user) -> LOGGER.info(
+                "Phase's Discord Rich Presence Client is ready!"
+                        );
         discord.Discord_Initialize(appID, handlers, true, steamId);
+
+        discordPresenceUpdateRate = PhaseDiscordConfig.discordRichPresenceUpdateRate;
 
         basicDiscordPresence();
         new Thread(() -> {
@@ -64,7 +86,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             public void run() {
                 updateDiscordPresence();
             }
-        }, 5000, 5000);
+        }, discordPresenceUpdateRate, discordPresenceUpdateRate);
     }
 
 
@@ -87,7 +109,6 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
         presence.instance = 1; //i'm going to be honest, idk what this does
         discord.Discord_UpdatePresence(presence); //update discord presence
-
     }
 
     private void updateDiscordPresence() {
@@ -97,11 +118,19 @@ public class PhaseDiscordClient implements ClientModInitializer {
         imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
         imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
         largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
-        //System.out.println(largeImageKey);
+
+        //get the amount of players
+        if(client.world != null)
+        {
+            amountOfPlayers = client.world.getPlayers().size();
+        }
+        else
+        {
+            amountOfPlayers = 0;
+        }
 
         if(PhaseDiscordConfig.discordEnable == false) {
             discord.Discord_ClearPresence();
-            return;
         }
         else if(PhaseDiscordConfig.enableAdvancedMode == true)
         {
@@ -158,23 +187,49 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
                 if (PhaseDiscordConfig.enableServerIP == false) {
                     if (PhaseDiscordConfig.showPaused == false) {
-                        presence.state = "Playing Multiplayer";
+                        if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                        {
+                            presence.state = "Playing Multiplayer with " + amountOfPlayers + " Players";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer";
+                        }
                     } else {
                         if (client.isPaused()) {
                             presence.state = "Playing Multiplayer - Paused";
                         } else {
-                            presence.state = "Playing Multiplayer";
+                            if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                            {
+                                presence.state = "Playing Multiplayer with " + amountOfPlayers + " Players";
+                            }
+                            else {
+                                presence.state = "Playing Multiplayer";
+                            }
                         }
                     }
                     presence.state = "Playing Multiplayer";
                 } else {
                     if (PhaseDiscordConfig.showPaused == false) {
-                        presence.state = "Playing Multiplayer on " + serverip;
+                        if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " Players";
+                        }
+                        else
+                        {
+                            presence.state = "Playing Multiplayer on " + serverip;
+                        }
                     } else {
                         if (client.isPaused()) {
                             presence.state = "Playing Multiplayer on " + serverip + " - Paused";
                         } else {
-                            presence.state = "Playing Multiplayer on " + serverip;
+                            if(PhaseDiscordConfig.enableServerPlayerCount == true)
+                            {
+                                presence.state = "Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " Players";
+                            }
+                            else {
+                                presence.state = "Playing Multiplayer on " + serverip;
+                            }
                         }
                     }
                     //presence.state = "Playing Multiplayer on " + serverip;
@@ -237,7 +292,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(PhaseDiscordConfig.enableDebug == true)
             {
-                System.out.println("Basic Presence Updated");
+                LOGGER.info("Basic Presence Updated");
             }
         }
     }
@@ -268,9 +323,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
             }
 
+
             //presence start stuff
             presence.startTimestamp = start_time;
-            presence.largeImageKey = largeImageKey; //change icon for when in a world
+            if(checkIfImageKeyIsValid(largeImageKey) == false)
+            {
+                presence.largeImageKey = "fallback"; //change icon for when in a world
+            }
+            else
+            {
+                presence.largeImageKey = largeImageKey; //change icon for when in a world
+            }
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence";
             presence.instance = 1; //still no clue what this means
 
@@ -290,10 +353,12 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 if(client.isPaused())
                 {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("{server_ip}", serverip);
+                    presence.state = presence.state.replace("{player_count}", String.valueOf(amountOfPlayers));
                 }
                 else
                 {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("{server_ip}", serverip);
+                    presence.state = presence.state.replace("{player_count}", String.valueOf(amountOfPlayers));
                 }
             }
             else //in singleplayer
@@ -312,43 +377,81 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
             if(dimensionName.equals("minecraft:overworld"))
             {
-                presence.smallImageKey = imageNameOverworld;
+                if(checkIfImageKeyIsValid(imageNameOverworld) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameOverworld;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionOverworld;
             }
             else if(dimensionName.equals("minecraft:the_nether"))
             {
-                presence.smallImageKey = imageNameNether;
+                if(checkIfImageKeyIsValid(imageNameNether) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameNether;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionNether;
             }
             else if(dimensionName.equals("minecraft:the_end"))
             {
-                presence.smallImageKey = imageNameEnd;
+                if(checkIfImageKeyIsValid(imageNameEnd) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameEnd;
+                }
+
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionEnd;
             }
             else
             {
                 customDimensionName = dimensionName.replace("minecraft:", "");
-                presence.smallImageKey = imageNameCustom;
+                if(checkIfImageKeyIsValid(imageNameCustom) == false)
+                {
+                    presence.smallImageKey = "fallback";
+                }
+                else
+                {
+                    presence.smallImageKey = imageNameCustom;
+                }
                 presence.smallImageText = PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName);
             }
 
             if(PhaseDiscordConfig.enableDebug == true)
             {
-                System.out.println("Advanced Mode Variables");
-                System.out.println("Dimension Name - " + dimensionName);
-                System.out.println("Item Name - " + item_name);
-                System.out.println("Server IP - " + serverip);
+                LOGGER.info("Advanced Mode Variables");
+                LOGGER.info("Dimension Name - " + dimensionName);
+                LOGGER.info("Item Name - " + item_name);
+                LOGGER.info("Server IP - " + serverip);
             }
 
             discord.Discord_UpdatePresence(presence);
         }
         else
         {
-            System.out.println("World is null, cannot update presence.");
+            LOGGER.info("World is null, cannot update presence.");
             DiscordRichPresence presence = new DiscordRichPresence();
 
             presence.details = PhaseDiscordConfig.advancedModeMainMenuText;
-            presence.largeImageKey = largeImageKey; //large image key for an icon, the thing inside must be uploaded
+            if(checkIfImageKeyIsValid(largeImageKey) == false) {
+                presence.largeImageKey = "fallback";
+            }
+            else
+            {
+                presence.largeImageKey = largeImageKey; //large image key for an icon, the thing inside must be uploaded
+            }
+
             // to discord application's rich presence assets
             presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
 
@@ -358,7 +461,17 @@ public class PhaseDiscordClient implements ClientModInitializer {
         }
     }
 
-
-
-
+    public boolean checkIfImageKeyIsValid(String imageKey)
+    {
+        if(Arrays.stream(imageKeyArray).anyMatch(imageKey::equals))
+        {
+            return true;
+        }
+        else
+        {
+            LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
+            LOGGER.info("Invalid Image Key - " + imageKey);
+            return false;
+        }
+    }
 }

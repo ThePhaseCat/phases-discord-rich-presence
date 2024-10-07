@@ -18,7 +18,7 @@ To start, simply have Discord open, either in the background or on your desktop 
 ## Config
 The config is short and simple while trying to be as flexable as possible for you!
 
-The config screen can be accessed in your Minecraft options using the MidnightLib icon, or in the mod menu if you have that mod installed! 
+The config screen can be accessed in your Minecraft options using the MidnightLib icon, or in the mod menu if you have ModMenu installed!
 
 ## Contributing
 
