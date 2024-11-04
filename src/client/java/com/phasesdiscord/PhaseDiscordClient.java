@@ -6,6 +6,7 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.world.dimension.DimensionType;
 import org.slf4j.Logger;
@@ -160,7 +161,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 } else {
                     ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
                     String item_name = held_item.getName().getString();
-                    if (!item_name.equals("Air")) {
+                    if (!item_name.equals(Items.AIR.getName().getString())) {
                         presence.details = "Holding " + item_name;
                     }
                 }
@@ -313,7 +314,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             {
                 ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
                 item_name = held_item.getName().getString();
-                if(!item_name.equals("Air"))
+                if(!item_name.equals(Items.AIR.getName().getString()))
                 {
                     presence.details = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("{item_name}", item_name);
                 }
