@@ -27,6 +27,9 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(category = ADVANCED, centered = true) public static Comment text2;
     @Entry(category = ADVANCED) public static boolean enableAdvancedMode = false;
 
+    @Comment(category = ADVANCED) public static Comment advanceExplain;
+    @Comment(category = ADVANCED) public static Comment advanceExplain2;
+
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding %s").getString();
 
