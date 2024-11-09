@@ -33,8 +33,8 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
     @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding %s").getString();
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing multiplayer on %s").getString();
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField","Playing multiplayer on %s - Paused").getString();;
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing Multiplayer on %s with %s players").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField","Playing Multiplayer on %s with %s players - Paused").getString();
 
     @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();;
     @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField","Playing Singleplayer - Paused").getString();;
