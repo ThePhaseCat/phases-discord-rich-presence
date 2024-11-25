@@ -78,14 +78,14 @@ public class PhaseDiscordClient implements ClientModInitializer {
             public void reload(ResourceManager manager) {
                 mainAdvancedModeDetail = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
                 mainAdvancedModeDetailWhenHoldingItem = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding %s").getString();
-                mainAdvancedModeStateMultiplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing multiplayer on %s").getString();
-                mainAdvancedModeStateMultiplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField","Playing multiplayer on %s - Paused").getString();;
-                mainAdvancedModeStateSingleplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();;
-                mainAdvancedModeStateSingleplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField","Playing Singleplayer - Paused").getString();;
-                advancedModeDimensionOverworld = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString();;
-                advancedModeDimensionNether = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString();;
-                advancedModeDimensionEnd = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString();;
-                advancedModeDimensionCustom = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField","In %s Dimension").getString();;
+                mainAdvancedModeStateMultiplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing Multiplayer on %s with %s players").getString();
+                mainAdvancedModeStateMultiplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField","Playing multiplayer on %s with %s players - Paused").getString();
+                mainAdvancedModeStateSingleplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();
+                mainAdvancedModeStateSingleplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField","Playing Singleplayer - Paused").getString();
+                advancedModeDimensionOverworld = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString();
+                advancedModeDimensionNether = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString();
+                advancedModeDimensionEnd = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString();
+                advancedModeDimensionCustom = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField","In %s Dimension").getString();
                 advancedModeMainMenuText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString();
 
                 MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
@@ -132,7 +132,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
             presence.largeImageKey = "testicon1";
         }
 
-        presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField.default","Main Menu").getString(); //presence details
+        presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString(); //presence details
          //large image key for an icon, the thing inside must be uploaded
         // to discord application's rich presence assets
         presence.largeImageText = "Phase's Minecraft Discord Rich Presence"; //large image text when hovered
@@ -152,7 +152,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         //get the amount of players
         if(client.world != null)
         {
-            amountOfPlayers = client.world.getPlayers().size();
+            amountOfPlayers = client.world.getPlayers().size() - 1;
         }
         else
         {
@@ -186,12 +186,12 @@ public class PhaseDiscordClient implements ClientModInitializer {
             //check if player holds something, update presence from there
             if (client.player != null) {
                 if (PhaseDiscordConfig.enableItem == false) {
-                    presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField.default","Playing Minecraft").getString();
+                    presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
                 } else {
                     ItemStack held_item = client.player.getStackInHand(Hand.MAIN_HAND);
                     String item_name = held_item.getName().getString();
                     if (!item_name.equals(Items.AIR.getName().getString())) {
-                        presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField.default","Holding" + item_name, item_name).getString();
+                        presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding" + item_name, item_name).getString();
                     }
                 }
 
@@ -219,46 +219,94 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     if (PhaseDiscordConfig.showPaused == false) {
                         if(PhaseDiscordConfig.enableServerPlayerCount == true)
                         {
-                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString() + Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerAmount","with " + amountOfPlayers + " players",amountOfPlayers).getString();
+                            /*
+                            ip - no
+                            paused - no
+                            player count - yes
+                             */
+                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoIP","Playing Multiplayer with " + " players", String.valueOf(amountOfPlayers)).getString();
                         }
                         else
                         {
+                            /*
+                            ip - no
+                            paused - no
+                            player count - no
+                             */
                             presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString();
                         }
                     } else {
-                        if (client.isPaused()) {
+                        if (client.currentScreen != null) { // client.currentScreen is not null when paused
+                            /*
+                            ip - no
+                            paused - yes
+                             */
                             presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseBasic","Playing multiplayer - Paused").getString();
                         } else {
                             if(PhaseDiscordConfig.enableServerPlayerCount == true)
                             {
-                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString() + Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerAmount","with " + amountOfPlayers + " players",amountOfPlayers).getString();
+                                /*
+                                ip - no
+                                paused - no
+                                player count - yes
+                                 */
+                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoIP","Playing Multiplayer with " + " players", String.valueOf(amountOfPlayers)).getString();
                             }
                             else {
+                                /*
+                                ip - no
+                                paused - no
+                                player count - no
+                                 */
                                 presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString();
                             }
                         }
                     }
-                    presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString();
+                    presence.details = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic","Playing Multiplayer").getString();
                 } else {
                     if (PhaseDiscordConfig.showPaused == false) {
                         if(PhaseDiscordConfig.enableServerPlayerCount == true)
                         {
-                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField.default","Playing Multiplayer on " + serverip,serverip).getString() + Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerAmount","with " + amountOfPlayers + " players",amountOfPlayers).getString();
+                            /*
+                            ip - yes
+                            paused - no
+                            player count - yes
+                             */
+                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " players", serverip, String.valueOf(amountOfPlayers)).getString();
                         }
                         else
                         {
-                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField.default","Playing multiplayer on " + serverip,serverip).getString();
+                            /*
+                            ip - yes
+                            paused - no
+                            player count - no
+                             */
+                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoAmount","Playing multiplayer on " + serverip, serverip).getString();
                         }
                     } else {
-                        if (client.isPaused()) {
-                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField.default","Playing Multiplayer on " + serverip +  " - Paused",serverip).getString();
+                        if (client.currentScreen != null) {
+                            /*
+                            ip - yes
+                            paused - yes
+                             */
+                            presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseNoAmount","Playing Multiplayer on " + serverip +  " - Paused", serverip).getString();
                         } else {
                             if(PhaseDiscordConfig.enableServerPlayerCount == true)
                             {
-                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField.default","Playing Multiplayer on " + serverip,serverip).getString() + Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerAmount","with " + amountOfPlayers + " players",amountOfPlayers).getString();
+                                /*
+                                ip - yes
+                                paused - no
+                                player count - yes
+                                 */
+                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing Multiplayer on " + serverip + " with " + amountOfPlayers + " players", serverip, String.valueOf(amountOfPlayers)).getString();
                             }
                             else {
-                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField.default","Playing multiplayer on " + serverip,serverip).getString();
+                                /*
+                                ip - yes
+                                paused - no
+                                player count - no
+                                 */
+                                presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoAmount","Playing multiplayer on " + serverip, serverip).getString();
                             }
                         }
                     }
@@ -269,12 +317,12 @@ public class PhaseDiscordClient implements ClientModInitializer {
             } else //means in singeplayer
             {
                 if (PhaseDiscordConfig.showPaused == false) {
-                    presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField.default","Playing Singleplayer").getString();;
+                    presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();
                 } else {
-                    if (client.isPaused()) {
-                        presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField.default","Playing Singleplayer - Paused").getString();;
+                    if (client.currentScreen != null) {
+                        presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField","Playing Singleplayer - Paused").getString();
                     } else {
-                        presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField.default","Playing Singleplayer").getString();;
+                        presence.state = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();
                     }
                 }
                 //presence.state = "Playing Singleplayer";
@@ -287,21 +335,21 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     //empty
                 } else {
                     presence.smallImageKey = "overworld";
-                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField.default","In The Overworld").getString();;
+                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString();
                 }
             } else if (dimensionName.equals("minecraft:the_nether")) {
                 if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
                     presence.smallImageKey = "nether";
-                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField.default","In The Nether").getString();;
+                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString();
                 }
             } else if (dimensionName.equals("minecraft:the_end")) {
                 if (PhaseDiscordConfig.enableDimension == false) {
                     //empty
                 } else {
                     presence.smallImageKey = "the_end";
-                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField.default","In The End").getString();;
+                    presence.smallImageText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString();
                 }
             } else {
                 if (PhaseDiscordConfig.enableDimension == false) {
@@ -380,20 +428,20 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 {
                     serverip = client.getCurrentServerEntry().address.toUpperCase();
                 }
-                if(client.isPaused())
+                if(client.currentScreen != null)
                 {
-                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replace("%s", serverip);
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverip);
                     presence.state = presence.state.replace("%s", String.valueOf(amountOfPlayers));
                 }
                 else
                 {
-                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replace("%s", serverip);
+                    presence.state = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverip);
                     presence.state = presence.state.replace("%s", String.valueOf(amountOfPlayers));
                 }
             }
             else //in singleplayer
             {
-                if(client.isPaused())
+                if(client.currentScreen != null)
                 {
                     presence.state = PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause;
                 }
@@ -464,6 +512,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 LOGGER.info("Dimension Name - " + dimensionName);
                 LOGGER.info("Item Name - " + item_name);
                 LOGGER.info("Server IP - " + serverip);
+                LOGGER.info("Current Presence Details - " + presence.details);
+                LOGGER.info("Current Presence State - " + presence.state);
             }
 
             discord.Discord_UpdatePresence(presence);
