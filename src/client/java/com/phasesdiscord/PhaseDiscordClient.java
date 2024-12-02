@@ -58,10 +58,10 @@ public class PhaseDiscordClient implements ClientModInitializer {
 
     String imageKeyArray[] = {
             "overworld", "mountain", "swamp", "blankplains", "caveoverlookview", "mountainview",
-            "pale_garden1", "shaders1", "shaders2", "trial_chamber",
+            "pale_garden1", "pale_garden2", "pale_garden3", "shaders1", "shaders2", "trial_chamber",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
-            "void", "base", "fallback"
+            "void", "base", "creeper_icon", "fallback"
     };
 
     //logger
