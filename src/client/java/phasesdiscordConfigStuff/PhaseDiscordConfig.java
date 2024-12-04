@@ -1,6 +1,7 @@
 package phasesdiscordConfigStuff;
 
 import eu.midnightdust.lib.config.MidnightConfig;
+import net.minecraft.text.Text;
 
 public class PhaseDiscordConfig extends MidnightConfig
 {
@@ -26,28 +27,26 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(category = ADVANCED, centered = true) public static Comment text2;
     @Entry(category = ADVANCED) public static boolean enableAdvancedMode = false;
 
-    @Comment(category = ADVANCED) public static Comment text3;
-    @Comment(category = ADVANCED) public static Comment text4;
-    @Comment(category = ADVANCED) public static Comment text5;
-    @Comment(category = ADVANCED) public static Comment text6;
-    @Comment(category = ADVANCED) public static Comment text7;
-    @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = "Playing Minecraft";
-    @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = "Holding {item_name}";
+    @Comment(category = ADVANCED) public static Comment advanceExplain;
+    @Comment(category = ADVANCED) public static Comment advanceExplain2;
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = "Playing multiplayer on {server_ip}";
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = "Playing multiplayer on {server_ip} - Paused";
+    @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding %s").getString();
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayer = "Playing Singleplayer";
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayerPause = "Playing Singleplayer - Paused";
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField","Playing Multiplayer on %s with %s players").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField","Playing Multiplayer on %s with %s players - Paused").getString();
 
-    @Entry(category = ADVANCED) public static String advancedModeDimensionOverworld = "In The Overworld";
-    @Entry(category = ADVANCED) public static String advancedModeDimensionNether = "In The Nether";
-    @Entry(category = ADVANCED) public static String advancedModeDimensionEnd = "In The End";
-    @Entry(category = ADVANCED) public static String advancedModeDimensionCustom = "In {dimension_name} Dimension";
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayer = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField","Playing Singleplayer").getString();;
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayerPause = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField","Playing Singleplayer - Paused").getString();;
+
+    @Entry(category = ADVANCED) public static String advancedModeDimensionOverworld = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString();;
+    @Entry(category = ADVANCED) public static String advancedModeDimensionNether = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString();;
+    @Entry(category = ADVANCED) public static String advancedModeDimensionEnd = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString();;
+    @Entry(category = ADVANCED) public static String advancedModeDimensionCustom = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField","In %s Dimension").getString();;
 
     @Entry(category = ADVANCED) public static boolean advancedModeChangeMainMenuText = false;
 
-    @Entry(category = ADVANCED) public static String advancedModeMainMenuText = "Main Menu";
+    @Entry(category = ADVANCED) public static String advancedModeMainMenuText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString();
 
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail1;
 
@@ -56,6 +55,8 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail3;
 
     @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail;
+
+    @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail2;
 
     @Comment(category = ADVANCED) public static Comment advancedModeNetherPicDetail;
 
