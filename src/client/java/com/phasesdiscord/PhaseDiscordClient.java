@@ -96,6 +96,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
         handlers.ready = (user) -> LOGGER.info(
                 "Phase's Discord Rich Presence Client is ready!"
                         );
+        /*
         discord.Discord_Initialize(appID, handlers, true, steamId);
 
         discordPresenceUpdateRate = PhaseDiscordConfig.discordRichPresenceUpdateRate;
@@ -118,6 +119,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 updateDiscordPresence();
             }
         }, discordPresenceUpdateRate, discordPresenceUpdateRate);
+        */
     }
 
 
