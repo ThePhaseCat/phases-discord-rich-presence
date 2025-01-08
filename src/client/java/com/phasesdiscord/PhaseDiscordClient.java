@@ -20,7 +20,6 @@ import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
 import java.util.Arrays;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.phasesdiscord.MenuIntegration.configScreenFactory;
 import static phasesdiscordConfigStuff.PhaseDiscordConfig.*;
@@ -96,6 +95,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
         handlers.ready = (user) -> LOGGER.info(
                 "Phase's Discord Rich Presence Client is ready!"
                         );
+
+        RPC.start(); //starts the new discord client
         /*
         discord.Discord_Initialize(appID, handlers, true, steamId);
 
