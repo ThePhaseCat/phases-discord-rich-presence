@@ -99,7 +99,7 @@ public class RPC
                     core.activityManager().updateActivity(activity);
 
                     try {
-                        Thread.sleep(16);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
