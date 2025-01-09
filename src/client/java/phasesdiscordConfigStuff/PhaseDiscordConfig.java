@@ -24,6 +24,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = BASIC) public static boolean showPaused = true;
 
+    @Entry(category = BASIC) public static boolean showPlayerHeadAndUsername = true;
+
     @Comment(category = ADVANCED, centered = true) public static Comment text2;
     @Entry(category = ADVANCED) public static boolean enableAdvancedMode = false;
 

@@ -16,6 +16,8 @@
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles basic support for modded dimensions. Please note this looks awful in the Discord Rich Presence, but if it works, it works.",
   "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in DRP",
   "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "Toggles showing if your game is paused in the Discord Rich Presence",
+  "phases-discord-rich-presence.midnightconfig.showPlayerHeadAndUsername": "Show Player Head and Username in DRP",
+  "phases-discord-rich-presence.midnightconfig.showPlayerHeadAndUsername.tooltip": "Toggles showing your player head and username in the Discord Rich Presence. This will replace the dimension icon in the bottom right of the presence.",
   "phases-discord-rich-presence.midnightconfig.text2": "Advanced Settings (Be *VERY* careful with these!)",
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode": "Enable Advanced Mode",
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode.tooltip": "Toggles advanced mode, allowing more customization and control over the Discord Rich Presence. \n (This overrides all basic settings from above)",
