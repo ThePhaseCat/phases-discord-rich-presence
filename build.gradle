@@ -61,8 +61,7 @@ dependencies {
 	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 	//new discord rpc
-	modImplementation 'com.github.JnCrMx:discord-game-sdk4j:master-SNAPSHOT'
-	include 'com.github.JnCrMx:discord-game-sdk4j:master-SNAPSHOT'
+	include(implementation('com.github.JnCrMx:discord-game-sdk4j:5cdac341e3'))
 
 	//include(implementation('com.jagrosh:DiscordIPC:LATEST'))
 
