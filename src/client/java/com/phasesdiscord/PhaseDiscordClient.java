@@ -96,7 +96,8 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 "Phase's Discord Rich Presence Client is ready!"
                         );
 
-        RPC.start(); //starts the new discord client
+        RPC.start(); //starts the new discord client system
+
         /*
         discord.Discord_Initialize(appID, handlers, true, steamId);
 
