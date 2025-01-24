@@ -111,7 +111,25 @@ public class RPC
                                         }
                                     }
                                 }
-                            } else if (client.getCurrentServerEntry() != null) {
+                            } else if (client.getCurrentServerEntry() != null) { //so multiplayer
+                                DimensionType dimensionType = client.world.getDimension();
+                                String dimensionName = dimensionType.effects().toString();
+                                String itemToDisplay = "";
+                                imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
+                                imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
+                                imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
+                                imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
+                                largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
+
+                                if(PhaseDiscordConfig.enableAdvancedMode)
+                                {
+
+                                }
+                                else //simple mode
+                                {
+
+                                }
+
                                 activity.assets().setLargeText("test");
                                 activity.assets().setLargeImage("large");
                                 updatePlayerHead();
