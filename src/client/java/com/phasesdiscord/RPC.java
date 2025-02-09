@@ -2,6 +2,7 @@ package com.phasesdiscord;
 
 import de.jcm.discordgamesdk.Core;
 import de.jcm.discordgamesdk.CreateParams;
+import de.jcm.discordgamesdk.LogLevel;
 import de.jcm.discordgamesdk.activity.Activity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.boss.dragon.phase.Phase;
@@ -58,6 +59,9 @@ public class RPC
                 activity.timestamps().setStart(Instant.now());
 
                 try (final Core core = new Core(params)) {
+                    //comment to enable logging
+                    //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
+                    core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
                     while (true) {
                         try {
                             if (client.isInSingleplayer()) {
@@ -115,6 +119,7 @@ public class RPC
                                 DimensionType dimensionType = client.world.getDimension();
                                 String dimensionName = dimensionType.effects().toString();
                                 String itemToDisplay = "";
+                                String serverIP = client.getCurrentServerEntry().address.toUpperCase();
                                 imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
                                 imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
                                 imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
@@ -123,20 +128,51 @@ public class RPC
 
                                 if(PhaseDiscordConfig.enableAdvancedMode)
                                 {
-
+                                    itemToDisplay = getHeldItem(true);
+                                    activity.setDetails(itemToDisplay);
+                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
+                                    if (!checkIfImageKeyIsValid(largeImageKey)) { // large image stuff
+                                        activity.assets().setLargeImage("fallback"); // change icon for when in a world
+                                    } else {
+                                        activity.assets().setLargeImage(largeImageKey); // change icon for when in a world
+                                    }
+                                    String stateParsed;
+                                    if (client.currentScreen != null) {
+                                        stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
+                                        stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                                        activity.setState(stateParsed);
+                                    } else {
+                                        stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
+                                        stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                                        activity.setState(stateParsed);
+                                    }
+                                    // set dimension stuff
+                                    setDimensionKey(true, dimensionName, activity);
                                 }
                                 else //simple mode
                                 {
+                                    itemToDisplay = getHeldItem(false);
+                                    activity.setDetails(itemToDisplay);
+                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
+                                    activity.assets().setLargeImage("base");
 
+                                    if (PhaseDiscordConfig.showPlayerHeadAndUsername) {
+                                        updatePlayerHead();
+                                    } else {
+                                        setDimensionKey(false, dimensionName, activity);
+                                    }
+
+                                    if (!PhaseDiscordConfig.showPaused) {
+                                        activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
+                                    } else {
+                                        if (client.currentScreen != null) {
+                                            activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing Multiplayer on %s with %s players - Paused", serverIP, client.world.getPlayers().size()).getString());
+                                        } else {
+                                            activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
+                                        }
+                                    }
                                 }
-
-                                activity.assets().setLargeText("test");
-                                activity.assets().setLargeImage("large");
-                                updatePlayerHead();
-                                activity.assets().setSmallText("insert player name here when i get around to it");
-                                activity.setDetails("In Multiplayer");
-                                activity.setState("HI!");
-                            } else {
+                            } else { //main menu stuff
                                 activity.assets().setLargeText("replace");
                                 activity.assets().setLargeImage("large");
                                 updatePlayerHead();
@@ -147,13 +183,15 @@ public class RPC
 
                             core.activityManager().updateActivity(activity);
 
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            LOGGER.error("Thread was interrupted", e);
-                            Thread.currentThread().interrupt();
-                            break;
-                        } catch (Exception e) {
-                            LOGGER.error("An error occurred while updating Discord activity", e);
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                LOGGER.error("Thread was interrupted", e);
+                                Thread.currentThread().interrupt();
+                                throw new RuntimeException(e);
+                            }
+                        } catch (RuntimeException e) {
+                            e.printStackTrace();
                         }
                     }
                 } catch (RuntimeException e) {
