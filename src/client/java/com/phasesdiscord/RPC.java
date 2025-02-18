@@ -114,6 +114,7 @@ public class RPC
                                             }
                                         }
                                     }
+                                    LoggerStuff(dimensionName, itemToDisplay, "singleplayer, not needed", activity);
                                 }
                             } else if (client.getCurrentServerEntry() != null) { //so multiplayer
                                 DimensionType dimensionType = client.world.getDimension();
@@ -167,6 +168,8 @@ public class RPC
                                         }
                                     }
                                 }
+                                LoggerStuff(dimensionName, itemToDisplay, serverIP, activity);
+
                             } else { //main menu stuff
                                 if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
                                 {
@@ -199,7 +202,7 @@ public class RPC
                             core.activityManager().updateActivity(activity);
 
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 LOGGER.error("Thread was interrupted", e);
                                 Thread.currentThread().interrupt();
@@ -387,6 +390,19 @@ public class RPC
             LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
             LOGGER.info("Invalid Image Key - " + imageKey);
             return false;
+        }
+    }
+
+    public static void LoggerStuff(String dimName, String item_name, String serverip, Activity presence)
+    {
+        if(PhaseDiscordConfig.enableDebug == true)
+        {
+            LOGGER.info("Advanced Mode Variables");
+            LOGGER.info("Dimension Name - " + dimName);
+            LOGGER.info("Item Name - " + item_name);
+            LOGGER.info("Server IP - " + serverip);
+            LOGGER.info("Current Presence Details - " + activity.getDetails());
+            LOGGER.info("Current Presence State - " + activity.getState());
         }
     }
 }
