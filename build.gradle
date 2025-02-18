@@ -57,8 +57,8 @@ dependencies {
 
 	//implementation 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'
 	//implementation 'club.minnced:discord-rpc-release:v3.4.0'
-	include(implementation ('club.minnced:discord-rpc-release:v3.3.0'))
-	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
+	//include(implementation ('club.minnced:discord-rpc-release:v3.3.0'))
+	//include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 	//new discord rpc
 	include(implementation('com.github.JnCrMx:discord-game-sdk4j:5cdac341e3'))
