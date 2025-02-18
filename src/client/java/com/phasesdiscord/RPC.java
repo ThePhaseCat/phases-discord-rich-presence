@@ -64,16 +64,16 @@ public class RPC
                     core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
                     while (true) {
                         try {
+                            imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
+                            imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
+                            imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
+                            imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
+                            largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
                             if (client.isInSingleplayer()) {
                                 if (client.world != null) {
                                     DimensionType dimensionType = client.world.getDimension();
                                     String dimensionName = dimensionType.effects().toString();
                                     String itemToDisplay = "";
-                                    imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
-                                    imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
-                                    imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
-                                    imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
-                                    largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
 
                                     if (PhaseDiscordConfig.enableAdvancedMode) { // advanced mode is enabled
                                         itemToDisplay = getHeldItem(true);
@@ -120,11 +120,6 @@ public class RPC
                                 String dimensionName = dimensionType.effects().toString();
                                 String itemToDisplay = "";
                                 String serverIP = client.getCurrentServerEntry().address.toUpperCase();
-                                imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
-                                imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
-                                imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
-                                imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
-                                largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
 
                                 if(PhaseDiscordConfig.enableAdvancedMode)
                                 {
@@ -173,12 +168,32 @@ public class RPC
                                     }
                                 }
                             } else { //main menu stuff
-                                activity.assets().setLargeText("replace");
-                                activity.assets().setLargeImage("large");
-                                updatePlayerHead();
-                                activity.assets().setSmallText("insert player name here when i get around to it");
-                                activity.setDetails("In Main Menu");
-                                activity.setState("HELLO!");
+                                if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
+                                {
+                                    activity.assets().setLargeImage(largeImageKey);
+                                    if(PhaseDiscordConfig.advancedModeChangeMainMenuText)
+                                    {
+                                        activity.setDetails(PhaseDiscordConfig.advancedModeMainMenuText);
+                                    }
+                                    else
+                                    {
+                                        activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
+                                    }
+
+                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence"); //to be changed via options eventually
+                                }
+                                else //simple mode
+                                {
+                                    activity.assets().setLargeImage("testicon1");
+                                    activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
+                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
+                                    if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+                                    {
+                                        updatePlayerHead();
+                                        activity.assets().setSmallText(client.getSession().getUsername());
+                                    }
+                                }
+                                activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
                             }
 
                             core.activityManager().updateActivity(activity);
