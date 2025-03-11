@@ -95,13 +95,13 @@ public class RPC
                                     } else { // do simple mode stuff
                                         itemToDisplay = getHeldItem(false);
                                         activity.setDetails(itemToDisplay);
-                                        activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
-                                        activity.assets().setLargeImage("base");
 
+                                        setDimensionKey(false, dimensionName, activity);
                                         if (PhaseDiscordConfig.showPlayerHeadAndUsername) {
                                             updatePlayerHead();
                                         } else {
-                                            setDimensionKey(false, dimensionName, activity);
+                                            activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
+                                            activity.assets().setSmallImage("base");
                                         }
 
                                         if (!PhaseDiscordConfig.showPaused) {
@@ -149,13 +149,13 @@ public class RPC
                                 {
                                     itemToDisplay = getHeldItem(false);
                                     activity.setDetails(itemToDisplay);
-                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
-                                    activity.assets().setLargeImage("base");
 
+                                    setDimensionKey(false, dimensionName, activity);
                                     if (PhaseDiscordConfig.showPlayerHeadAndUsername) {
                                         updatePlayerHead();
                                     } else {
-                                        setDimensionKey(false, dimensionName, activity);
+                                        activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
+                                        activity.assets().setSmallImage("base");
                                     }
 
                                     if (!PhaseDiscordConfig.showPaused) {
@@ -284,95 +284,95 @@ public class RPC
             {
                 if(checkIfImageKeyIsValid(imageNameOverworld) == false)
                 {
-                    activity.assets().setSmallImage("fallback");
+                    activity.assets().setLargeImage("fallback");
                 }
                 else
                 {
-                    activity.assets().setSmallImage(imageNameOverworld);
+                    activity.assets().setLargeImage(imageNameOverworld);
                 }
 
-                activity.assets().setSmallText(PhaseDiscordConfig.advancedModeDimensionOverworld);
+                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionOverworld);
             }
             else if(dimensionName.equals("minecraft:the_nether"))
             {
                 if(checkIfImageKeyIsValid(imageNameNether) == false)
                 {
-                    activity.assets().setSmallImage("fallback");
+                    activity.assets().setLargeImage("fallback");
                 }
                 else
                 {
-                    activity.assets().setSmallImage(imageNameNether);
+                    activity.assets().setLargeImage(imageNameNether);
                 }
 
-                activity.assets().setSmallText(PhaseDiscordConfig.advancedModeDimensionNether);
+                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionNether);
             }
             else if(dimensionName.equals("minecraft:the_end"))
             {
                 if(checkIfImageKeyIsValid(imageNameEnd) == false)
                 {
-                    activity.assets().setSmallImage("fallback");
+                    activity.assets().setLargeImage("fallback");
                 }
                 else
                 {
-                    activity.assets().setSmallImage(imageNameEnd);
+                    activity.assets().setLargeImage(imageNameEnd);
                 }
 
-                activity.assets().setSmallText(PhaseDiscordConfig.advancedModeDimensionEnd);
+                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionEnd);
             }
             else
             {
                 customDimensionName = dimensionName.replace("minecraft:", "");
                 if(checkIfImageKeyIsValid(imageNameCustom) == false)
                 {
-                    activity.assets().setSmallImage("fallback");
+                    activity.assets().setLargeImage("fallback");
                 }
                 else
                 {
-                    activity.assets().setSmallImage(imageNameCustom);
+                    activity.assets().setLargeImage(imageNameCustom);
                 }
 
-                activity.assets().setSmallText(PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName));
+                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName));
             }
         }
         else
         {
             if (dimensionName.equals("minecraft:overworld")) {
                 if (PhaseDiscordConfig.enableDimension == false) {
-                    presence.assets().setSmallImage("void");
-                    presence.assets().setSmallText("Minecraft");
+                    presence.assets().setLargeImage("void");
+                    presence.assets().setLargeText("Minecraft");
                 } else {
-                    presence.assets().setSmallImage("overworld");
-                    presence.assets().setSmallText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString());
+                    presence.assets().setLargeImage("overworld");
+                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString());
                 }
             } else if (dimensionName.equals("minecraft:the_nether")) {
                 if (PhaseDiscordConfig.enableDimension == false) {
-                    presence.assets().setSmallImage("void");
-                    presence.assets().setSmallText("Minecraft");
+                    presence.assets().setLargeImage("void");
+                    presence.assets().setLargeText("Minecraft");
                 } else {
-                    presence.assets().setSmallImage("nether");
-                    presence.assets().setSmallText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString());
+                    presence.assets().setLargeImage("nether");
+                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString());
                 }
             } else if (dimensionName.equals("minecraft:the_end")) {
                 if (PhaseDiscordConfig.enableDimension == false) {
-                    presence.assets().setSmallImage("void");
-                    presence.assets().setSmallText("Minecraft");
+                    presence.assets().setLargeImage("void");
+                    presence.assets().setLargeText("Minecraft");
                 } else {
-                    presence.assets().setSmallImage("the_end");
-                    presence.assets().setSmallText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString());
+                    presence.assets().setLargeImage("the_end");
+                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString());
                 }
             } else {
                 if (PhaseDiscordConfig.enableDimension == false) {
-                    presence.assets().setSmallImage("void");
-                    presence.assets().setSmallText("Minecraft");
+                    presence.assets().setLargeImage("void");
+                    presence.assets().setLargeText("Minecraft");
                 } else {
                     if (PhaseDiscordConfig.enableCustomDimensionSupport == false) {
-                        presence.assets().setSmallImage("void");
-                        presence.assets().setSmallText("");
+                        presence.assets().setLargeImage("void");
+                        presence.assets().setLargeText("");
                     } else {
                         //System.out.println(dimensionName + " why is this not working");
                         customDimensionName = dimensionName.replace("minecraft:", "");
-                        presence.assets().setSmallImage("void");
-                        presence.assets().setSmallText("In " + customDimensionName + " Dimension");
+                        presence.assets().setLargeImage("void");
+                        presence.assets().setLargeText("In " + customDimensionName + " Dimension");
                     }
                 }
             }
