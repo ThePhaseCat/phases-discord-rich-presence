@@ -78,11 +78,14 @@ public class RPC
                                     if (PhaseDiscordConfig.enableAdvancedMode) { // advanced mode is enabled
                                         itemToDisplay = getHeldItem(true);
                                         activity.setDetails(itemToDisplay);
-                                        activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
-                                        if (!checkIfImageKeyIsValid(largeImageKey)) { // large image stuff
-                                            activity.assets().setLargeImage("fallback"); // change icon for when in a world
-                                        } else {
-                                            activity.assets().setLargeImage(largeImageKey); // change icon for when in a world
+
+                                        if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
+                                        {
+                                            updatePlayerHead();
+                                        }
+                                        else
+                                        {
+                                            updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity);
                                         }
 
                                         if (client.currentScreen != null) {
@@ -126,12 +129,16 @@ public class RPC
                                 {
                                     itemToDisplay = getHeldItem(true);
                                     activity.setDetails(itemToDisplay);
-                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
-                                    if (!checkIfImageKeyIsValid(largeImageKey)) { // large image stuff
-                                        activity.assets().setLargeImage("fallback"); // change icon for when in a world
-                                    } else {
-                                        activity.assets().setLargeImage(largeImageKey); // change icon for when in a world
+
+                                    if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
+                                    {
+                                        updatePlayerHead();
                                     }
+                                    else
+                                    {
+                                        updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity);
+                                    }
+
                                     String stateParsed;
                                     if (client.currentScreen != null) {
                                         stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
@@ -221,7 +228,8 @@ public class RPC
 
     //these following methods are adopted from the Fabric-DiscordRPC repo (https://github.com/copyandbuild/Fabric-DiscordRPC)
     //updates player head
-    private static void updatePlayerHead() {
+    private static void updatePlayerHead()
+    {
         String uuid = client.getGameProfile().getId().toString();
         String playerHeadImage = getPlayerHeadURL(uuid, "head", 3);
         activity.assets().setSmallImage(playerHeadImage);
@@ -376,6 +384,18 @@ public class RPC
                     }
                 }
             }
+        }
+    }
+
+    public static void updateSmallImageAdvancedMode(String name, Activity presence)
+    {
+        if(checkIfImageKeyIsValid(name) == false)
+        {
+            presence.assets().setSmallImage("fallback");
+        }
+        else
+        {
+            presence.assets().setSmallImage(name);
         }
     }
 

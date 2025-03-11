@@ -66,6 +66,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOtherPicDetail;
 
+    @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
+
     @Entry(category = ADVANCED) public static String advancedModeOverworldPic = "overworld";
 
     @Entry(category = ADVANCED) public static String advancedModeNetherPic = "nether";
@@ -74,7 +76,7 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = ADVANCED) public static String advancedModeCustomPic = "void";
 
-    @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
+    @Entry(category = ADVANCED) public static boolean advancedModeShowPlayerHeadUser = true;
 
     @Comment(category = OTHER, centered = true) public static Comment otherOptions;
 
