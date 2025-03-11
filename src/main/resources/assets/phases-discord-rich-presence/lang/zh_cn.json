@@ -16,6 +16,8 @@
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "切换对模组的维度是否进行基本支持。请注意，这在 Discord Rich Presence 中看起来很糟糕。但如果它工作，它就会有效。",
   "phases-discord-rich-presence.midnightconfig.showPaused": "在 DRP 中显示游戏是否暂停",
   "phases-discord-rich-presence.midnightconfig.showPaused.tooltip": "切换在 Discord Rich Presence 中显示游戏是否已暂停",
+  "phases-discord-rich-presence.midnightconfig.showPlayerHeadAndUsername": "在DRP中显示玩家头颅和用户名",
+  "phases-discord-rich-presence.midnightconfig.showPlayerHeadAndUsername.tooltip": "切换在Discord Rich Presence中是否显示你的玩家头颅和用户名，这将替换掉显示在Presence右下角的维度图标。",
   "phases-discord-rich-presence.midnightconfig.text2": "高级设置（请对这些选项*非常*细心！）",
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode": "启用高级模式",
   "phases-discord-rich-presence.midnightconfig.enableAdvancedMode.tooltip": "切换高级模式，允许对 Discord Rich Presence 进行更多自定义和控制。 \n （这将覆盖上面的所有基本设置）",
