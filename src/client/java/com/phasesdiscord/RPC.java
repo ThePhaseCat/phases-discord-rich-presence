@@ -95,6 +95,8 @@ public class RPC
                                         }
                                         // set dimension stuff
                                         setDimensionKey(true, dimensionName, activity);
+                                        //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
+
                                     } else { // do simple mode stuff
                                         itemToDisplay = getHeldItem(false);
                                         activity.setDetails(itemToDisplay);
@@ -151,6 +153,8 @@ public class RPC
                                     }
                                     // set dimension stuff
                                     setDimensionKey(true, dimensionName, activity);
+                                    //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
+
                                 }
                                 else //simple mode
                                 {
@@ -190,7 +194,7 @@ public class RPC
                                         activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
                                     }
 
-                                    activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence"); //to be changed via options eventually
+                                    activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
                                 }
                                 else //simple mode
                                 {
