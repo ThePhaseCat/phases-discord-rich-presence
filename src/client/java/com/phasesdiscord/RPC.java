@@ -243,6 +243,7 @@ public class RPC
         return "https://api.mineatar.io/" + type + "/" + uuid + "?scale=" + size;
     }
 
+    //returns the string/name of the item the player is currently holding
     private static String getHeldItem(boolean isAdvancedMode)
     {
         String finalResult = ""; //default value
@@ -285,6 +286,7 @@ public class RPC
         return ""; //just in case
     }
 
+    //sets the assets in the presence to the correct dimension
     public static void setDimensionKey(boolean inAdvancedMode, String dimensionName, Activity presence)
     {
         if(inAdvancedMode)
@@ -388,6 +390,7 @@ public class RPC
         }
     }
 
+    //updates the small image of advanced mode
     public static void updateSmallImageAdvancedMode(String name, Activity presence)
     {
         if(checkIfImageKeyIsValid(name) == false)
@@ -399,7 +402,9 @@ public class RPC
             presence.assets().setSmallImage(name);
         }
     }
-    
+
+    //checks if the image string passed in through advanced mode is a valid string
+    //given the array holding all possible images
     public static boolean checkIfImageKeyIsValid(String imageKey)
     {
         if(Arrays.stream(imageKeyArray).anyMatch(imageKey::equals))
@@ -414,6 +419,7 @@ public class RPC
         }
     }
 
+    //prints out debug stuff, mainly meant for advanced mode debugging
     public static void LoggerStuff(String dimName, String item_name, String serverip, Activity presence)
     {
         if(PhaseDiscordConfig.enableDebug == true)
