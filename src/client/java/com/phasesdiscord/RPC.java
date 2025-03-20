@@ -209,7 +209,7 @@ public class RPC
                             core.activityManager().updateActivity(activity);
 
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);
                             } catch (InterruptedException e) {
                                 LOGGER.error("Thread was interrupted", e);
                                 Thread.currentThread().interrupt();
@@ -238,7 +238,8 @@ public class RPC
 
     //fetches the image URL for the player head
     @Contract(pure = true)
-    private static @NotNull String getPlayerHeadURL(String uuid, String type, int size) {
+    private static @NotNull String getPlayerHeadURL(String uuid, String type, int size)
+    {
         return "https://api.mineatar.io/" + type + "/" + uuid + "?scale=" + size;
     }
 
@@ -398,7 +399,7 @@ public class RPC
             presence.assets().setSmallImage(name);
         }
     }
-
+    
     public static boolean checkIfImageKeyIsValid(String imageKey)
     {
         if(Arrays.stream(imageKeyArray).anyMatch(imageKey::equals))
