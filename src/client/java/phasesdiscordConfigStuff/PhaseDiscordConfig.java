@@ -10,6 +10,7 @@ public class PhaseDiscordConfig extends MidnightConfig
     public static final String OTHER = "other";
 
     @Comment(category = BASIC, centered = true) public static Comment text1;
+
     @Entry(category = BASIC) public static boolean discordEnable = true;
 
     @Entry(category = BASIC) public static boolean enableItem = true;
