@@ -5,7 +5,6 @@ import de.jcm.discordgamesdk.CreateParams;
 import de.jcm.discordgamesdk.LogLevel;
 import de.jcm.discordgamesdk.activity.Activity;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.boss.dragon.phase.Phase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
@@ -15,7 +14,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
-import java.io.File;
 import java.time.Instant;
 import java.util.Arrays;
 
