@@ -78,7 +78,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeLargePic": "Presence 大图像",
   "phases-discord-rich-presence.midnightconfig.advancedModeLargePic.tooltip": "更改 Presence 中的大图像。它必须是上面列出的键之一。",
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail": "主世界图像键: \n overworld, mountain, swamp, blankplains, caveoverlookview, mountainview",
-  "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail2": "pale_garden1, pale_garden2, pale_garden3, shaders1, shaders2, trial_chamber",
+  "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail2": "pale_garden1, pale_garden2, pale_garden3 shaders1, shaders2, trial_chamber, polar_bear, savanna, savanna_plateau",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "下界图像键: \n nether, nether2, nether3, nethercool",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "末地图像键: \n the_end, end2, end3, actualendbg",
   "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "其他图像键: \n void, base, creeper_icon, fallback",
