@@ -39,9 +39,9 @@ public class RPC
 
     static String[] imageKeyArray = {
             "overworld", "mountain", "swamp", "blankplains", "caveoverlookview", "mountainview",
-            "polar_bear, savanna, savanna_plateau",
+            "polar_bear", "savanna", "savanna_plateau",
             "pale_garden1", "pale_garden2", "pale_garden3", "shaders1", "shaders2", "trial_chamber",
-            "spring1, spring2, vibrant_visuals1, vibrant_visuals2",
+            "spring1", "spring2", "vibrant_visuals1", "vibrant_visuals2",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "creeper_icon", "fallback"
