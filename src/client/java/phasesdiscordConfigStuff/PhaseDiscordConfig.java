@@ -10,6 +10,7 @@ public class PhaseDiscordConfig extends MidnightConfig
     public static final String OTHER = "other";
 
     @Comment(category = BASIC, centered = true) public static Comment text1;
+
     @Entry(category = BASIC) public static boolean discordEnable = true;
 
     @Entry(category = BASIC) public static boolean enableItem = true;
@@ -23,6 +24,8 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry(category = BASIC) public static boolean enableServerPlayerCount = true;
 
     @Entry(category = BASIC) public static boolean showPaused = true;
+
+    @Entry(category = BASIC) public static boolean showPlayerHeadAndUsername = true;
 
     @Comment(category = ADVANCED, centered = true) public static Comment text2;
     @Entry(category = ADVANCED) public static boolean enableAdvancedMode = false;
@@ -48,6 +51,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = ADVANCED) public static String advancedModeMainMenuText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString();
 
+    @Entry(category = ADVANCED) public static String advancedModeLargeText = "Phase's Discord Rich Presence";
+
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail1;
 
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail2;
@@ -64,6 +69,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOtherPicDetail;
 
+    @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
+
     @Entry(category = ADVANCED) public static String advancedModeOverworldPic = "overworld";
 
     @Entry(category = ADVANCED) public static String advancedModeNetherPic = "nether";
@@ -72,13 +79,11 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = ADVANCED) public static String advancedModeCustomPic = "void";
 
-    @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
+    @Entry(category = ADVANCED) public static boolean advancedModeShowPlayerHeadUser = true;
 
     @Comment(category = OTHER, centered = true) public static Comment otherOptions;
 
     @Entry(category = OTHER) public static boolean enableDebug = false;
-    
-    @Entry(category = OTHER) public static String discordAppID = "1147361100929708053";
 
     @Entry(category = OTHER) public static int discordRichPresenceUpdateRate = 5000;
 }
