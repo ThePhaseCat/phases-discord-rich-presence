@@ -4,6 +4,7 @@ import de.jcm.discordgamesdk.Core;
 import de.jcm.discordgamesdk.CreateParams;
 import de.jcm.discordgamesdk.LogLevel;
 import de.jcm.discordgamesdk.activity.Activity;
+import de.jcm.discordgamesdk.activity.ActivityType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -64,6 +65,9 @@ public class RPC
                     core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
                     while (true) {
                         try {
+                            //test stuff below
+                            activity.setType(ActivityType.COMPETING);
+
                             imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
                             imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
                             imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
@@ -428,12 +432,15 @@ public class RPC
     {
         if(PhaseDiscordConfig.enableDebug == true)
         {
-            LOGGER.info("Advanced Mode Variables");
-            LOGGER.info("Dimension Name - " + dimName);
-            LOGGER.info("Item Name - " + item_name);
-            LOGGER.info("Server IP - " + serverip);
-            LOGGER.info("Current Presence Details - " + activity.getDetails());
-            LOGGER.info("Current Presence State - " + activity.getState());
+            //LOGGER.info("Advanced Mode Variables");
+            //LOGGER.info("Dimension Name - " + dimName);
+            //LOGGER.info("Item Name - " + item_name);
+            //LOGGER.info("Server IP - " + serverip);
+            //LOGGER.info("Current Presence Details - " + activity.getDetails());
+            //LOGGER.info("Current Presence State - " + activity.getState());
+
+            //try my random test stuff
+            LOGGER.info(String.valueOf(presence.getType()));
         }
     }
 }
