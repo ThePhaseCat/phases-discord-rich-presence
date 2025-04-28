@@ -195,6 +195,7 @@ public class RPC
                                     }
 
                                     activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
+                                    activity.setState("CHANGE IN CODE: " + PhaseDiscordConfig.advancedModeLargeText); //CHANGE, VERY WORK IN PROGRESS
                                 }
                                 else //simple mode
                                 {
@@ -206,8 +207,9 @@ public class RPC
                                         updatePlayerHead();
                                         activity.assets().setSmallText(client.getSession().getUsername());
                                     }
+
+                                    activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
                                 }
-                                activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
                             }
 
                             core.activityManager().updateActivity(activity);

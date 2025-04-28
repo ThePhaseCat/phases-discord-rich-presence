@@ -84,7 +84,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "Other Images Keys: \n void, base, creeper_icon, fallback",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser": "Show Player Head and Username in Presence",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser.tooltip": "Toggles showing your player head and username in Advanced Mode. This replaces the small image in the presence.",
-  "phases-discord-rich-presence.midnightconfig.advancedModeLargeText": "Presence Small Text (Main Menu)",
+  "phases-discord-rich-presence.midnightconfig.advancedModeLargeText": "Presence Small Image Text (Main Menu)",
   "phases-discord-rich-presence.midnightconfig.advancedModeLargeText.tooltip": "Changes the small text in the presence when in the main menu",
   "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
   "phases-discord-rich-presence.midnightconfig.enableDebug": "Enable Debug Mode",
