@@ -62,6 +62,7 @@ public class RPC
                     //comment to enable logging
                     //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
                     core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
+
                     while (true) {
                         try {
                             imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
