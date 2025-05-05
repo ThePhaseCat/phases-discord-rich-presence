@@ -195,7 +195,7 @@ public class RPC
                                     }
 
                                     activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
-                                    activity.setState("CHANGE IN CODE: " + PhaseDiscordConfig.advancedModeLargeText); //CHANGE, VERY WORK IN PROGRESS
+                                    activity.setState(PhaseDiscordConfig.advancedModeMainMenuState);
                                 }
                                 else //simple mode
                                 {

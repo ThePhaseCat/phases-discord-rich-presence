@@ -53,6 +53,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = ADVANCED) public static String advancedModeLargeText = "Phase's Discord Rich Presence";
 
+    @Entry(category = ADVANCED) public static String advancedModeMainMenuState = "Phase's Discord Rich Presence";
+
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail1;
 
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail2;
