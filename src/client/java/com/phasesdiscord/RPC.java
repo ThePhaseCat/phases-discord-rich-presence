@@ -44,7 +44,7 @@ public class RPC
             "spring1", "spring2", "vibrant_visuals1", "vibrant_visuals2",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
-            "void", "base", "creeper_icon", "fallback"
+            "void", "base", "base_old", "creeper_icon", "fallback"
     };
 
     public static void start() {
@@ -224,7 +224,17 @@ public class RPC
                             {
                                 if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
                                 {
-                                    activity.assets().setLargeImage(largeImageKey);
+
+                                    //main menu large image error handle
+                                    if(Arrays.stream(imageKeyArray).anyMatch(largeImageKey::equals))
+                                    {
+                                        activity.assets().setLargeImage(largeImageKey);
+                                    }
+                                    else
+                                    {
+                                        activity.assets().setLargeImage("fallback");
+                                    }
+
                                     if(PhaseDiscordConfig.advancedModeChangeMainMenuText)
                                     {
                                         activity.setDetails(PhaseDiscordConfig.advancedModeMainMenuText);
@@ -239,7 +249,7 @@ public class RPC
                                 }
                                 else //simple mode
                                 {
-                                    activity.assets().setLargeImage("testicon1");
+                                    activity.assets().setLargeImage("base");
                                     activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
                                     activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
                                     if(PhaseDiscordConfig.showPlayerHeadAndUsername)

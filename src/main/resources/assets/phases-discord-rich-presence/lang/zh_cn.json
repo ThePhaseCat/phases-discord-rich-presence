@@ -83,7 +83,7 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeOverworldPicDetail2": "pale_garden1, pale_garden2, pale_garden3 shaders1, shaders2, trial_chamber, polar_bear, savanna, savanna_plateau, spring1, spring2, vibrant_visuals1, vibrant_visuals2",
   "phases-discord-rich-presence.midnightconfig.advancedModeNetherPicDetail": "下界图像键: \n nether, nether2, nether3, nethercool",
   "phases-discord-rich-presence.midnightconfig.advancedModeEndPicDetail": "末地图像键: \n the_end, end2, end3, actualendbg",
-  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "其他图像键: \n void, base, creeper_icon, fallback",
+  "phases-discord-rich-presence.midnightconfig.advancedModeOtherPicDetail": "其他图像键: \n void, base, base_old, creeper_icon, fallback",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser": "在场时显示玩家头像和用户名",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser.tooltip": "切换在高级模式中显示您的玩家头像和用户名。这将替换存在中的小图像。",
   "phases-discord-rich-presence.midnightconfig.advancedModeLargeText": "存在小文本（主菜单）",
