@@ -42,9 +42,10 @@ public class RPC
             "polar_bear", "savanna", "savanna_plateau",
             "pale_garden1", "pale_garden2", "pale_garden3", "shaders1", "shaders2", "trial_chamber",
             "spring1", "spring2", "vibrant_visuals1", "vibrant_visuals2",
+            "lush_cave", "deep_dark1", "deep_dark2", "happy_ghast1",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
-            "void", "base", "creeper_icon", "fallback"
+            "void", "base", "base_old", "creeper_icon", "fallback"
     };
 
     public static void start() {
@@ -62,20 +63,26 @@ public class RPC
                     //comment to enable logging
                     //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
                     core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
-                    while (true) {
-                        try {
+
+                    while(true)
+                    {
+                        try
+                        {
                             imageNameOverworld = PhaseDiscordConfig.advancedModeOverworldPic;
                             imageNameNether = PhaseDiscordConfig.advancedModeNetherPic;
                             imageNameEnd = PhaseDiscordConfig.advancedModeEndPic;
                             imageNameCustom = PhaseDiscordConfig.advancedModeCustomPic;
                             largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
-                            if (client.isInSingleplayer()) {
-                                if (client.world != null) {
+                            if(client.isInSingleplayer()) //singleplayer presence
+                            {
+                                if(client.world != null)
+                                {
                                     DimensionType dimensionType = client.world.getDimension();
                                     String dimensionName = dimensionType.effects().toString();
                                     String itemToDisplay = "";
 
-                                    if (PhaseDiscordConfig.enableAdvancedMode) { // advanced mode is enabled
+                                    if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode on
+                                    {
                                         itemToDisplay = getHeldItem(true);
                                         activity.setDetails(itemToDisplay);
 
@@ -88,40 +95,58 @@ public class RPC
                                             updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity);
                                         }
 
-                                        if (client.currentScreen != null) {
+                                        if(client.currentScreen != null)
+                                        {
                                             activity.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause);
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             activity.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayer);
                                         }
                                         // set dimension stuff
                                         setDimensionKey(true, dimensionName, activity);
                                         //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
 
-                                    } else { // do simple mode stuff
+                                    }
+                                    else //simple mode
+                                    {
                                         itemToDisplay = getHeldItem(false);
                                         activity.setDetails(itemToDisplay);
 
                                         setDimensionKey(false, dimensionName, activity);
-                                        if (PhaseDiscordConfig.showPlayerHeadAndUsername) {
+                                        if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+                                        {
                                             updatePlayerHead();
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
                                             activity.assets().setSmallImage("base");
                                         }
 
-                                        if (!PhaseDiscordConfig.showPaused) {
+                                        if(!PhaseDiscordConfig.showPaused)
+                                        {
                                             activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField", "Playing Singleplayer").getString());
-                                        } else {
-                                            if (client.currentScreen != null) {
+                                        }
+                                        else
+                                        {
+                                            if(client.currentScreen != null)
+                                            {
                                                 activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField", "Playing Singleplayer - Paused").getString());
-                                            } else {
+                                            }
+                                            else
+                                            {
                                                 activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField", "Playing Singleplayer").getString());
                                             }
                                         }
                                     }
+
+                                    //debug logging
                                     LoggerStuff(dimensionName, itemToDisplay, "singleplayer, not needed", activity);
                                 }
-                            } else if (client.getCurrentServerEntry() != null) { //so multiplayer
+                            }
+                            else if(client.getCurrentServerEntry() != null) //multiplayer presence
+                            {
                                 DimensionType dimensionType = client.world.getDimension();
                                 String dimensionName = dimensionType.effects().toString();
                                 String itemToDisplay = "";
@@ -142,19 +167,22 @@ public class RPC
                                     }
 
                                     String stateParsed;
-                                    if (client.currentScreen != null) {
+                                    if(client.currentScreen != null)
+                                    {
                                         stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
                                         stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
                                         activity.setState(stateParsed);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
                                         stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
                                         activity.setState(stateParsed);
                                     }
+
                                     // set dimension stuff
                                     setDimensionKey(true, dimensionName, activity);
                                     //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
-
                                 }
                                 else //simple mode
                                 {
@@ -162,29 +190,52 @@ public class RPC
                                     activity.setDetails(itemToDisplay);
 
                                     setDimensionKey(false, dimensionName, activity);
-                                    if (PhaseDiscordConfig.showPlayerHeadAndUsername) {
+                                    if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+                                    {
                                         updatePlayerHead();
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
                                         activity.assets().setSmallImage("base");
                                     }
 
-                                    if (!PhaseDiscordConfig.showPaused) {
+                                    if(!PhaseDiscordConfig.showPaused)
+                                    {
                                         activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
-                                    } else {
-                                        if (client.currentScreen != null) {
+                                    }
+                                    else
+                                    {
+                                        if(client.currentScreen != null)
+                                        {
                                             activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing Multiplayer on %s with %s players - Paused", serverIP, client.world.getPlayers().size()).getString());
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
                                         }
                                     }
                                 }
+
+                                //debug logging
                                 LoggerStuff(dimensionName, itemToDisplay, serverIP, activity);
 
-                            } else { //main menu stuff
+                            }
+                            else //main menu presence
+                            {
                                 if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
                                 {
-                                    activity.assets().setLargeImage(largeImageKey);
+
+                                    //main menu large image error handle
+                                    if(Arrays.stream(imageKeyArray).anyMatch(largeImageKey::equals))
+                                    {
+                                        activity.assets().setLargeImage(largeImageKey);
+                                    }
+                                    else
+                                    {
+                                        activity.assets().setLargeImage("fallback");
+                                    }
+
                                     if(PhaseDiscordConfig.advancedModeChangeMainMenuText)
                                     {
                                         activity.setDetails(PhaseDiscordConfig.advancedModeMainMenuText);
@@ -195,10 +246,11 @@ public class RPC
                                     }
 
                                     activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
+                                    activity.setState(PhaseDiscordConfig.advancedModeMainMenuState);
                                 }
                                 else //simple mode
                                 {
-                                    activity.assets().setLargeImage("testicon1");
+                                    activity.assets().setLargeImage("base");
                                     activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
                                     activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
                                     if(PhaseDiscordConfig.showPlayerHeadAndUsername)
@@ -206,8 +258,9 @@ public class RPC
                                         updatePlayerHead();
                                         activity.assets().setSmallText(client.getSession().getUsername());
                                     }
+
+                                    activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
                                 }
-                                activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
                             }
 
                             core.activityManager().updateActivity(activity);
@@ -271,10 +324,14 @@ public class RPC
             }
             else //simple mode
             {
-                if (PhaseDiscordConfig.enableItem == false) {
+                if(PhaseDiscordConfig.enableItem == false)
+                {
                     finalResult = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
-                } else {
-                    if (!item_name.equals(Items.AIR.getName().getString())) {
+                }
+                else
+                {
+                    if(!item_name.equals(Items.AIR.getName().getString()))
+                    {
                         finalResult = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding" + item_name, item_name).getString();
                     }
                     else
@@ -287,7 +344,7 @@ public class RPC
             }
         }
 
-        return ""; //just in case
+        return "(If this is showing, then a bug has occured)"; //just in case, but this should never be shown
     }
 
     //sets the assets in the presence to the correct dimension
@@ -351,39 +408,61 @@ public class RPC
         }
         else
         {
-            if (dimensionName.equals("minecraft:overworld")) {
-                if (PhaseDiscordConfig.enableDimension == false) {
+            if(dimensionName.equals("minecraft:overworld"))
+            {
+                if(PhaseDiscordConfig.enableDimension == false)
+                {
                     presence.assets().setLargeImage("void");
                     presence.assets().setLargeText("Minecraft");
-                } else {
+                }
+                else
+                {
                     presence.assets().setLargeImage("overworld");
                     presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString());
                 }
-            } else if (dimensionName.equals("minecraft:the_nether")) {
-                if (PhaseDiscordConfig.enableDimension == false) {
+            }
+            else if(dimensionName.equals("minecraft:the_nether"))
+            {
+                if(PhaseDiscordConfig.enableDimension == false)
+                {
                     presence.assets().setLargeImage("void");
                     presence.assets().setLargeText("Minecraft");
-                } else {
+                }
+                else
+                {
                     presence.assets().setLargeImage("nether");
                     presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString());
                 }
-            } else if (dimensionName.equals("minecraft:the_end")) {
-                if (PhaseDiscordConfig.enableDimension == false) {
+            }
+            else if(dimensionName.equals("minecraft:the_end"))
+            {
+                if(PhaseDiscordConfig.enableDimension == false)
+                {
                     presence.assets().setLargeImage("void");
                     presence.assets().setLargeText("Minecraft");
-                } else {
+                }
+                else
+                {
                     presence.assets().setLargeImage("the_end");
                     presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString());
                 }
-            } else {
-                if (PhaseDiscordConfig.enableDimension == false) {
+            }
+            else
+            {
+                if(PhaseDiscordConfig.enableDimension == false)
+                {
                     presence.assets().setLargeImage("void");
                     presence.assets().setLargeText("Minecraft");
-                } else {
-                    if (PhaseDiscordConfig.enableCustomDimensionSupport == false) {
+                }
+                else
+                {
+                    if(PhaseDiscordConfig.enableCustomDimensionSupport == false)
+                    {
                         presence.assets().setLargeImage("void");
                         presence.assets().setLargeText("");
-                    } else {
+                    }
+                    else
+                    {
                         //System.out.println(dimensionName + " why is this not working");
                         customDimensionName = dimensionName.replace("minecraft:", "");
                         presence.assets().setLargeImage("void");
@@ -418,7 +497,7 @@ public class RPC
         else
         {
             LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
-            LOGGER.info("Invalid Image Key - " + imageKey);
+            LOGGER.info("Invalid Image Key was..." + imageKey);
             return false;
         }
     }
