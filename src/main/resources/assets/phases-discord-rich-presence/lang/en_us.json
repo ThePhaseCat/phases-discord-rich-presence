@@ -35,7 +35,7 @@
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoAmount": "Playing Multiplayer on %s",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerNoIP": "Playing Multiplayer with %s players",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerBasic": "Playing Multiplayer",
-  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPause\": \"Presence State - Multiplayer Paused",
+  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPause": "Presence State - Multiplayer Paused",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPause.tooltip": "Presence State text when you're playing multiplayer and you're paused (First %s - Server IP, Second %s - Player Count)",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField": "Playing multiplayer on %s with %s players - Paused",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseNoAmount": "Playing Multiplayer on %s - Paused",
