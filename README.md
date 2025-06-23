@@ -13,6 +13,9 @@ Fabric API `>=0.127.0`
 
 To start, simply have Discord open, either in the background or on your desktop and as long as the config is set to be turned on, then you should see Discord Rich Presence using this mod!
 
+![image](https://github.com/user-attachments/assets/7a523c07-8694-4a4b-aa8a-dae14bb1f236)
+![image](https://github.com/user-attachments/assets/e0a30830-801a-4f32-bb28-59df22ae1c8a)
+![image](https://github.com/user-attachments/assets/181fcc02-9b38-4164-b043-56157c2f792c)
 ![image](https://github.com/user-attachments/assets/20e27011-6caa-48e1-9b5d-8117b4d185bc)
 
 
