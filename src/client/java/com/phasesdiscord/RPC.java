@@ -48,14 +48,27 @@ public class RPC
             "void", "base", "base_old", "creeper_icon", "fallback"
     };
 
+    static long defaultAppID = 1147361100929708053L; //in order to check if the id matches
+    static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
+
     public static void start() {
             new Thread(() -> {
                 if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
                     return;
                 }
 
+                long finalAppID = Long.parseLong(PhaseDiscordConfig.discordAppID);
+                if(finalAppID == defaultAppID)
+                {
+                    usingDefaultAppID = true;
+                }
+                else
+                {
+                    usingDefaultAppID = false;
+                }
+
                 final CreateParams params = new CreateParams();
-                params.setClientID(1147361100929708053L);
+                params.setClientID(finalAppID);
                 params.setFlags(CreateParams.Flags.NO_REQUIRE_DISCORD);
                 activity.timestamps().setStart(Instant.now());
 
@@ -496,6 +509,11 @@ public class RPC
         }
         else
         {
+            if(usingDefaultAppID == false)
+            {
+                return true; //always return true, expect the user to have handled valid keys themselves
+            }
+
             LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
             LOGGER.info("Invalid Image Key was..." + imageKey);
             return false;
