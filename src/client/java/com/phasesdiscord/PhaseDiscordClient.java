@@ -57,10 +57,10 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     loadSuccess = true;
                 } catch (ClassNotFoundException ignored) {
                 }
+
+                //starts the new discord client system
+                RPC.start();
             }
         });
-
-        //starts the new discord client system
-        RPC.start();
     }
 }
