@@ -240,7 +240,7 @@ public class RPC
                             {
 
                                 //main menu large image error handle
-                                if(Arrays.stream(imageKeyArray).anyMatch(largeImageKey::equals))
+                                if(checkIfImageKeyIsValid(largeImageKey))
                                 {
                                     activity.assets().setLargeImage(largeImageKey);
                                 }
@@ -511,6 +511,7 @@ public class RPC
         {
             if(usingDefaultAppID == false)
             {
+                //LOGGER.info("using custom app id");
                 return true; //always return true, expect the user to have handled valid keys themselves
             }
 
