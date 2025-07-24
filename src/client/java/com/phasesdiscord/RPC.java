@@ -240,7 +240,7 @@ public class RPC
                                 {
 
                                     //main menu large image error handle
-                                    if(Arrays.stream(imageKeyArray).anyMatch(largeImageKey::equals))
+                                    if(checkIfImageKeyIsValid(largeImageKey))
                                     {
                                         activity.assets().setLargeImage(largeImageKey);
                                     }
