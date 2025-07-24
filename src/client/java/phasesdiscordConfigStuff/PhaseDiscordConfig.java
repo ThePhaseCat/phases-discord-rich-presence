@@ -53,6 +53,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = ADVANCED) public static String advancedModeLargeText = "Phase's Discord Rich Presence";
 
+    @Entry(category = ADVANCED) public static String advancedModeMainMenuState = "Phase's Discord Rich Presence";
+
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail1;
 
     @Comment(category = ADVANCED) public static Comment advancedModePicDetail2;
@@ -86,4 +88,6 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry(category = OTHER) public static boolean enableDebug = false;
 
     @Entry(category = OTHER) public static int discordRichPresenceUpdateRate = 5000;
+
+    @Entry(category = OTHER) public static String discordAppID = "1147361100929708053";
 }
