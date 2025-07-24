@@ -92,7 +92,7 @@
   "phases-discord-rich-presence.midnightconfig.enableDebug": "启用调试模式",
   "phases-discord-rich-presence.midnightconfig.enableDebug.tooltip": "切换调试模式是否启用，它会将信息打印到控制台 (大概将此项保持关闭状态lol)",
   "phases-discord-rich-presence.midnightconfig.discordAppID": "Discord 应用程序 ID",
-  "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "Discord Rich Presence 的应用程序 ID。如果你想做你自己的事情，那就改变这个ID。否则，请勿触碰此内容。",
+  "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "Discord Rich Presence 的应用程序 ID。如果您想自定义，请更改此 ID。否则，请勿更改。重启即可查看更改",
   "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate": "Discord Rich Presence 更新频率",
   "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate.tooltip": "Discord Rich Presence 更新的频率。此值以毫秒为单位。更改后请重新启动游戏以使其生效!",
   "phases-discord-rich-presence.midnightconfig.category.basic": "基本设置",
