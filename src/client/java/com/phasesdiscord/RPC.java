@@ -286,11 +286,15 @@ public class RPC
                             throw new RuntimeException(e);
                         }
                     } catch (RuntimeException e) {
+                        LOGGER.error("Unexpected unexpected error while updating Discord Rich Presence, closing connection.", e);
                         e.printStackTrace();
+                        break; //exit while loop, stop running
                     }
                 }
             } catch (RuntimeException e) {
-                LOGGER.error("Failed to initialize Discord Core", e);
+                LOGGER.error("Unexpected error while updating Discord Rich Presence", e);
+                e.printStackTrace();
+                return;
             }
         }).start();
     }
