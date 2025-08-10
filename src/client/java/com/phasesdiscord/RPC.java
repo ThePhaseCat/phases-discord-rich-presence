@@ -215,18 +215,19 @@ public class RPC
 
                                     if(!PhaseDiscordConfig.showPaused)
                                     {
-                                        activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
+                                        String stateString = buildMultiplayerSimpleState(serverIP, client.world.getPlayers().size());
+                                        activity.setState(stateString);
                                     }
                                     else
                                     {
+                                        String stateString = buildMultiplayerSimpleState(serverIP, client.world.getPlayers().size());
                                         if(client.currentScreen != null)
                                         {
-                                            activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing Multiplayer on %s with %s players - Paused", serverIP, client.world.getPlayers().size()).getString());
+                                            stateString = stateString + " - Paused";
                                         }
-                                        else
-                                        {
-                                            activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
-                                        }
+
+                                        activity.setState(stateString);
+
                                     }
                                 }
 
@@ -522,6 +523,22 @@ public class RPC
             LOGGER.info("Invalid Image Key was..." + imageKey);
             return false;
         }
+    }
+
+    //helper method to create string for multiplayer in simple state because there's a lot to manage
+    public static String buildMultiplayerSimpleState(String serverIP, int playerCount)
+    {
+        StringBuilder state = new StringBuilder("Playing Multiplayer");
+        if(PhaseDiscordConfig.enableServerIP)
+        {
+            state.append(" on ").append(serverIP);
+        }
+        if(PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            state.append(" with ").append(playerCount).append(" players");
+        }
+
+        return state.toString();
     }
 
     //prints out debug stuff, mainly meant for advanced mode debugging
