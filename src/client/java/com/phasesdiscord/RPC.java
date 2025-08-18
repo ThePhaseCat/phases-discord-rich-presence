@@ -43,6 +43,7 @@ public class RPC
             "pale_garden1", "pale_garden2", "pale_garden3", "shaders1", "shaders2", "trial_chamber",
             "spring1", "spring2", "vibrant_visuals1", "vibrant_visuals2",
             "lush_cave", "deep_dark1", "deep_dark2", "happy_ghast1",
+            "coppergolem1", "coppergolem2", "coppergolem3",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback"
@@ -213,21 +214,14 @@ public class RPC
                                     activity.assets().setSmallImage("base");
                                 }
 
-                                if(!PhaseDiscordConfig.showPaused)
-                                {
-                                    activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
-                                }
-                                else
-                                {
-                                    if(client.currentScreen != null)
-                                    {
-                                        activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing Multiplayer on %s with %s players - Paused", serverIP, client.world.getPlayers().size()).getString());
-                                    }
-                                    else
-                                    {
-                                        activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players", serverIP, client.world.getPlayers().size()).getString());
-                                    }
-                                }
+                                String stateKey = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
+                                Object[] args = getSimpleMultiplayerArgs(serverIP, client.world.getPlayers().size());
+
+                                activity.setState(Text.translatableWithFallback(
+                                        stateKey,
+                                        getFallbackString(stateKey),
+                                        args
+                                ).getString());
                             }
 
                             //debug logging
@@ -522,6 +516,95 @@ public class RPC
             LOGGER.info("An image key for advanced mode is invalid, setting to fallback.");
             LOGGER.info("Invalid Image Key was..." + imageKey);
             return false;
+        }
+    }
+
+    //helper method to get the right translation key for multiplayer simple state
+    public static String getSimpleMultiplayerKey(boolean gamePaused)
+    {
+        String base = "phases-discord-rich-presence.multiplayer.";
+
+        if(PhaseDiscordConfig.enableServerIP && PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            if(gamePaused)
+            {
+                return base + "full.paused";
+            }
+            else
+            {
+                return base + "full";
+            }
+        }
+
+        if(PhaseDiscordConfig.enableServerIP)
+        {
+            if(gamePaused)
+            {
+                return base + "serverOnly.paused";
+            }
+            else
+            {
+                return base + "serverOnly";
+            }
+        }
+
+        if(PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            if(gamePaused)
+            {
+                return base + "playerCountOnly.paused";
+            }
+            else
+            {
+                return base + "playerCountOnly";
+            }
+        }
+
+        if(gamePaused)
+        {
+            return base + "base.paused";
+        }
+        else
+        {
+            return base + "base";
+        }
+    }
+
+    //helper method to get right arguments to pass in for multiplayer simple state
+    public static Object[] getSimpleMultiplayerArgs(String serverIP, int playerCount)
+    {
+        if(PhaseDiscordConfig.enableServerIP && PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            return new Object[]{serverIP, playerCount};
+        }
+
+        if(PhaseDiscordConfig.enableServerIP)
+        {
+            return new Object[]{serverIP};
+        }
+
+        if(PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            return new Object[]{playerCount};
+        }
+
+        return new Object[]{}; //just in case
+    }
+
+    //gets fallback string *just* in case something bad happens
+    public static String getFallbackString(String key)
+    {
+        switch(key)
+        {
+            case "phases-discord-rich-presence.multiplayer.full": return "Playing Multiplayer on %s with %s players";
+            case "phases-discord-rich-presence.multiplayer.full.paused": return "Playing Multiplayer on %s with %s players - Paused";
+            case "phases-discord-rich-presence.multiplayer.serverOnly": return "Playing Multiplayer on %s";
+            case "phases-discord-rich-presence.multiplayer.serverOnly.paused": return "Playing Multiplayer on %s - Paused";
+            case "phases-discord-rich-presence.multiplayer.playerCountOnly": return "Playing Multiplayer with %s players";
+            case "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": return "Playing Multiplayer with %s players - Paused";
+            case "phases-discord-rich-presence.multiplayer.base": return "Playing Multiplayer";
+            case "phases-discord-rich-presence.multiplayer.base.paused": return "Playing Multiplayer - Paused";
+            default: return "Playing Multiplayer"; //should never reach here, but let's play it safe
         }
     }
 
