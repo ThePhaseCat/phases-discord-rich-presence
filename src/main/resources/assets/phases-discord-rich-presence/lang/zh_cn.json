@@ -98,12 +98,12 @@
   "phases-discord-rich-presence.midnightconfig.category.basic": "基本设置",
   "phases-discord-rich-presence.midnightconfig.category.advanced": "高级设置",
   "phases-discord-rich-presence.midnightconfig.category.other": "其他选项",
-  "phases-discord-rich-presence.multiplayer.full": "Playing Multiplayer on %s with %s players",
-  "phases-discord-rich-presence.multiplayer.full.paused": "Playing Multiplayer on %s with %s players - Paused",
-  "phases-discord-rich-presence.multiplayer.serverOnly": "Playing Multiplayer on %s",
-  "phases-discord-rich-presence.multiplayer.serverOnly.paused": "Playing Multiplayer on %s - Paused",
-  "phases-discord-rich-presence.multiplayer.playerCountOnly": "Playing Multiplayer with %s players",
-  "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": "Playing Multiplayer with %s players - Paused",
-  "phases-discord-rich-presence.multiplayer.base": "Playing Multiplayer",
-  "phases-discord-rich-presence.multiplayer.base.paused": "Playing Multiplayer - Paused"
+  "phases-discord-rich-presence.multiplayer.full": "正在 %s 上进行多人游戏，有 %s 名玩家",
+  "phases-discord-rich-presence.multiplayer.full.paused": "正在 %s 上进行多人游戏，有 %s 名玩家 - 已暂停",
+  "phases-discord-rich-presence.multiplayer.serverOnly": "正在 %s 上进行多人游戏",
+  "phases-discord-rich-presence.multiplayer.serverOnly.paused": "正在 %s 上进行多人游戏 - 已暂停",
+  "phases-discord-rich-presence.multiplayer.playerCountOnly": "正在进行多人游戏，有 %s 名玩家",
+  "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": "正在进行多人游戏，有 %s 名玩家 - 已暂停",
+  "phases-discord-rich-presence.multiplayer.base": "正在进行多人游戏",
+  "phases-discord-rich-presence.multiplayer.base.paused": "正在进行多人游戏 - 已暂停"
 }
