@@ -572,9 +572,11 @@ public class RPC
     //helper method to get right arguments to pass in for multiplayer simple state
     public static Object[] getSimpleMultiplayerArgs(String serverIP, int playerCount)
     {
+        String playerCountString = getPlayerCountStringPart(playerCount);
+
         if(PhaseDiscordConfig.enableServerIP && PhaseDiscordConfig.enableServerPlayerCount)
         {
-            return new Object[]{serverIP, playerCount};
+            return new Object[]{serverIP, playerCountString};
         }
 
         if(PhaseDiscordConfig.enableServerIP)
@@ -584,10 +586,22 @@ public class RPC
 
         if(PhaseDiscordConfig.enableServerPlayerCount)
         {
-            return new Object[]{playerCount};
+            return new Object[]{playerCountString};
         }
 
         return new Object[]{}; //just in case
+    }
+
+    public static String getPlayerCountStringPart(int playerCount)
+    {
+        if(playerCount == 1) //playing by yourself
+        {
+            return Text.translatable("phases-discord-rich-presence.multiplayer.players.one").getString();
+        }
+        else //more players
+        {
+            return Text.translatable("phases-discord-rich-presence.multiplayer.players.other", playerCount).getString();
+        }
     }
 
     //gets fallback string *just* in case something bad happens
@@ -595,12 +609,12 @@ public class RPC
     {
         switch(key)
         {
-            case "phases-discord-rich-presence.multiplayer.full": return "Playing Multiplayer on %s with %s players";
-            case "phases-discord-rich-presence.multiplayer.full.paused": return "Playing Multiplayer on %s with %s players - Paused";
+            case "phases-discord-rich-presence.multiplayer.full": return "Playing Multiplayer on %s with %s";
+            case "phases-discord-rich-presence.multiplayer.full.paused": return "Playing Multiplayer on %s with %s - Paused";
             case "phases-discord-rich-presence.multiplayer.serverOnly": return "Playing Multiplayer on %s";
             case "phases-discord-rich-presence.multiplayer.serverOnly.paused": return "Playing Multiplayer on %s - Paused";
-            case "phases-discord-rich-presence.multiplayer.playerCountOnly": return "Playing Multiplayer with %s players";
-            case "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": return "Playing Multiplayer with %s players - Paused";
+            case "phases-discord-rich-presence.multiplayer.playerCountOnly": return "Playing Multiplayer with %s";
+            case "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": return "Playing Multiplayer with %s - Paused";
             case "phases-discord-rich-presence.multiplayer.base": return "Playing Multiplayer";
             case "phases-discord-rich-presence.multiplayer.base.paused": return "Playing Multiplayer - Paused";
             default: return "Playing Multiplayer"; //should never reach here, but let's play it safe
