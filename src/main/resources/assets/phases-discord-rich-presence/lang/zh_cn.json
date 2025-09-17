@@ -106,6 +106,6 @@
   "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": "正在进行多人游戏，有 %s 名玩家 - 已暂停",
   "phases-discord-rich-presence.multiplayer.base": "正在进行多人游戏",
   "phases-discord-rich-presence.multiplayer.base.paused": "正在进行多人游戏 - 已暂停",
-  "phases-discord-rich-presence.multiplayer.players.one": "1 player",
-  "phases-discord-rich-presence.multiplayer.players.other": "%s players"
+  "phases-discord-rich-presence.multiplayer.players.one": "1 名玩家",
+  "phases-discord-rich-presence.multiplayer.players.other": "%s 名玩家"
 }
