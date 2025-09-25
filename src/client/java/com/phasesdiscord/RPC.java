@@ -298,7 +298,7 @@ public class RPC
     //updates player head
     private static void updatePlayerHead()
     {
-        String uuid = client.getGameProfile().getId().toString();
+        String uuid = client.getGameProfile().id().toString();
         String playerHeadImage = getPlayerHeadURL(uuid, "head", 3);
         activity.assets().setSmallImage(playerHeadImage);
         activity.assets().setSmallText(client.getSession().getUsername());
