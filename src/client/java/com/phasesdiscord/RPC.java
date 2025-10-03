@@ -308,7 +308,7 @@ public class RPC
     @Contract(pure = true)
     private static @NotNull String getPlayerHeadURL(String uuid, String type, int size)
     {
-        return "https://api.mineatar.io/" + type + "/" + uuid + "?scale=" + size;
+        return "https://mc-heads.net/avatar/" + uuid;
     }
 
     //returns the string/name of the item the player is currently holding
