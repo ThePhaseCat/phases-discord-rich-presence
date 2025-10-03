@@ -65,6 +65,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail2;
 
+    @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail3;
+
     @Comment(category = ADVANCED) public static Comment advancedModeNetherPicDetail;
 
     @Comment(category = ADVANCED) public static Comment advancedModeEndPicDetail;
