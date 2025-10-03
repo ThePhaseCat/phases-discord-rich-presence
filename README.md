@@ -3,7 +3,7 @@
 A mod that adds simple and light Discord Rich Presence into Minecraft!
 
 # Requirements
-Minecraft `1.21.4-1.21.8`
+Minecraft `1.21.4-1.21.10`
 
 Fabric Loader `>=0.16.14`
 
