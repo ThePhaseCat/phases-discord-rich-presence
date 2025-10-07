@@ -17,14 +17,15 @@ import static net.minecraft.resource.ResourceType.CLIENT_RESOURCES;
 public class PhaseDiscordClient implements ClientModInitializer {
 
     public static boolean loadSuccess = false;
+    public static final String ModID = "phases-discord-rich-presence";
     //logger
-    public static final Logger LOGGER = LoggerFactory.getLogger("phases-discord-rich-presence");
+    public static final Logger LOGGER = LoggerFactory.getLogger(ModID);
 
     @Override
     public void onInitializeClient()
     {
         //config stuff
-        ResourceLoader.get(CLIENT_RESOURCES).registerReloader(Identifier.of("phases-discord-rich-presence", "discord-rich-presence"), new SimpleResourceReloader<Void>() {
+        ResourceLoader.get(CLIENT_RESOURCES).registerReloader(Identifier.of(ModID, "discord-rich-presence"), new SimpleResourceReloader<Void>() {
             // After all the resource files have been loaded, the Modmenu configuration interface is provided so that the text translation works properly
             @Override
             protected Void prepare(Store store) {
@@ -45,10 +46,10 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 advancedModeDimensionCustom = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField", "In %s Dimension").getString();
                 advancedModeMainMenuText = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField", "Main Menu").getString();
 
-                MidnightConfig.init("phases-discord-rich-presence", PhaseDiscordConfig.class);
+                MidnightConfig.init(ModID, PhaseDiscordConfig.class);
                 try {
                     Class.forName("com.terraformersmc.modmenu.api.ModMenuApi");
-                    configScreenFactory = parent -> MidnightConfig.getScreen(parent, "phases-discord-rich-presence");
+                    configScreenFactory = parent -> MidnightConfig.getScreen(parent, ModID);
                     loadSuccess = true;
                 } catch (ClassNotFoundException ignored) {
                 }
