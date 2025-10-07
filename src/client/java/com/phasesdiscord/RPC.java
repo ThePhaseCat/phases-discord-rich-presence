@@ -346,7 +346,7 @@ public class RPC
                     }
                     else
                     {
-                        finalResult = "Playing Minecraft";
+                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField").getString();
                     }
                 }
 
