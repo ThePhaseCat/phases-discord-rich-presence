@@ -140,17 +140,17 @@ public class RPC
 
                                         if(!PhaseDiscordConfig.showPaused)
                                         {
-                                            activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField", "Playing Singleplayer").getString());
+                                            activity.setState(Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
                                         }
                                         else
                                         {
                                             if(client.currentScreen != null)
                                             {
-                                                activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField", "Playing Singleplayer - Paused").getString());
+                                                activity.setState(Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString());
                                             }
                                             else
                                             {
-                                                activity.setState(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField", "Playing Singleplayer").getString());
+                                                activity.setState(Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
                                             }
                                         }
                                     }
@@ -217,9 +217,8 @@ public class RPC
                                     String stateKey = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
                                     Object[] args = getSimpleMultiplayerArgs(serverIP, client.world.getPlayers().size());
 
-                                    activity.setState(Text.translatableWithFallback(
+                                    activity.setState(Text.translatable(
                                             stateKey,
-                                            getFallbackString(stateKey),
                                             args
                                     ).getString());
                                 }
@@ -249,7 +248,7 @@ public class RPC
                                     }
                                     else
                                     {
-                                        activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
+                                        activity.setDetails(Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
                                     }
 
                                     activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
@@ -258,7 +257,7 @@ public class RPC
                                 else //simple mode
                                 {
                                     activity.assets().setLargeImage("base");
-                                    activity.setDetails(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField","Main Menu").getString());
+                                    activity.setDetails(Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
                                     activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
                                     if(PhaseDiscordConfig.showPlayerHeadAndUsername)
                                     {
@@ -337,17 +336,17 @@ public class RPC
             {
                 if(PhaseDiscordConfig.enableItem == false)
                 {
-                    finalResult = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField","Playing Minecraft").getString();
+                    finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField").getString();
                 }
                 else
                 {
                     if(!item_name.equals(Items.AIR.getName().getString()))
                     {
-                        finalResult = Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField","Holding" + item_name, item_name).getString();
+                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", item_name).getString();
                     }
                     else
                     {
-                        finalResult = "Playing Minecraft";
+                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField").getString();
                     }
                 }
 
@@ -429,7 +428,7 @@ public class RPC
                 else
                 {
                     presence.assets().setLargeImage("overworld");
-                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField","In The Overworld").getString());
+                    presence.assets().setLargeText(Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField").getString());
                 }
             }
             else if(dimensionName.equals("minecraft:the_nether"))
@@ -442,7 +441,7 @@ public class RPC
                 else
                 {
                     presence.assets().setLargeImage("nether");
-                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField","In The Nether").getString());
+                    presence.assets().setLargeText(Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField").getString());
                 }
             }
             else if(dimensionName.equals("minecraft:the_end"))
@@ -455,7 +454,7 @@ public class RPC
                 else
                 {
                     presence.assets().setLargeImage("the_end");
-                    presence.assets().setLargeText(Text.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField","In The End").getString());
+                    presence.assets().setLargeText(Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField").getString());
                 }
             }
             else
@@ -601,23 +600,6 @@ public class RPC
         else //more players
         {
             return Text.translatable("phases-discord-rich-presence.multiplayer.players.other", playerCount).getString();
-        }
-    }
-
-    //gets fallback string *just* in case something bad happens
-    public static String getFallbackString(String key)
-    {
-        switch(key)
-        {
-            case "phases-discord-rich-presence.multiplayer.full": return "Playing Multiplayer on %s with %s";
-            case "phases-discord-rich-presence.multiplayer.full.paused": return "Playing Multiplayer on %s with %s - Paused";
-            case "phases-discord-rich-presence.multiplayer.serverOnly": return "Playing Multiplayer on %s";
-            case "phases-discord-rich-presence.multiplayer.serverOnly.paused": return "Playing Multiplayer on %s - Paused";
-            case "phases-discord-rich-presence.multiplayer.playerCountOnly": return "Playing Multiplayer with %s";
-            case "phases-discord-rich-presence.multiplayer.playerCountOnly.paused": return "Playing Multiplayer with %s - Paused";
-            case "phases-discord-rich-presence.multiplayer.base": return "Playing Multiplayer";
-            case "phases-discord-rich-presence.multiplayer.base.paused": return "Playing Multiplayer - Paused";
-            default: return "Playing Multiplayer"; //should never reach here, but let's play it safe
         }
     }
 
