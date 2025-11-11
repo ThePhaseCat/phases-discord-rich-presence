@@ -100,7 +100,12 @@ public class RPC
                                 mainMenuPresenceLogic(activity);
                             }
 
-                            core.activityManager().updateActivity(activity);
+                            try {
+                                core.activityManager().updateActivity(activity);
+                            } catch (Exception e) {
+                                LOGGER.error("Failed to update activity, closing connection");
+                                throw new RuntimeException(e);
+                            }
 
                             try {
                                 Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);

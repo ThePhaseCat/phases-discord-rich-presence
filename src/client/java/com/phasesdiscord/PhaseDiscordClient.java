@@ -55,7 +55,12 @@ public class PhaseDiscordClient implements ClientModInitializer {
                 }
 
                 //starts the new discord client system
-                RPC.start();
+                try {
+                    RPC.start();
+                } catch (Exception e) {
+                    LOGGER.error("Failed to start Discord RPC?");
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
