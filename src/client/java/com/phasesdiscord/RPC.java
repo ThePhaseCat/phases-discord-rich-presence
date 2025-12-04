@@ -294,7 +294,7 @@ public class RPC
     }
 
 
-    //these following methods are adopted from the Fabric-DiscordRPC repo (https://github.com/copyandbuild/Fabric-DiscordRPC)
+    //these following methods are adopted from the Fabric-DiscordRPC repo (https://github.com/larroxtv/Fabric-DiscordRPC)
     //updates player head
     private static void updatePlayerHead()
     {
