@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.12-SNAPSHOT'
+	id 'fabric-loom' version '1.14-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,7 +11,7 @@ base {
 }
 
 repositories {
-	jcenter()
+	//jcenter()
 
 	mavenCentral() //for new discord rpc stuff
 	maven { url 'https://jitpack.io' }

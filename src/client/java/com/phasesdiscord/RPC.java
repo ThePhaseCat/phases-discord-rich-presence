@@ -460,7 +460,9 @@ public class RPC
         if(client.world != null)
         {
             DimensionType dimensionType = client.world.getDimension();
-            String dimensionName = dimensionType.effects().toString();
+            String dimensionName = dimensionType.toString();
+            //String dimensionName = dimensionType.effects().toString();
+            LOGGER.info(dimensionName);
             String itemToDisplay = "";
 
             if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode on
@@ -532,7 +534,9 @@ public class RPC
     public static void multiplayerPresenceLogic(Activity activity)
     {
         DimensionType dimensionType = client.world.getDimension();
-        String dimensionName = dimensionType.effects().toString();
+        String dimensionName = dimensionType.toString();
+        //String dimensionName = dimensionType.effects().toString();
+        LOGGER.info(dimensionName);
         String itemToDisplay = "";
         String serverIP = client.getCurrentServerEntry().address.toUpperCase();
 
