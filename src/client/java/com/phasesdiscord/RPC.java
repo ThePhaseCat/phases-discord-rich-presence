@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -459,10 +460,11 @@ public class RPC
     {
         if(client.world != null)
         {
-            DimensionType dimensionType = client.world.getDimension();
-            String dimensionName = dimensionType.toString();
+            String dimensionName = client.world.getRegistryKey().getValue().toString();
+            //DimensionType dimensionType = client.world.getDimension();
+            //String dimensionName = dimensionType.toString();
             //String dimensionName = dimensionType.effects().toString();
-            LOGGER.info(dimensionName);
+            //LOGGER.info(dimensionName);
             String itemToDisplay = "";
 
             if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode on
@@ -533,10 +535,11 @@ public class RPC
     //handles multiplayer presence logic
     public static void multiplayerPresenceLogic(Activity activity)
     {
-        DimensionType dimensionType = client.world.getDimension();
-        String dimensionName = dimensionType.toString();
+        String dimensionName = client.world.getRegistryKey().getValue().toString();
+        //DimensionType dimensionType = client.world.getDimension();
+        //String dimensionName = dimensionType.toString();
         //String dimensionName = dimensionType.effects().toString();
-        LOGGER.info(dimensionName);
+        //LOGGER.info(dimensionName);
         String itemToDisplay = "";
         String serverIP = client.getCurrentServerEntry().address.toUpperCase();
 
