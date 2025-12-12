@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'fabric-loom' version '1.14-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,7 +11,7 @@ base {
 }
 
 repositories {
-	jcenter()
+	//jcenter()
 
 	mavenCentral() //for new discord rpc stuff
 	maven { url 'https://jitpack.io' }
@@ -24,10 +24,10 @@ repositories {
 		}
 	}
 	*/
-	maven {
-		url = "https://api.modrinth.com/maven"
-
-	}
+    //for midnightlib
+    maven {
+        url = "https://maven.midnightdust.eu/releases"
+    }
 
 	// Maven for ModMenu
 	maven { url "https://maven.terraformersmc.com/releases/" }
@@ -61,12 +61,13 @@ dependencies {
 	//include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 	//new discord rpc
-	include(implementation('com.github.JnCrMx:discord-game-sdk4j:5cdac341e3'))
+	include(implementation('com.github.JnCrMx:discord-game-sdk4j:08b2bf45a6'))
 
 	//include(implementation('com.jagrosh:DiscordIPC:LATEST'))
 
 	//modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
-	include(modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}"))
+	//include(modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}"))
+    modImplementation include ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
 
 	// ModMenu is optional, but it's a nice to have for quality of life.
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
