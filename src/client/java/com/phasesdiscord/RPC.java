@@ -106,6 +106,7 @@ public class RPC
                             core.activityManager().updateActivity(activity);
                         } catch (Exception e) {
                             LOGGER.error("Failed to update activity, closing connection");
+                            core.activityManager().clearActivity();
                             throw new RuntimeException(e);
                         }
 
@@ -114,16 +115,18 @@ public class RPC
                         } catch (InterruptedException e) {
                             LOGGER.error("Thread was interrupted", e);
                             Thread.currentThread().interrupt();
+                            core.activityManager().clearActivity();
                             throw new RuntimeException(e);
                         }
                     } catch (RuntimeException e) {
                         LOGGER.error("Unexpected unexpected error while updating Discord Rich Presence, closing connection.", e);
                         e.printStackTrace();
+                        core.activityManager().clearActivity();
                         break; //exit while loop, stop running
                     }
                 }
             } catch (RuntimeException e) {
-                LOGGER.error("Unexpected error while updating Discord Rich Presence", e);
+                LOGGER.error("Unexpected error while starting Discord Rich Presence", e);
                 e.printStackTrace();
                 return;
             }
