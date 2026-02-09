@@ -17,7 +17,7 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = BASIC) public static boolean enableDimension = true;
 
-    @Entry(category = BASIC) public static boolean enableServerIP = true;
+    @Entry(category = BASIC) public static boolean enableServerName = true;
 
     @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
 

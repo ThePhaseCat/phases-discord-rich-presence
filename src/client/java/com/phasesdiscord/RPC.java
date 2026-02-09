@@ -5,6 +5,7 @@ import de.jcm.discordgamesdk.CreateParams;
 import de.jcm.discordgamesdk.LogLevel;
 import de.jcm.discordgamesdk.activity.Activity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ServerInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
@@ -363,7 +364,7 @@ public class RPC
     {
         String base = "phases-discord-rich-presence.multiplayer.";
 
-        if(PhaseDiscordConfig.enableServerIP && PhaseDiscordConfig.enableServerPlayerCount)
+        if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
         {
             if(gamePaused)
             {
@@ -375,7 +376,7 @@ public class RPC
             }
         }
 
-        if(PhaseDiscordConfig.enableServerIP)
+        if(PhaseDiscordConfig.enableServerName)
         {
             if(gamePaused)
             {
@@ -410,18 +411,18 @@ public class RPC
     }
 
     //helper method to get right arguments to pass in for multiplayer simple state
-    public static Object[] getSimpleMultiplayerArgs(String serverIP, int playerCount)
+    public static Object[] getSimpleMultiplayerArgs(ServerInfo server, int playerCount)
     {
         String playerCountString = getPlayerCountStringPart(playerCount);
 
-        if(PhaseDiscordConfig.enableServerIP && PhaseDiscordConfig.enableServerPlayerCount)
+        if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
         {
-            return new Object[]{serverIP, playerCountString};
+            return new Object[]{server.name, playerCountString};
         }
 
-        if(PhaseDiscordConfig.enableServerIP)
+        if(PhaseDiscordConfig.enableServerName)
         {
-            return new Object[]{serverIP};
+            return new Object[]{server.name};
         }
 
         if(PhaseDiscordConfig.enableServerPlayerCount)
@@ -538,13 +539,15 @@ public class RPC
     //handles multiplayer presence logic
     public static void multiplayerPresenceLogic(Activity activity)
     {
+        ServerInfo server = client.getCurrentServerEntry();
         String dimensionName = client.world.getRegistryKey().getValue().toString();
         //DimensionType dimensionType = client.world.getDimension();
         //String dimensionName = dimensionType.toString();
         //String dimensionName = dimensionType.effects().toString();
         //LOGGER.info(dimensionName);
         String itemToDisplay = "";
-        String serverIP = client.getCurrentServerEntry().address.toUpperCase();
+        String serverName = server.name;
+        String serverIP = server.address.toUpperCase();
 
         if(PhaseDiscordConfig.enableAdvancedMode)
         {
@@ -595,7 +598,7 @@ public class RPC
             }
 
             String stateKey = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
-            Object[] args = getSimpleMultiplayerArgs(serverIP, client.world.getPlayers().size());
+            Object[] args = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
             activity.setState(Text.translatable(
                     stateKey,
