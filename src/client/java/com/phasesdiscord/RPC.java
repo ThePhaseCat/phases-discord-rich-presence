@@ -589,7 +589,7 @@ public class RPC
             {
                 String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
                 activity.assets().setLargeImage(imageLink);
-                
+
                 String imageText = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
                 Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
