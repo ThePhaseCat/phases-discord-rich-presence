@@ -12,6 +12,8 @@
   "phases-discord-rich-presence.midnightconfig.enableServerName.tooltip": "此选项用于控制在玩多人游戏时，是否在 Discord 富状态显示中显示服务器名称（即添加到服务器列表时的服务器名称）。关闭此选项或使用直接连接时，将显示通用文本。",
   "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount": "在多人游戏时显示玩家数量",
   "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount.tooltip": "切换在多人游戏时是否显示玩家数量。这只会显示在线的玩家数量。",
+  "phases-discord-rich-presence.midnightconfig.enableServerIcon": "Show Server Icon in DRP",
+  "phases-discord-rich-presence.midnightconfig.enableServerIcon.tooltip": "Toggles showing the icon of the server in the Discord Rich Presence when playing Multiplayer. Playing a server that doesn't have an icon will show a default image. This option overrides dimension settings.",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "自定义维度的 DRP 支持",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "切换对模组的维度是否进行基本支持。请注意，这在 Discord Rich Presence 中看起来很糟糕。但如果它工作，它就会有效。",
   "phases-discord-rich-presence.midnightconfig.showPaused": "在 DRP 中显示游戏是否暂停",

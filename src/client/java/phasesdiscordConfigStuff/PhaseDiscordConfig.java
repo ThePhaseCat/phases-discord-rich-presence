@@ -19,9 +19,11 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = BASIC) public static boolean enableServerName = true;
 
-    @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
-
     @Entry(category = BASIC) public static boolean enableServerPlayerCount = true;
+
+    @Entry(category = BASIC) public static boolean enableServerIcon = true;
+
+    @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
 
     @Entry(category = BASIC) public static boolean showPaused = true;
 

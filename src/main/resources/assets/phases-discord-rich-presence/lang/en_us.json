@@ -12,6 +12,8 @@
   "phases-discord-rich-presence.midnightconfig.enableServerName.tooltip": "Toggles server name (the one when adding a server to your server list) from showing in the Discord Rich Presence when playing Multiplayer. Turning this option off, or using Direct Connection, will show generic text.",
   "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount": "Show player count in Multiplayer",
   "phases-discord-rich-presence.midnightconfig.enableServerPlayerCount.tooltip": "Toggles player count showing in the Discord Rich Presence when playing Multiplayer. This will only show amount of players online.",
+  "phases-discord-rich-presence.midnightconfig.enableServerIcon": "Show Server Icon in DRP",
+  "phases-discord-rich-presence.midnightconfig.enableServerIcon.tooltip": "Toggles showing the icon of the server in the Discord Rich Presence when playing Multiplayer. Playing a server that doesn't have an icon will show a default image. This option overrides dimension settings.",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport": "Custom Dimension DRP Support",
   "phases-discord-rich-presence.midnightconfig.enableCustomDimensionSupport.tooltip": "Toggles basic support for modded dimensions. Please note this looks awful in the Discord Rich Presence, but if it works, it works.",
   "phases-discord-rich-presence.midnightconfig.showPaused": "Show if Game is Paused in DRP",

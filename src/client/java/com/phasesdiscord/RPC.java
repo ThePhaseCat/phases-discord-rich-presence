@@ -585,8 +585,24 @@ public class RPC
         {
             itemToDisplay = getHeldItem(false);
             activity.setDetails(itemToDisplay);
+            if(PhaseDiscordConfig.enableServerIcon)
+            {
+                String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
+                activity.assets().setLargeImage(imageLink);
+                
+                String imageText = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
+                Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
-            setDimensionKey(false, dimensionName, activity);
+                activity.assets().setLargeText(Text.translatable(
+                        imageText,
+                        imageTextArgs
+                ).getString());
+            }
+            else
+            {
+                setDimensionKey(false, dimensionName, activity);
+            }
+
             if(PhaseDiscordConfig.showPlayerHeadAndUsername)
             {
                 updatePlayerHead();
@@ -618,6 +634,7 @@ public class RPC
             //main menu large image error handle
             if(checkIfImageKeyIsValid(largeImageKey))
             {
+                //activity.assets().setLargeImage("https://api.mcsrvstat.us/icon/mc.hypixel.net");
                 activity.assets().setLargeImage(largeImageKey);
             }
             else
