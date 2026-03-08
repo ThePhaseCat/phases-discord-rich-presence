@@ -75,15 +75,19 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOtherPicDetail;
 
+    @Comment(category = ADVANCED) public static Comment advancedModeMultiplayerKeyDetail;
+
     @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
 
-    @Entry(category = ADVANCED) public static String advancedModeOverworldPic = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeOverworldPicSingle = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeNetherPicSingle = "nether";
+    @Entry(category = ADVANCED) public static String advancedModeEndPicSingle = "the_end";
+    @Entry(category = ADVANCED) public static String advancedModeCustomPicSingle = "void";
 
-    @Entry(category = ADVANCED) public static String advancedModeNetherPic = "nether";
-
-    @Entry(category = ADVANCED) public static String advancedModeEndPic = "the_end";
-
-    @Entry(category = ADVANCED) public static String advancedModeCustomPic = "void";
+    @Entry(category = ADVANCED) public static String advancedModeOverworldPicMult = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeNetherPicMult = "nether";
+    @Entry(category = ADVANCED) public static String advancedModeEndPicMult = "the_end";
+    @Entry(category = ADVANCED) public static String advancedModeCustomPicMult = "void";
 
     @Entry(category = ADVANCED) public static boolean advancedModeShowPlayerHeadUser = true;
 
