@@ -57,6 +57,7 @@ public class RPC
             "lush_cave", "dripstone_cave", "deep_dark1", "deep_dark2", "happy_ghast1",
             "coppergolem1", "coppergolem2", "coppergolem3", "coppergolem4",
             "nautilus1", "nautilus2", "nautilus3", "spear1",
+            "baby_overworld1", "baby_overworld2", "baby_overworld3", "baby_nether1", "baby_nether2", "baby_fish",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback", "pack"
