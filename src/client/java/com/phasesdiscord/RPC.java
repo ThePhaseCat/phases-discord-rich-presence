@@ -176,7 +176,7 @@ public class RPC
             item_name = held_item.getHoverName().getString();
             if(isAdvancedMode)
             {
-                if(!item_name.equals(Items.AIR.getName().getString()))
+                if(!held_item.isEmpty())
                 {
                     finalResult = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("%s", item_name);
                 }
@@ -195,7 +195,7 @@ public class RPC
                 }
                 else
                 {
-                    if(!item_name.equals(Items.AIR.getName().getString()))
+                    if(!held_item.isEmpty())
                     {
                         finalResult = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", item_name).getString();
                     }
