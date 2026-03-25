@@ -25,9 +25,7 @@ public class PhaseDiscordClient implements ClientModInitializer {
     @Override
     public void onInitializeClient()
     {
-        RPC.start();
         //config stuff
-        /*
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES)
                 .registerReloadListener(new SimpleSynchronousResourceReloadListener() {
                     @Override
@@ -68,6 +66,5 @@ public class PhaseDiscordClient implements ClientModInitializer {
                         }
                     }
                 });
-         */
     }
 }
