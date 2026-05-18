@@ -36,16 +36,16 @@ public class PhaseDiscordClient implements ClientModInitializer {
                     @Override
                     public void onResourceManagerReload(ResourceManager manager) {
                         mainAdvancedModeDetail = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField", "Playing Minecraft").getString();
-                        mainAdvancedModeDetailWhenHoldingItem = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", "Holding %s").getString();
-                        mainAdvancedModeStateMultiplayer = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %s with %s players").getString();
-                        mainAdvancedModeStateMultiplayerPause = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing multiplayer on %s with %s players - Paused").getString();
+                        mainAdvancedModeDetailWhenHoldingItem = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", "Holding %rpc").getString();
+                        mainAdvancedModeStateMultiplayer = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField", "Playing Multiplayer on %rpc with %rpc players").getString();
+                        mainAdvancedModeStateMultiplayerPause = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField", "Playing multiplayer on %rpc with %rpc players - Paused").getString();
                         mainAdvancedModeStateSingleplayer = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField", "Playing Singleplayer").getString();
                         mainAdvancedModeStateSingleplayerPause = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField", "Playing Singleplayer - Paused").getString();
 
                         advancedModeDimensionOverworld = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField", "In The Overworld").getString();
                         advancedModeDimensionNether = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField", "In The Nether").getString();
                         advancedModeDimensionEnd = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField", "In The End").getString();
-                        advancedModeDimensionCustom = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField", "In %s Dimension").getString();
+                        advancedModeDimensionCustom = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField", "In %rpc Dimension").getString();
 
                         advancedModeMainMenuText = Component.translatableWithFallback("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField", "Main Menu").getString();
 

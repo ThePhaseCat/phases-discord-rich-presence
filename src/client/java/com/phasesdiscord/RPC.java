@@ -179,6 +179,7 @@ public class RPC
                 if(!held_item.isEmpty())
                 {
                     finalResult = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("%s", item_name);
+                    finalResult = finalResult.replace("%rpc", item_name);
                 }
                 else
                 {
@@ -684,12 +685,16 @@ public class RPC
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
             }
             else
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
             }
 
