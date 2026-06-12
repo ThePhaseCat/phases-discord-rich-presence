@@ -603,7 +603,7 @@ public class RPC
                     updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity, false, "not used");
                 }
 
-                if(client.screen != null)
+                if(client.isPaused())
                 {
                     activity.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause);
                 }
@@ -638,7 +638,7 @@ public class RPC
                 }
                 else
                 {
-                    if(client.screen != null)
+                    if(client.isPaused())
                     {
                         activity.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString());
                     }
@@ -682,7 +682,7 @@ public class RPC
             }
 
             String stateParsed;
-            if(client.screen != null)
+            if(client.isPaused())
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.level.players().size()));
@@ -712,7 +712,7 @@ public class RPC
                 String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
                 activity.assets().setLargeImage(imageLink);
 
-                String imageText = getSimpleMultiplayerKey(client.screen != null && PhaseDiscordConfig.showPaused);
+                String imageText = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
                 Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.level.players().size());
 
                 activity.assets().setLargeText(Component.translatable(
@@ -735,7 +735,7 @@ public class RPC
                 activity.assets().setSmallImage("base");
             }
 
-            String stateKey = getSimpleMultiplayerKey(client.screen != null && PhaseDiscordConfig.showPaused);
+            String stateKey = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
             Object[] args = getSimpleMultiplayerArgs(server, client.level.players().size());
 
             activity.setState(Component.translatable(
