@@ -199,7 +199,7 @@ public class RPC
                 {
                     if(!held_item.isEmpty())
                     {
-                        finalResult = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", item_name).getString();
+                        finalResult = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString().replace("%rpc", item_name);
                     }
                     else
                     {
