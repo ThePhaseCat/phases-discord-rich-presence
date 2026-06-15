@@ -54,6 +54,7 @@ public class RPC
             "coppergolem1", "coppergolem2", "coppergolem3", "coppergolem4",
             "nautilus1", "nautilus2", "nautilus3", "spear1",
             "baby_overworld1", "baby_overworld2", "baby_overworld3", "baby_nether1", "baby_nether2", "baby_fish",
+            "sulfur_cube1", "sulfur_cube2", "sulfur_cave1", "sulfur_cave2", "sulfur_cave3",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback", "pack"
@@ -63,88 +64,92 @@ public class RPC
     static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
 
     public static void start() {
-            new Thread(() -> {
-                if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
-                    return;
-                }
+        Thread discordThread = new Thread(() -> {
+            if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
+                return;
+            }
 
-                long finalAppID = Long.parseLong(PhaseDiscordConfig.discordAppID);
-                if(finalAppID == defaultAppID)
+            long finalAppID = Long.parseLong(PhaseDiscordConfig.discordAppID);
+            if(finalAppID == defaultAppID)
+            {
+                usingDefaultAppID = true;
+            }
+            else
+            {
+                usingDefaultAppID = false;
+            }
+
+            final CreateParams params = new CreateParams();
+            params.setClientID(finalAppID);
+            params.setFlags(CreateParams.Flags.NO_REQUIRE_DISCORD);
+            activity.timestamps().setStart(Instant.now());
+
+            try (final Core core = new Core(params)) {
+                //comment to enable logging
+                //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
+                core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
+
+                while(true)
                 {
-                    usingDefaultAppID = true;
-                }
-                else
-                {
-                    usingDefaultAppID = false;
-                }
-
-                final CreateParams params = new CreateParams();
-                params.setClientID(finalAppID);
-                params.setFlags(CreateParams.Flags.NO_REQUIRE_DISCORD);
-                activity.timestamps().setStart(Instant.now());
-
-                try (final Core core = new Core(params)) {
-                    //comment to enable logging
-                    //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
-                    core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
-
-                    while(true)
+                    try
                     {
-                        try
+                        imageNameOverworldSingleplayer = PhaseDiscordConfig.advancedModeOverworldPicSingle;
+                        imageNameNetherSingleplayer = PhaseDiscordConfig.advancedModeNetherPicSingle;
+                        imageNameEndSingleplayer = PhaseDiscordConfig.advancedModeEndPicSingle;
+                        imageNameCustomSingleplayer = PhaseDiscordConfig.advancedModeCustomPicSingle;
+
+                        imageNameOverworldMutliplayer = PhaseDiscordConfig.advancedModeOverworldPicMult;
+                        imageNameNetherMutliplayer = PhaseDiscordConfig.advancedModeNetherPicMult;
+                        imageNameEndMutliplayer = PhaseDiscordConfig.advancedModeEndPicMult;
+                        imageNameCustomMutliplayer = PhaseDiscordConfig.advancedModeCustomPicMult;
+
+                        largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
+                        if(client.isLocalServer()) //singleplayer presence
                         {
-                            imageNameOverworldSingleplayer = PhaseDiscordConfig.advancedModeOverworldPicSingle;
-                            imageNameNetherSingleplayer = PhaseDiscordConfig.advancedModeNetherPicSingle;
-                            imageNameEndSingleplayer = PhaseDiscordConfig.advancedModeEndPicSingle;
-                            imageNameCustomSingleplayer = PhaseDiscordConfig.advancedModeCustomPicSingle;
-
-                            imageNameOverworldMutliplayer = PhaseDiscordConfig.advancedModeOverworldPicMult;
-                            imageNameNetherMutliplayer = PhaseDiscordConfig.advancedModeNetherPicMult;
-                            imageNameEndMutliplayer = PhaseDiscordConfig.advancedModeEndPicMult;
-                            imageNameCustomMutliplayer = PhaseDiscordConfig.advancedModeCustomPicMult;
-
-                            largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
-                            if(client.isLocalServer()) //singleplayer presence
-                            {
-                                singleplayerPresenceLogic(activity);
-                            }
-                            else if(client.getCurrentServer() != null) //multiplayer presence
-                            {
-                                multiplayerPresenceLogic(activity);
-                            }
-                            else //main menu presence
-                            {
-                                mainMenuPresenceLogic(activity);
-                            }
-
-                            try {
-                                core.activityManager().updateActivity(activity);
-                            } catch (Exception e) {
-                                LOGGER.error("Failed to update activity, closing connection");
-                                core.activityManager().clearActivity();
-                                throw new RuntimeException(e);
-                            }
-
-                            try {
-                                Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);
-                            } catch (InterruptedException e) {
-                                LOGGER.error("Thread was interrupted", e);
-                                Thread.currentThread().interrupt();
-                                core.activityManager().clearActivity();
-                                throw new RuntimeException(e);
-                            }
-                        } catch (RuntimeException e) {
-                            LOGGER.error("Unexpected unexpected error while updating Discord Rich Presence, closing connection.", e);
-                            e.printStackTrace();
-                            core.activityManager().clearActivity();
-                            break; //exit while loop, stop running
+                            singleplayerPresenceLogic(activity);
                         }
+                        else if(client.getCurrentServer() != null) //multiplayer presence
+                        {
+                            multiplayerPresenceLogic(activity);
+                        }
+                        else //main menu presence
+                        {
+                            mainMenuPresenceLogic(activity);
+                        }
+
+                        try {
+                            core.activityManager().updateActivity(activity);
+                        } catch (Exception e) {
+                            LOGGER.error("Failed to update activity, closing connection");
+                            core.activityManager().clearActivity();
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);
+                        } catch (InterruptedException e) {
+                            LOGGER.error("Thread was interrupted", e);
+                            Thread.currentThread().interrupt();
+                            core.activityManager().clearActivity();
+                            throw new RuntimeException(e);
+                        }
+                    } catch (RuntimeException e) {
+                        LOGGER.error("Unexpected unexpected error while updating Discord Rich Presence, closing connection.", e);
+                        e.printStackTrace();
+                        core.activityManager().clearActivity();
+                        break; //exit while loop, stop running
                     }
-                } catch (RuntimeException e) {
-                    LOGGER.error("Unexpected error while starting Discord Rich Presence", e);
-                    e.printStackTrace();
-                    return;
                 }
-            }).start();
+            } catch (RuntimeException e) {
+                LOGGER.error("Unexpected error while starting Discord Rich Presence", e);
+                e.printStackTrace();
+                return;
+            }
+        });
+
+        discordThread.setDaemon(true);
+        discordThread.setName("Phase's Discord Rich Presence Thread"); //in case of debugging
+        discordThread.start();
     }
 
 
@@ -179,6 +184,7 @@ public class RPC
                 if(!item_name.equals(Items.AIR.getName().getString()))
                 {
                     finalResult = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("%s", item_name);
+                    finalResult = finalResult.replace("%rpc", item_name);
                 }
                 else
                 {
@@ -197,7 +203,7 @@ public class RPC
                 {
                     if(!item_name.equals(Items.AIR.getName().getString()))
                     {
-                        finalResult = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", item_name).getString();
+                        finalResult = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString().replace("%rpc", item_name);
                     }
                     else
                     {
@@ -684,12 +690,16 @@ public class RPC
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
             }
             else
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
             }
 
