@@ -56,6 +56,7 @@ public class RPC
             "coppergolem1", "coppergolem2", "coppergolem3", "coppergolem4",
             "nautilus1", "nautilus2", "nautilus3", "spear1",
             "baby_overworld1", "baby_overworld2", "baby_overworld3", "baby_nether1", "baby_nether2", "baby_fish",
+            "sulfur_cube1", "sulfur_cube2", "sulfur_cave1", "sulfur_cave2", "sulfur_cave3",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback", "pack"
@@ -65,7 +66,7 @@ public class RPC
     static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
 
     public static void start() {
-        new Thread(() -> {
+        Thread discordThread = new Thread(() -> {
             if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
                 return;
             }
@@ -146,7 +147,11 @@ public class RPC
                 e.printStackTrace();
                 return;
             }
-        }).start();
+        });
+
+        discordThread.setDaemon(true);
+        discordThread.setName("Phase's Discord Rich Presence Thread"); //in case of debugging
+        discordThread.start();
     }
 
 
@@ -181,6 +186,7 @@ public class RPC
                 if(!item_name.equals(Items.AIR.getName().getString()))
                 {
                     finalResult = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("%s", item_name);
+                    finalResult = finalResult.replace("%rpc", item_name);
                 }
                 else
                 {
@@ -199,7 +205,7 @@ public class RPC
                 {
                     if(!item_name.equals(Items.AIR.getName().getString()))
                     {
-                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField", item_name).getString();
+                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString().replace("%rpc", item_name);
                     }
                     else
                     {
@@ -686,12 +692,16 @@ public class RPC
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.world.getPlayers().size()));
                 activity.setState(stateParsed);
             }
             else
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
                 stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.world.getPlayers().size()));
                 activity.setState(stateParsed);
             }
 
