@@ -64,7 +64,7 @@ public class RPC
     static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
 
     public static void start() {
-        new Thread(() -> {
+        Thread discordThread = new Thread(() -> {
             if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
                 return;
             }
@@ -145,7 +145,11 @@ public class RPC
                 e.printStackTrace();
                 return;
             }
-        }).start();
+        });
+
+        discordThread.setDaemon(true);
+        discordThread.setName("Phase's Discord Rich Presence Thread"); //in case of debugging
+        discordThread.start();
     }
 
 
