@@ -565,7 +565,8 @@ public class RPC
         }
         else //more players
         {
-            return Text.translatable("phases-discord-rich-presence.multiplayer.players.other", playerCount).getString();
+            String baseString = Text.translatable("phases-discord-rich-presence.multiplayer.players.other").getString();
+            return baseString.replaceFirst("%rpc", String.valueOf(playerCount));
         }
     }
 
@@ -721,8 +722,14 @@ public class RPC
                 String imageText = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
                 Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
+                String imageParsed = Text.translatable(imageText).getString();
+                for(Object arg:imageTextArgs)
+                {
+                    imageParsed = imageParsed.replaceFirst("%rpc", String.valueOf(arg));
+                }
+
                 activity.assets().setLargeText(Text.translatable(
-                        imageText,
+                        imageParsed,
                         imageTextArgs
                 ).getString());
             }
@@ -744,8 +751,14 @@ public class RPC
             String stateKey = getSimpleMultiplayerKey(client.currentScreen != null && PhaseDiscordConfig.showPaused);
             Object[] args = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
+            String stateParsed = Text.translatable(stateKey).getString();
+            for (Object arg:args)
+            {
+                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(arg));
+            }
+
             activity.setState(Text.translatable(
-                    stateKey,
+                    stateParsed,
                     args
             ).getString());
         }
