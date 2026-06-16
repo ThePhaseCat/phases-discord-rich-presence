@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.14-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -49,11 +49,12 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	//mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    //mappings loom.officialMojangMappings()
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	//implementation 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'
 	//implementation 'club.minnced:discord-rpc-release:v3.4.0'
@@ -67,10 +68,10 @@ dependencies {
 
 	//modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 	//include(modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}"))
-    modImplementation include ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
+    implementation include ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
 
 	// ModMenu is optional, but it's a nice to have for quality of life.
-	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
@@ -82,7 +83,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 25
 }
 
 java {
@@ -91,8 +92,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {

@@ -1,6 +1,5 @@
 package com.phasesdiscord;
 
-
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import eu.midnightdust.lib.config.MidnightConfig;

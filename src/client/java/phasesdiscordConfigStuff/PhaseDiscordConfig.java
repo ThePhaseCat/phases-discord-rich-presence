@@ -1,7 +1,7 @@
 package phasesdiscordConfigStuff;
 
 import eu.midnightdust.lib.config.MidnightConfig;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public class PhaseDiscordConfig extends MidnightConfig
 {
@@ -17,11 +17,13 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Entry(category = BASIC) public static boolean enableDimension = true;
 
-    @Entry(category = BASIC) public static boolean enableServerIP = true;
-
-    @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
+    @Entry(category = BASIC) public static boolean enableServerName = true;
 
     @Entry(category = BASIC) public static boolean enableServerPlayerCount = true;
+
+    @Entry(category = BASIC) public static boolean enableServerIcon = true;
+
+    @Entry(category = BASIC) public static boolean enableCustomDimensionSupport = true;
 
     @Entry(category = BASIC) public static boolean showPaused = true;
 
@@ -33,23 +35,23 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Comment(category = ADVANCED) public static Comment advanceExplain;
     @Comment(category = ADVANCED) public static Comment advanceExplain2;
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField").getString();
-    @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeDetail = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeDetailWhenHoldingItem = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString();
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField").getString();
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayer = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateMultiplayerPause = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerPauseTextField").getString();
 
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayer = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString();;
-    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayerPause = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString();;
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayer = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString();
+    @Entry(category = ADVANCED) public static String mainAdvancedModeStateSingleplayerPause = Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString();
 
-    @Entry(category = ADVANCED) public static String advancedModeDimensionOverworld = Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField").getString();;
-    @Entry(category = ADVANCED) public static String advancedModeDimensionNether = Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField").getString();;
-    @Entry(category = ADVANCED) public static String advancedModeDimensionEnd = Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField").getString();;
-    @Entry(category = ADVANCED) public static String advancedModeDimensionCustom = Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField").getString();;
+    @Entry(category = ADVANCED) public static String advancedModeDimensionOverworld = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField").getString();
+    @Entry(category = ADVANCED) public static String advancedModeDimensionNether = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField").getString();
+    @Entry(category = ADVANCED) public static String advancedModeDimensionEnd = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField").getString();
+    @Entry(category = ADVANCED) public static String advancedModeDimensionCustom = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionCustomTextField").getString();
 
     @Entry(category = ADVANCED) public static boolean advancedModeChangeMainMenuText = false;
 
-    @Entry(category = ADVANCED) public static String advancedModeMainMenuText = Text.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString();
+    @Entry(category = ADVANCED) public static String advancedModeMainMenuText = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString();
 
     @Entry(category = ADVANCED) public static String advancedModeLargeText = "Phase's Discord Rich Presence";
 
@@ -67,21 +69,27 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail3;
 
+    @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail4;
+
     @Comment(category = ADVANCED) public static Comment advancedModeNetherPicDetail;
 
     @Comment(category = ADVANCED) public static Comment advancedModeEndPicDetail;
 
     @Comment(category = ADVANCED) public static Comment advancedModeOtherPicDetail;
 
+    @Comment(category = ADVANCED) public static Comment advancedModeMultiplayerKeyDetail;
+
     @Entry(category = ADVANCED) public static String advancedModeLargePic = "base";
 
-    @Entry(category = ADVANCED) public static String advancedModeOverworldPic = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeOverworldPicSingle = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeNetherPicSingle = "nether";
+    @Entry(category = ADVANCED) public static String advancedModeEndPicSingle = "the_end";
+    @Entry(category = ADVANCED) public static String advancedModeCustomPicSingle = "void";
 
-    @Entry(category = ADVANCED) public static String advancedModeNetherPic = "nether";
-
-    @Entry(category = ADVANCED) public static String advancedModeEndPic = "the_end";
-
-    @Entry(category = ADVANCED) public static String advancedModeCustomPic = "void";
+    @Entry(category = ADVANCED) public static String advancedModeOverworldPicMult = "overworld";
+    @Entry(category = ADVANCED) public static String advancedModeNetherPicMult = "nether";
+    @Entry(category = ADVANCED) public static String advancedModeEndPicMult = "the_end";
+    @Entry(category = ADVANCED) public static String advancedModeCustomPicMult = "void";
 
     @Entry(category = ADVANCED) public static boolean advancedModeShowPlayerHeadUser = true;
 
