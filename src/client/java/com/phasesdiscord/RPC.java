@@ -719,8 +719,12 @@ public class RPC
                 String imageText = getSimpleMultiplayerKey(client.screen != null && PhaseDiscordConfig.showPaused);
                 Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.level.players().size());
 
+                String translatedImageText = Component.translatable(imageText, imageTextArgs).getString();
+                translatedImageText = translatedImageText.replaceFirst("%rpc", serverIP);
+                translatedImageText = translatedImageText.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
+
                 activity.assets().setLargeText(Component.translatable(
-                        imageText,
+                        translatedImageText,
                         imageTextArgs
                 ).getString());
             }
@@ -742,8 +746,12 @@ public class RPC
             String stateKey = getSimpleMultiplayerKey(client.screen != null && PhaseDiscordConfig.showPaused);
             Object[] args = getSimpleMultiplayerArgs(server, client.level.players().size());
 
+            String translatedState = Component.translatable(stateKey, args).getString();
+            translatedState = translatedState.replaceFirst("%rpc", serverIP);
+            translatedState = translatedState.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
+
             activity.setState(Component.translatable(
-                    stateKey,
+                    translatedState,
                     args
             ).getString());
         }
