@@ -169,7 +169,7 @@ public class RPC
       if (!PhaseDiscordConfig.enableAdvancedMode) {
         return "https://mc-heads.net/avatar/" + uuid;
       } else {
-        return PhaseDiscordConfig.advancedModePlayerHeadService + uuid;
+        return PhaseDiscordConfig.advancedModePlayerHeadService.replace("%uuid", uuid);
       }
     }
 
