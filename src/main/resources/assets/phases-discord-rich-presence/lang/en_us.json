@@ -102,6 +102,8 @@
   "phases-discord-rich-presence.midnightconfig.advancedModeMultiplayerKeyDetail": "Typing 'server' as an image key for the Multiplayer Image Key Options will display the server's icon!",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser": "Show Player Head and Username in Presence",
   "phases-discord-rich-presence.midnightconfig.advancedModeShowPlayerHeadUser.tooltip": "Toggles showing your player head and username in Advanced Mode. This replaces the small image in the presence.",
+  "phases-discord-rich-presence.midnightconfig.advancedModePlayerHeadService": "Player Head Web API",
+  "phases-discord-rich-presence.midnightconfig.advancedModePlayerHeadService.tooltip": "What service to use for the player head.",
   "phases-discord-rich-presence.midnightconfig.advancedModeLargeText": "Presence Image Text (Main Menu)",
   "phases-discord-rich-presence.midnightconfig.advancedModeLargeText.tooltip": "Changes the text in the presence large image when in the main menu",
   "phases-discord-rich-presence.midnightconfig.otherOptions": "Other Options",
