@@ -92,6 +92,7 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry(category = ADVANCED) public static String advancedModeCustomPicMult = "void";
 
     @Entry(category = ADVANCED) public static boolean advancedModeShowPlayerHeadUser = true;
+    @Entry(category = ADVANCED) public static String advancedModePlayerHeadService = "https://mc-heads.net/avatar/%uuid";
 
     @Comment(category = OTHER, centered = true) public static Comment otherOptions;
 
