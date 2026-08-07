@@ -166,11 +166,7 @@ public class RPC
     //fetches the image URL for the player head
     private static @NotNull String getPlayerHeadURL(String uuid, String type, int size)
     {
-      if (!PhaseDiscordConfig.enableAdvancedMode) {
-        return "https://mc-heads.net/avatar/" + uuid;
-      } else {
-        return PhaseDiscordConfig.advancedModePlayerHeadService.replace("%uuid", uuid);
-      }
+        return PhaseDiscordConfig.playerHeadServiceURL.replace("%uuid%", uuid);
     }
 
     //returns the string/name of the item the player is currently holding

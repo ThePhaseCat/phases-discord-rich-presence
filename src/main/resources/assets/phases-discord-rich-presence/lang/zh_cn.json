@@ -111,6 +111,8 @@
   "phases-discord-rich-presence.midnightconfig.discordAppID.tooltip": "Discord Rich Presence 的应用程序 ID。如果您想自定义，请更改此 ID。否则，请勿更改。重启即可查看更改",
   "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate": "Discord Rich Presence 更新频率",
   "phases-discord-rich-presence.midnightconfig.discordRichPresenceUpdateRate.tooltip": "Discord Rich Presence 更新的频率。此值以毫秒为单位。更改后请重新启动游戏以使其生效!",
+  "phases-discord-rich-presence.midnightconfig.playerHeadServiceURL": "玩家头像 Web API",
+  "phases-discord-rich-presence.midnightconfig.playerHeadServiceURL.tooltip": "用于获取玩家头像的服务或 API。%uuid 会被替换为实际的 UUID。建议保持默认设置。",
   "phases-discord-rich-presence.midnightconfig.category.basic": "基本设置",
   "phases-discord-rich-presence.midnightconfig.category.advanced": "高级设置",
   "phases-discord-rich-presence.midnightconfig.category.other": "其他选项",
