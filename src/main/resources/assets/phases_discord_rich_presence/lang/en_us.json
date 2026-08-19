@@ -1,0 +1,13 @@
+{
+  "itemGroup.phases_discord_rich_presence": "Example Mod Tab",
+  "block.phases_discord_rich_presence.example_block": "Example Block",
+  "item.phases_discord_rich_presence.example_item": "Example Item",
+
+  "phases_discord_rich_presence.configuration.title": "Phase's Discord Rich Presence Configs",
+  "phases_discord_rich_presence.configuration.section.phases_discord_rich_presence.common.toml": "Phase's Discord Rich Presence Configs",
+  "phases_discord_rich_presence.configuration.section.phases_discord_rich_presence.common.toml.title": "Phase's Discord Rich Presence Configs",
+  "phases_discord_rich_presence.configuration.items": "Item List",
+  "phases_discord_rich_presence.configuration.logDirtBlock": "Log Dirt Block",
+  "phases_discord_rich_presence.configuration.magicNumberIntroduction": "Magic Number Text",
+  "phases_discord_rich_presence.configuration.magicNumber": "Magic Number"
+}
