@@ -55,6 +55,7 @@ public class RPC
             "nautilus1", "nautilus2", "nautilus3", "spear1",
             "baby_overworld1", "baby_overworld2", "baby_overworld3", "baby_nether1", "baby_nether2", "baby_fish",
             "sulfur_cube1", "sulfur_cube2", "sulfur_cave1", "sulfur_cave2", "sulfur_cave3",
+            "dappled1", "dappled2", "dappled3", "dappled4", "dappled5", "cushion1", "cushion2",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback", "pack"
