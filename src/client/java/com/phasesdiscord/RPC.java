@@ -57,6 +57,7 @@ public class RPC
             "nautilus1", "nautilus2", "nautilus3", "spear1",
             "baby_overworld1", "baby_overworld2", "baby_overworld3", "baby_nether1", "baby_nether2", "baby_fish",
             "sulfur_cube1", "sulfur_cube2", "sulfur_cave1", "sulfur_cave2", "sulfur_cave3",
+            "dappled1", "dappled2", "dappled3", "dappled4", "dappled5", "cushion1", "cushion2",
             "nether", "nether2", "nether3", "nethercool",
             "the_end", "end2", "end3", "actualendbg",
             "void", "base", "base_old", "creeper_icon", "fallback", "pack"
@@ -169,7 +170,7 @@ public class RPC
     @Contract(pure = true)
     private static @NotNull String getPlayerHeadURL(String uuid, String type, int size)
     {
-        return "https://mc-heads.net/avatar/" + uuid;
+        return PhaseDiscordConfig.playerHeadServiceURL.replace("%uuid", uuid);
     }
 
     //returns the string/name of the item the player is currently holding
@@ -186,7 +187,7 @@ public class RPC
                 if(!item_name.equals(Items.AIR.getName().getString()))
                 {
                     finalResult = PhaseDiscordConfig.mainAdvancedModeDetailWhenHoldingItem.replace("%s", item_name);
-                    finalResult = finalResult.replace("%rpc", item_name);
+                    finalResult = finalResult.replace("%item", item_name);
                 }
                 else
                 {
@@ -205,7 +206,7 @@ public class RPC
                 {
                     if(!item_name.equals(Items.AIR.getName().getString()))
                     {
-                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString().replace("%rpc", item_name);
+                        finalResult = Text.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField").getString().replace("%item", item_name);
                     }
                     else
                     {
@@ -566,7 +567,7 @@ public class RPC
         else //more players
         {
             String baseString = Text.translatable("phases-discord-rich-presence.multiplayer.players.other").getString();
-            return baseString.replaceFirst("%rpc", String.valueOf(playerCount));
+            return baseString.replaceFirst("%playercount", String.valueOf(playerCount));
         }
     }
 
@@ -691,16 +692,16 @@ public class RPC
             String stateParsed;
             if(client.currentScreen != null)
             {
-                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%s", serverIP);
-                stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%serverip", serverIP);
+                stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.world.getPlayers().size()));
                 stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
                 stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.world.getPlayers().size()));
                 activity.setState(stateParsed);
             }
             else
             {
-                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%s", serverIP);
-                stateParsed = stateParsed.replaceFirst("%s", String.valueOf(client.world.getPlayers().size()));
+                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%serverip", serverIP);
+                stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.world.getPlayers().size()));
                 stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
                 stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.world.getPlayers().size()));
                 activity.setState(stateParsed);
@@ -723,9 +724,17 @@ public class RPC
                 Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
                 String imageParsed = Text.translatable(imageText).getString();
-                for(Object arg:imageTextArgs)
+                if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
                 {
-                    imageParsed = imageParsed.replaceFirst("%rpc", String.valueOf(arg));
+                    imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0])).replace("%playercount", String.valueOf(imageTextArgs[1]));
+                }
+                else if(PhaseDiscordConfig.enableServerName)
+                {
+                    imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0]));
+                }
+                else if(PhaseDiscordConfig.enableServerPlayerCount)
+                {
+                    imageParsed = imageParsed.replace("%playercount", String.valueOf(imageTextArgs[0]));
                 }
 
                 activity.assets().setLargeText(Text.translatable(
@@ -752,9 +761,17 @@ public class RPC
             Object[] args = getSimpleMultiplayerArgs(server, client.world.getPlayers().size());
 
             String stateParsed = Text.translatable(stateKey).getString();
-            for (Object arg:args)
+            if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
             {
-                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(arg));
+                stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0])).replace("%playercount", String.valueOf(args[1]));
+            }
+            else if(PhaseDiscordConfig.enableServerName)
+            {
+                stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0]));
+            }
+            else if(PhaseDiscordConfig.enableServerPlayerCount)
+            {
+                stateParsed = stateParsed.replace("%playercount", String.valueOf(args[0]));
             }
 
             activity.setState(Text.translatable(
