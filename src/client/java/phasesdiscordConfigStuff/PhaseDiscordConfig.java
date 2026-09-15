@@ -71,6 +71,8 @@ public class PhaseDiscordConfig extends MidnightConfig
 
     @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail4;
 
+    @Comment(category = ADVANCED) public static Comment advancedModeOverworldPicDetail5;
+
     @Comment(category = ADVANCED) public static Comment advancedModeNetherPicDetail;
 
     @Comment(category = ADVANCED) public static Comment advancedModeEndPicDetail;
@@ -100,4 +102,6 @@ public class PhaseDiscordConfig extends MidnightConfig
     @Entry(category = OTHER) public static int discordRichPresenceUpdateRate = 5000;
 
     @Entry(category = OTHER) public static String discordAppID = "1147361100929708053";
+
+    @Entry(category = OTHER) public static String playerHeadServiceURL = "https://mc-heads.net/avatar/%uuid";
 }
