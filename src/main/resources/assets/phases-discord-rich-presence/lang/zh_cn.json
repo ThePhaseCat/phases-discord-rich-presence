@@ -30,7 +30,7 @@
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailTextField": "正在玩 Minecraft",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItem": "Presence 详情 - 手持物品",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItem.tooltip": "当您手持物品时的Presence详细信息文本 ",
-  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField": "拿着 %rpc",
+  "phases-discord-rich-presence.midnightconfig.mainAdvancedModeDetailWhenHoldingItemTextField": "拿着 %item",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayer": "Presence 状态 - 多人游戏",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayer.tooltip": "多人游戏时的状态文本",
   "phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateMultiplayerTextField": "正在 %serverip 内与 %playercount 位玩家一起玩",
