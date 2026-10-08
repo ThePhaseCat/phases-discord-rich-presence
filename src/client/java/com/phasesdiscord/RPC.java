@@ -691,6 +691,7 @@ public class RPC
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%serverip", serverIP);
                 stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%servername", serverName);
                 stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
                 stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
@@ -699,6 +700,7 @@ public class RPC
             {
                 stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%serverip", serverIP);
                 stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
+                stateParsed = stateParsed.replaceFirst("%servername", serverName);
                 stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
                 stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
                 activity.setState(stateParsed);
