@@ -2,6 +2,9 @@
 
 A mod that adds simple and light Discord Rich Presence into Minecraft!
 
+[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_64h.png)](https://modrinth.com/mod/phases-discord-rich-presence)
+[![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_64h.png)](https://www.curseforge.com/minecraft/mc-mods/phases-discord-rich-presence)
+
 # Requirements
 Minecraft `1.21.1, 1.21.11, 26.1, 26.2, 26.3`
 
