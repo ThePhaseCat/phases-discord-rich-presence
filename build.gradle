@@ -72,6 +72,8 @@ dependencies {
 
 	// ModMenu is optional, but it's a nice to have for quality of life.
     implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+	include(implementation('io.github.CDAGaming:DiscordIPC:0.10.2'))
 }
 
 processResources {

@@ -1,5 +1,13 @@
 package com.phasesdiscord;
 
+import com.google.gson.JsonObject;
+import com.jagrosh.discordipc.IPCClient;
+import com.jagrosh.discordipc.IPCListener;
+import com.jagrosh.discordipc.entities.ActivityType;
+import com.jagrosh.discordipc.entities.Packet;
+import com.jagrosh.discordipc.entities.RichPresence;
+import com.jagrosh.discordipc.entities.User;
+import com.jagrosh.discordipc.exceptions.NoDiscordClientException;
 import de.jcm.discordgamesdk.Core;
 import de.jcm.discordgamesdk.CreateParams;
 import de.jcm.discordgamesdk.LogLevel;
@@ -9,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import phasesdiscordConfigStuff.PhaseDiscordConfig;
 
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
@@ -64,12 +73,19 @@ public class RPC
     static long defaultAppID = 1147361100929708053L; //in order to check if the id matches
     static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
 
-    public static void start() {
-        Thread discordThread = new Thread(() -> {
-            if (!PhaseDiscordConfig.discordEnable) { // rich presence is disabled
-                return;
-            }
+    private static IPCClient ipcClient;
+    private static volatile boolean ready = false;
 
+    //details is top text
+    //state is bottom text
+
+    public static void start() {
+        if(!PhaseDiscordConfig.discordEnable)
+        {
+            return; //they don't want to use my mod :(
+        }
+
+        Thread discordThread = new Thread(() -> {
             long finalAppID = Long.parseLong(PhaseDiscordConfig.discordAppID);
             if(finalAppID == defaultAppID)
             {
@@ -79,20 +95,62 @@ public class RPC
             {
                 usingDefaultAppID = false;
             }
+            ipcClient = new IPCClient(finalAppID);
 
-            final CreateParams params = new CreateParams();
-            params.setClientID(finalAppID);
-            params.setFlags(CreateParams.Flags.NO_REQUIRE_DISCORD);
-            activity.timestamps().setStart(Instant.now());
+            ipcClient.setListener(new IPCListener() {
+                @Override
+                public void onPacketSent(IPCClient ipcClient, Packet packet) {
 
-            try (final Core core = new Core(params)) {
-                //comment to enable logging
-                //THIS SPAMS THE CONSOLE A LOT YOU HAVE BEEN WARNED
-                core.setLogHook(LogLevel.DEBUG, (level, message) -> LOGGER.info("[Discord] " + message));
+                }
 
-                while(true)
+                @Override
+                public void onPacketReceived(IPCClient ipcClient, Packet packet) {
+
+                }
+
+                @Override
+                public void onActivityJoin(IPCClient ipcClient, String s) {
+
+                }
+
+                @Override
+                public void onActivitySpectate(IPCClient ipcClient, String s) {
+
+                }
+
+                @Override
+                public void onActivityJoinRequest(IPCClient ipcClient, String s, User user) {
+
+                }
+
+                @Override
+                public void onReady(IPCClient ipcClient) {
+                    ready = true;
+                }
+
+                @Override
+                public void onClose(IPCClient ipcClient, JsonObject jsonObject) {
+
+                }
+
+                @Override
+                public void onDisconnect(IPCClient ipcClient, Throwable throwable) {
+
+                }
+            });
+
+            try
+            {
+                ipcClient.connect();
+            } catch (NoDiscordClientException e) {
+                LOGGER.error("failed to connect to discord", e);
+            }
+
+            while(!Thread.currentThread().isInterrupted())
+            {
+                try
                 {
-                    try
+                    if(ready)
                     {
                         imageNameOverworldSingleplayer = PhaseDiscordConfig.advancedModeOverworldPicSingle;
                         imageNameNetherSingleplayer = PhaseDiscordConfig.advancedModeNetherPicSingle;
@@ -105,63 +163,46 @@ public class RPC
                         imageNameCustomMutliplayer = PhaseDiscordConfig.advancedModeCustomPicMult;
 
                         largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
+
+                        RichPresence.Builder builder = new RichPresence.Builder();
+                        builder.setActivityType(ActivityType.Playing);
+
                         if(client.isLocalServer()) //singleplayer presence
                         {
-                            singleplayerPresenceLogic(activity);
+                            singleplayerMainPresenceLogic(builder);
                         }
                         else if(client.getCurrentServer() != null) //multiplayer presence
                         {
-                            multiplayerPresenceLogic(activity);
+                            multiplayerMainPresenceLogic(builder);
                         }
                         else //main menu presence
                         {
-                            mainMenuPresenceLogic(activity);
+                            mainMenuMainPresenceLogic(builder);
                         }
 
-                        try {
-                            core.activityManager().updateActivity(activity);
-                        } catch (Exception e) {
-                            LOGGER.error("Failed to update activity, closing connection");
-                            core.activityManager().clearActivity();
-                            throw new RuntimeException(e);
-                        }
-
-                        try {
-                            Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);
-                        } catch (InterruptedException e) {
-                            LOGGER.error("Thread was interrupted", e);
-                            Thread.currentThread().interrupt();
-                            core.activityManager().clearActivity();
-                            throw new RuntimeException(e);
-                        }
-                    } catch (RuntimeException e) {
-                        LOGGER.error("Unexpected unexpected error while updating Discord Rich Presence, closing connection.", e);
-                        e.printStackTrace();
-                        core.activityManager().clearActivity();
-                        break; //exit while loop, stop running
+                        ipcClient.sendRichPresence(builder.build());
                     }
+                    Thread.sleep(PhaseDiscordConfig.discordRichPresenceUpdateRate);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } catch (Exception e) {
+                    LOGGER.error("failed to update discord presence", e);
                 }
-            } catch (RuntimeException e) {
-                LOGGER.error("Unexpected error while starting Discord Rich Presence", e);
-                e.printStackTrace();
-                return;
             }
+            ipcClient.close();
         });
-
         discordThread.setDaemon(true);
-        discordThread.setName("Phase's Discord Rich Presence Thread"); //in case of debugging
         discordThread.start();
     }
 
 
     //these following methods are adopted from the Fabric-DiscordRPC repo (https://github.com/larroxtv/Fabric-DiscordRPC)
     //updates player head
-    private static void updatePlayerHead()
+    private static void updatePlayerHead(RichPresence.Builder builder)
     {
         String uuid = client.getGameProfile().id().toString();
         String playerHeadImage = getPlayerHeadURL(uuid, "head", 3);
-        activity.assets().setSmallImage(playerHeadImage);
-        activity.assets().setSmallText(client.getUser().getName());
+        builder.setSmallImage(playerHeadImage, client.getUser().getName());
     }
 
     //fetches the image URL for the player head
@@ -583,7 +624,7 @@ public class RPC
     }
 
     //handles singleplayer presence logic
-    public static void singleplayerPresenceLogic(Activity activity)
+    public static void singleplayerMainPresenceLogic(RichPresence.Builder builder)
     {
         if(client.level != null)
         {
@@ -601,7 +642,7 @@ public class RPC
 
                 if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
                 {
-                    updatePlayerHead();
+                    updatePlayerHead(builder);
                 }
                 else
                 {
@@ -629,7 +670,7 @@ public class RPC
                 setDimensionKey(false, dimensionName, activity, false, "not used");
                 if(PhaseDiscordConfig.showPlayerHeadAndUsername)
                 {
-                    updatePlayerHead();
+                    updatePlayerHead(builder);
                 }
                 else
                 {
@@ -659,8 +700,18 @@ public class RPC
         }
     }
 
+    public static void singleplayerBasic(RichPresence.Builder builder)
+    {
+        //to do
+    }
+
+    public static void singleplayerAdvancedLogic(RichPresence.Builder builder)
+    {
+        //to do
+    }
+
     //handles multiplayer presence logic
-    public static void multiplayerPresenceLogic(Activity activity)
+    public static void multiplayerMainPresenceLogic(RichPresence.Builder builder)
     {
         ServerData server = client.getCurrentServer();
         String dimensionName = client.level.dimension().identifier().toString();
@@ -679,7 +730,7 @@ public class RPC
 
             if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
             {
-                updatePlayerHead();
+                updatePlayerHead(builder);
             }
             else
             {
@@ -748,7 +799,7 @@ public class RPC
 
             if(PhaseDiscordConfig.showPlayerHeadAndUsername)
             {
-                updatePlayerHead();
+                updatePlayerHead(builder);
             }
             else
             {
@@ -783,46 +834,62 @@ public class RPC
         LoggerStuff(dimensionName, itemToDisplay, serverIP, activity);
     }
 
-    public static void mainMenuPresenceLogic(Activity activity)
+    public static void multiplayerBasic(RichPresence.Builder builder)
+    {
+        //to do
+    }
+
+    public static void multiplayerAdvanced(RichPresence.Builder builder)
+    {
+        //to do
+    }
+
+    public static void mainMenuMainPresenceLogic(RichPresence.Builder builder)
     {
         if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
         {
 
-            //main menu large image error handle
-            if(checkIfImageKeyIsValid(largeImageKey, false))
-            {
-                //activity.assets().setLargeImage("https://api.mcsrvstat.us/icon/mc.hypixel.net");
-                activity.assets().setLargeImage(largeImageKey);
-            }
-            else
-            {
-                activity.assets().setLargeImage("fallback");
-            }
-
-            if(PhaseDiscordConfig.advancedModeChangeMainMenuText)
-            {
-                activity.setDetails(PhaseDiscordConfig.advancedModeMainMenuText);
-            }
-            else
-            {
-                activity.setDetails(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
-            }
-
-            activity.assets().setLargeText(PhaseDiscordConfig.advancedModeLargeText); //to be changed via options eventually
-            activity.setState(PhaseDiscordConfig.advancedModeMainMenuState);
+            mainMenuAdvanced(builder);
         }
         else //simple mode
         {
-            activity.assets().setLargeImage("base");
-            activity.setDetails(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
-            activity.assets().setLargeText("Phase's Minecraft Discord Rich Presence");
-            if(PhaseDiscordConfig.showPlayerHeadAndUsername)
-            {
-                updatePlayerHead();
-                activity.assets().setSmallText(client.getUser().getName());
-            }
-
-            activity.setState("Phase's Minecraft Discord Rich Presence"); //maybe add an option to change this?
+            mainMenuBasic(builder);
         }
+    }
+
+    public static void mainMenuBasic(RichPresence.Builder builder)
+    {
+        builder.setLargeImage("base", "Phase's Minecraft Discord Rich Presence");
+        builder.setDetails(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
+        if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+        {
+            updatePlayerHead(builder);
+        }
+        builder.setState("Phase's Minecraft Discord Rich Presence");
+    }
+
+    public static void mainMenuAdvanced(RichPresence.Builder builder)
+    {
+        //main menu large image error handle
+        if(checkIfImageKeyIsValid(largeImageKey, false))
+        {
+            //activity.assets().setLargeImage("https://api.mcsrvstat.us/icon/mc.hypixel.net");
+            builder.setLargeImage(largeImageKey, PhaseDiscordConfig.advancedModeLargeText);
+        }
+        else
+        {
+            builder.setLargeImage("fallback", PhaseDiscordConfig.advancedModeLargeText);
+        }
+
+        if(PhaseDiscordConfig.advancedModeChangeMainMenuText)
+        {
+            builder.setDetails(PhaseDiscordConfig.advancedModeMainMenuText);
+        }
+        else
+        {
+            builder.setDetails(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeMainMenuTextTextField").getString());
+        }
+
+        builder.setState(PhaseDiscordConfig.advancedModeMainMenuState);
     }
 }
