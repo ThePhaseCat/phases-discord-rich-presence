@@ -848,7 +848,6 @@ public class RPC
     {
         if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode
         {
-
             mainMenuAdvanced(builder);
         }
         else //simple mode
