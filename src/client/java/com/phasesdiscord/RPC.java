@@ -73,12 +73,13 @@ public class RPC
     static long defaultAppID = 1147361100929708053L; //in order to check if the id matches
     static boolean usingDefaultAppID = true; //if the app id is the default one, then we can use the default image keys
 
+    //new discord rpc stuff
     private static IPCClient ipcClient;
     private static volatile boolean ready = false;
+    private static volatile boolean disconnected = false;
+    private static long startTime;
 
-    //details is top text
-    //state is bottom text
-
+    //to do, fix this
     public static void start() {
         if(!PhaseDiscordConfig.discordEnable)
         {
@@ -142,6 +143,7 @@ public class RPC
             try
             {
                 ipcClient.connect();
+                startTime = System.currentTimeMillis()/1000L;
             } catch (NoDiscordClientException e) {
                 LOGGER.error("failed to connect to discord", e);
             }
@@ -165,7 +167,7 @@ public class RPC
                         largeImageKey = PhaseDiscordConfig.advancedModeLargePic;
 
                         RichPresence.Builder builder = new RichPresence.Builder();
-                        builder.setActivityType(ActivityType.Playing);
+                        builder.setActivityType(ActivityType.Playing).setStartTimestamp(startTime);
 
                         if(client.isLocalServer()) //singleplayer presence
                         {
@@ -195,6 +197,52 @@ public class RPC
         discordThread.start();
     }
 
+    private static IPCListener createListener()
+    {
+        return new IPCListener() {
+            @Override
+            public void onPacketSent(IPCClient ipcClient, Packet packet) {
+
+            }
+
+            @Override
+            public void onPacketReceived(IPCClient ipcClient, Packet packet) {
+
+            }
+
+            @Override
+            public void onActivityJoin(IPCClient ipcClient, String s) {
+
+            }
+
+            @Override
+            public void onActivitySpectate(IPCClient ipcClient, String s) {
+
+            }
+
+            @Override
+            public void onActivityJoinRequest(IPCClient ipcClient, String s, User user) {
+
+            }
+
+            @Override
+            public void onReady(IPCClient ipcClient) {
+                ready = true;
+            }
+
+            @Override
+            public void onClose(IPCClient ipcClient, JsonObject jsonObject) {
+                ready = false;
+                disconnected = true;
+            }
+
+            @Override
+            public void onDisconnect(IPCClient ipcClient, Throwable throwable) {
+                ready = false;
+                disconnected = true;
+            }
+        };
+    }
 
     //these following methods are adopted from the Fabric-DiscordRPC repo (https://github.com/larroxtv/Fabric-DiscordRPC)
     //updates player head
@@ -259,237 +307,125 @@ public class RPC
         return "(If this is showing, then a bug has occured)"; //just in case, but this should never be shown
     }
 
-    //sets the assets in the presence to the correct dimension
-    public static void setDimensionKey(boolean inAdvancedMode, String dimensionName, Activity presence, boolean inMultiplayer, String serverIP)
+    //helper function to get the advanced mode image key based on passed in values
+    private static String getAdvancedModeImageKey(boolean inMultiplayer, String multiplayerKey, String singleplayerKey, String serverIP)
     {
-        if(inAdvancedMode)
+        if(inMultiplayer)
         {
-            if(dimensionName.equals("minecraft:overworld"))
+            if(!checkIfImageKeyIsValid(multiplayerKey, true))
             {
-                if(inMultiplayer) //multiplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameOverworldMutliplayer, true) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        if(imageNameOverworldMutliplayer.equals("server"))
-                        {
-                            String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                            activity.assets().setLargeImage(imageLink);
-                        }
-                        else
-                        {
-                            activity.assets().setLargeImage(imageNameOverworldMutliplayer);
-                        }
-                    }
-                }
-                else //singleplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameOverworldSingleplayer, false) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        activity.assets().setLargeImage(imageNameOverworldSingleplayer);
-                    }
-                }
-
-                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionOverworld);
+                return "fallback";
             }
-            else if(dimensionName.equals("minecraft:the_nether"))
+            else if(multiplayerKey.equals("server"))
             {
-                if(inMultiplayer) //multiplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameNetherMutliplayer, true) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        if(imageNameNetherMutliplayer.equals("server"))
-                        {
-                            String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                            activity.assets().setLargeImage(imageLink);
-                        }
-                        else
-                        {
-                            activity.assets().setLargeImage(imageNameNetherMutliplayer);
-                        }
-                    }
-                }
-                else //singleplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameNetherSingleplayer, false) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        activity.assets().setLargeImage(imageNameNetherSingleplayer);
-                    }
-                }
-
-                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionNether);
-            }
-            else if(dimensionName.equals("minecraft:the_end"))
-            {
-                if(inMultiplayer) //multiplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameEndMutliplayer, true) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        if(imageNameEndMutliplayer.equals("server"))
-                        {
-                            String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                            activity.assets().setLargeImage(imageLink);
-                        }
-                        else
-                        {
-                            activity.assets().setLargeImage(imageNameEndMutliplayer);
-                        }
-                    }
-                }
-                else //singleplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameEndSingleplayer, false) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        activity.assets().setLargeImage(imageNameEndSingleplayer);
-                    }
-                }
-
-                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionEnd);
-            }
-            else //custom dimension stuff
-            {
-                customDimensionName = dimensionName.replace("minecraft:", "");
-                if(inMultiplayer) //multiplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameCustomMutliplayer, true) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        if(imageNameCustomMutliplayer.equals("server"))
-                        {
-                            String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                            activity.assets().setLargeImage(imageLink);
-                        }
-                        else
-                        {
-                            activity.assets().setLargeImage(imageNameCustomMutliplayer);
-                        }
-                    }
-                }
-                else //singleplayer checks
-                {
-                    if(checkIfImageKeyIsValid(imageNameCustomSingleplayer, false) == false)
-                    {
-                        activity.assets().setLargeImage("fallback");
-                    }
-                    else
-                    {
-                        activity.assets().setLargeImage(imageNameCustomSingleplayer);
-                    }
-                }
-
-                activity.assets().setLargeText(PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName));
-            }
-        }
-        else
-        {
-            if(dimensionName.equals("minecraft:overworld"))
-            {
-                if(PhaseDiscordConfig.enableDimension == false)
-                {
-                    presence.assets().setLargeImage("void");
-                    presence.assets().setLargeText("Minecraft");
-                }
-                else
-                {
-                    presence.assets().setLargeImage("overworld");
-                    presence.assets().setLargeText(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField").getString());
-                }
-            }
-            else if(dimensionName.equals("minecraft:the_nether"))
-            {
-                if(PhaseDiscordConfig.enableDimension == false)
-                {
-                    presence.assets().setLargeImage("void");
-                    presence.assets().setLargeText("Minecraft");
-                }
-                else
-                {
-                    presence.assets().setLargeImage("nether");
-                    presence.assets().setLargeText(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField").getString());
-                }
-            }
-            else if(dimensionName.equals("minecraft:the_end"))
-            {
-                if(PhaseDiscordConfig.enableDimension == false)
-                {
-                    presence.assets().setLargeImage("void");
-                    presence.assets().setLargeText("Minecraft");
-                }
-                else
-                {
-                    presence.assets().setLargeImage("the_end");
-                    presence.assets().setLargeText(Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField").getString());
-                }
+                return "https://api.mcsrvstat.us/icon/" + serverIP;
             }
             else
             {
-                if(PhaseDiscordConfig.enableDimension == false)
-                {
-                    presence.assets().setLargeImage("void");
-                    presence.assets().setLargeText("Minecraft");
-                }
-                else
-                {
-                    if(PhaseDiscordConfig.enableCustomDimensionSupport == false)
-                    {
-                        presence.assets().setLargeImage("void");
-                        presence.assets().setLargeText("");
-                    }
-                    else
-                    {
-                        //System.out.println(dimensionName + " why is this not working");
-                        customDimensionName = dimensionName.replace("minecraft:", "");
-                        presence.assets().setLargeImage("void");
-                        presence.assets().setLargeText("In " + customDimensionName + " Dimension");
-                    }
-                }
+                return multiplayerKey;
+            }
+        }
+        else //so singleplayer
+        {
+            if(!checkIfImageKeyIsValid(singleplayerKey, false))
+            {
+                return "fallback";
+            }
+            else
+            {
+                return singleplayerKey;
             }
         }
     }
 
+    //sets the assets in the presence to the correct dimension
+    public static void setDimensionKey(boolean inAdvancedMode, String dimensionName, RichPresence.Builder builder, boolean inMultiplayer, String serverIP)
+    {
+        String largeImageKey = "";
+        String largeImageText = "";
+
+        if(inAdvancedMode)
+        {
+            switch(dimensionName)
+            {
+                case "minecraft:overworld":
+                    largeImageKey = getAdvancedModeImageKey(inMultiplayer, imageNameOverworldMutliplayer, imageNameOverworldSingleplayer, serverIP);
+                    largeImageText = PhaseDiscordConfig.advancedModeDimensionOverworld;
+                    break;
+                case "minecraft:the_nether":
+                    largeImageKey = getAdvancedModeImageKey(inMultiplayer, imageNameNetherMutliplayer, imageNameNetherSingleplayer, serverIP);
+                    largeImageText = PhaseDiscordConfig.advancedModeDimensionNether;
+                    break;
+                case "minecraft:the_end":
+                    largeImageKey = getAdvancedModeImageKey(inMultiplayer, imageNameEndMutliplayer, imageNameEndSingleplayer, serverIP);
+                    largeImageText = PhaseDiscordConfig.advancedModeDimensionEnd;
+                    break;
+                default: //custom dimension
+                    customDimensionName = dimensionName.replace("minecraft:", "");
+                    largeImageKey = getAdvancedModeImageKey(inMultiplayer, imageNameCustomMutliplayer, imageNameCustomSingleplayer, serverIP);
+                    largeImageText = PhaseDiscordConfig.advancedModeDimensionCustom.replace("{dimension_name}", customDimensionName);
+                    break;
+            }
+        }
+        else
+        {
+            if(!PhaseDiscordConfig.enableDimension)
+            {
+                largeImageKey = "void";
+                largeImageText = "Minecraft";
+            }
+            else
+            {
+                switch(dimensionName)
+                {
+                    case "minecraft:overworld":
+                        largeImageKey = "overworld";
+                        largeImageText = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionOverworldTextField").getString();
+                        break;
+                    case "minecraft:the_nether":
+                        largeImageKey = "nether";
+                        largeImageText = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionNetherTextField").getString();
+                        break;
+                    case "minecraft:the_end":
+                        largeImageKey = "end";
+                        largeImageText = Component.translatable("phases-discord-rich-presence.midnightconfig.advancedModeDimensionEndTextField").getString();
+                        break;
+                    default: //custom dimension
+                        largeImageKey = "void";
+                        if(!PhaseDiscordConfig.enableCustomDimensionSupport)
+                        {
+                            largeImageText = "In ???";
+                        }
+                        else
+                        {
+                            customDimensionName = dimensionName.replace("minecraft:", "");
+                            largeImageText = "In " + customDimensionName + " Dimension";
+                        }
+                        break;
+                }
+            }
+        }
+
+        builder.setLargeImage(largeImageKey, largeImageText);
+    }
+
     //updates the small image of advanced mode
-    public static void updateSmallImageAdvancedMode(String name, Activity presence, boolean inMultiplayer, String serverIP)
+    public static void updateSmallImageAdvancedMode(String name, RichPresence.Builder builder, boolean inMultiplayer, String serverIP)
     {
         if(checkIfImageKeyIsValid(name, inMultiplayer) == false)
         {
-            presence.assets().setSmallImage("fallback");
+            builder.setSmallImage("fallback");
         }
         else
         {
             if(name.equals("server") && inMultiplayer)
             {
                 String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                presence.assets().setSmallImage(imageLink);
+                builder.setSmallImage(imageLink);
             }
             else
             {
-                presence.assets().setSmallImage(name);
+                builder.setSmallImage(name);
             }
         }
     }
@@ -610,7 +546,7 @@ public class RPC
     }
 
     //prints out debug stuff, mainly meant for advanced mode debugging
-    public static void LoggerStuff(String dimName, String item_name, String serverip, Activity presence)
+    public static void LoggerStuff(String dimName, String item_name, String serverip)
     {
         if(PhaseDiscordConfig.enableDebug == true)
         {
@@ -618,8 +554,8 @@ public class RPC
             LOGGER.info("Dimension Name - " + dimName);
             LOGGER.info("Item Name - " + item_name);
             LOGGER.info("Server IP - " + serverip);
-            LOGGER.info("Current Presence Details - " + activity.getDetails());
-            LOGGER.info("Current Presence State - " + activity.getState());
+            //LOGGER.info("Current Presence Details - " + builder.);
+            //LOGGER.info("Current Presence State - " + activity.getState());
         }
     }
 
@@ -637,77 +573,77 @@ public class RPC
 
             if(PhaseDiscordConfig.enableAdvancedMode) //advanced mode on
             {
-                itemToDisplay = getHeldItem(true);
-                activity.setDetails(itemToDisplay);
-
-                if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
-                {
-                    updatePlayerHead(builder);
-                }
-                else
-                {
-                    updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity, false, "not used");
-                }
-
-                if(client.isPaused())
-                {
-                    activity.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause);
-                }
-                else
-                {
-                    activity.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayer);
-                }
-                // set dimension stuff
-                setDimensionKey(true, dimensionName, activity, false, "not used");
-                //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
-
+                singleplayerAdvanced(builder, dimensionName);
             }
             else //simple mode
             {
-                itemToDisplay = getHeldItem(false);
-                activity.setDetails(itemToDisplay);
-
-                setDimensionKey(false, dimensionName, activity, false, "not used");
-                if(PhaseDiscordConfig.showPlayerHeadAndUsername)
-                {
-                    updatePlayerHead(builder);
-                }
-                else
-                {
-                    activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
-                    activity.assets().setSmallImage("base");
-                }
-
-                if(!PhaseDiscordConfig.showPaused)
-                {
-                    activity.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
-                }
-                else
-                {
-                    if(client.isPaused())
-                    {
-                        activity.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString());
-                    }
-                    else
-                    {
-                        activity.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
-                    }
-                }
+                singleplayerBasic(builder, dimensionName);
             }
-
-            //debug logging
-            LoggerStuff(dimensionName, itemToDisplay, "singleplayer, not needed", activity);
         }
     }
 
-    public static void singleplayerBasic(RichPresence.Builder builder)
+    public static void singleplayerBasic(RichPresence.Builder builder, String dimensionName)
     {
-        //to do
+        String itemToDisplay = getHeldItem(false);
+        builder.setDetails(itemToDisplay);
+
+        setDimensionKey(false, dimensionName, builder, false, "not used");
+        if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+        {
+            updatePlayerHead(builder);
+        }
+        else
+        {
+            builder.setSmallImage("base", "Phase's Minecraft Discord Rich Presnece");
+        }
+
+        if(!PhaseDiscordConfig.showPaused)
+        {
+            builder.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
+        }
+        else
+        {
+            if(client.isPaused())
+            {
+                builder.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerPauseTextField").getString());
+            }
+            else
+            {
+                builder.setState(Component.translatable("phases-discord-rich-presence.midnightconfig.mainAdvancedModeStateSingleplayerTextField").getString());
+            }
+        }
+
+        //debug logging
+        LoggerStuff(dimensionName, itemToDisplay, "singleplayer, not needed");
     }
 
-    public static void singleplayerAdvancedLogic(RichPresence.Builder builder)
+    public static void singleplayerAdvanced(RichPresence.Builder builder, String dimensionName)
     {
-        //to do
+        String itemToDisplay = getHeldItem(true);
+        builder.setDetails(itemToDisplay);
+
+        if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
+        {
+            updatePlayerHead(builder);
+        }
+        else
+        {
+            updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, builder, false, "not used");
+        }
+
+        if(client.isPaused())
+        {
+            builder.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayerPause);
+        }
+        else
+        {
+            builder.setState(PhaseDiscordConfig.mainAdvancedModeStateSingleplayer);
+        }
+        //set dimension stuff
+        setDimensionKey(true, dimensionName, builder, false, "not used");
+
+        //debug logging
+        LoggerStuff(dimensionName, itemToDisplay, "singleplayer, not needed");
     }
 
     //handles multiplayer presence logic
@@ -718,130 +654,123 @@ public class RPC
         //DimensionType dimensionType = client.world.getDimension();
         //String dimensionName = dimensionType.toString();
         //String dimensionName = dimensionType.effects().toString();
-        //LOGGER.info(dimensionName);
-        String itemToDisplay = "";
+        //LOGGER.info(dimensionName
         String serverName = server.name;
         String serverIP = server.ip.toUpperCase();
 
         if(PhaseDiscordConfig.enableAdvancedMode)
         {
-            itemToDisplay = getHeldItem(true);
-            activity.setDetails(itemToDisplay);
-
-            if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
-            {
-                updatePlayerHead(builder);
-            }
-            else
-            {
-                updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, activity, true, serverIP);
-            }
-
-            String stateParsed;
-            if(client.isPaused())
-            {
-                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%serverip", serverIP);
-                stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
-                stateParsed = stateParsed.replaceFirst("%servername", serverName);
-                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
-                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
-                activity.setState(stateParsed);
-            }
-            else
-            {
-                stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%serverip", serverIP);
-                stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
-                stateParsed = stateParsed.replaceFirst("%servername", serverName);
-                stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
-                stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
-                activity.setState(stateParsed);
-            }
-
-            // set dimension stuff
-            setDimensionKey(true, dimensionName, activity, true, serverIP);
-            //activity.assets().setSmallText(PhaseDiscordConfig.advancedModeLargeText);
+            multiplayerAdvanced(builder, dimensionName, serverName, serverIP);
         }
         else //simple mode
         {
-            itemToDisplay = getHeldItem(false);
-            activity.setDetails(itemToDisplay);
-            if(PhaseDiscordConfig.enableServerIcon)
-            {
-                String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
-                activity.assets().setLargeImage(imageLink);
+            multiplayerBasic(builder, server, dimensionName, serverName, serverIP);
+        }
+    }
 
-                String imageText = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
-                Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.level.players().size());
+    public static void multiplayerBasic(RichPresence.Builder builder, ServerData server, String dimensionName, String serverName, String serverIP)
+    {
+        String itemToDisplay = getHeldItem(false);
+        builder.setDetails(itemToDisplay);
+        if(PhaseDiscordConfig.enableServerIcon)
+        {
+            String imageLink = "https://api.mcsrvstat.us/icon/"+serverIP;
 
-                String imageParsed = Component.translatable(imageText).getString();
-                if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
-                {
-                    imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0])).replace("%playercount", String.valueOf(imageTextArgs[1]));
-                }
-                else if(PhaseDiscordConfig.enableServerName)
-                {
-                    imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0]));
-                }
-                else if(PhaseDiscordConfig.enableServerPlayerCount)
-                {
-                    imageParsed = imageParsed.replace("%playercount", String.valueOf(imageTextArgs[0]));
-                }
+            String imageText = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
+            Object[] imageTextArgs = getSimpleMultiplayerArgs(server, client.level.players().size());
 
-                activity.assets().setLargeText(Component.translatable(
-                        imageParsed,
-                        imageTextArgs
-                ).getString());
-            }
-            else
-            {
-                setDimensionKey(false, dimensionName, activity, true, "not used");
-            }
-
-            if(PhaseDiscordConfig.showPlayerHeadAndUsername)
-            {
-                updatePlayerHead(builder);
-            }
-            else
-            {
-                activity.assets().setSmallText("Phase's Minecraft Discord Rich Presence");
-                activity.assets().setSmallImage("base");
-            }
-
-            String stateKey = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
-            Object[] args = getSimpleMultiplayerArgs(server, client.level.players().size());
-
-            String stateParsed = Component.translatable(stateKey).getString();
+            String imageParsed = Component.translatable(imageText).getString();
             if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
             {
-                stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0])).replace("%playercount", String.valueOf(args[1]));
+                imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0])).replace("%playercount", String.valueOf(imageTextArgs[1]));
             }
             else if(PhaseDiscordConfig.enableServerName)
             {
-                stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0]));
+                imageParsed = imageParsed.replace("%serverip", String.valueOf(imageTextArgs[0]));
             }
             else if(PhaseDiscordConfig.enableServerPlayerCount)
             {
-                stateParsed = stateParsed.replace("%playercount", String.valueOf(args[0]));
+                imageParsed = imageParsed.replace("%playercount", String.valueOf(imageTextArgs[0]));
             }
 
-            activity.setState(Component.translatable(
-                    stateParsed,
-                    args
-            ).getString());
+            builder.setLargeImage(imageLink, Component.translatable(imageParsed, imageTextArgs).getString());
+        }
+        else
+        {
+            setDimensionKey(false, dimensionName, builder, true, "not used");
         }
 
+        if(PhaseDiscordConfig.showPlayerHeadAndUsername)
+        {
+            updatePlayerHead(builder);
+        }
+        else
+        {
+            builder.setSmallImage("base", "Phase's Minecraft Discord Rich Presence");
+        }
+
+        String stateKey = getSimpleMultiplayerKey(client.isPaused() && PhaseDiscordConfig.showPaused);
+        Object[] args = getSimpleMultiplayerArgs(server, client.level.players().size());
+
+        String stateParsed = Component.translatable(stateKey).getString();
+        if(PhaseDiscordConfig.enableServerName && PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0])).replace("%playercount", String.valueOf(args[1]));
+        }
+        else if(PhaseDiscordConfig.enableServerName)
+        {
+            stateParsed = stateParsed.replace("%serverip", String.valueOf(args[0]));
+        }
+        else if(PhaseDiscordConfig.enableServerPlayerCount)
+        {
+            stateParsed = stateParsed.replace("%playercount", String.valueOf(args[0]));
+        }
+
+        builder.setState(Component.translatable(stateParsed, args).getString());
+
         //debug logging
-        LoggerStuff(dimensionName, itemToDisplay, serverIP, activity);
+        LoggerStuff(dimensionName, itemToDisplay, serverIP);
     }
 
-    public static void multiplayerBasic(RichPresence.Builder builder)
+    public static void multiplayerAdvanced(RichPresence.Builder builder, String dimensionName, String serverName, String serverIP)
     {
-        //to do
-    }
+        String itemToDisplay = getHeldItem(true);
+        builder.setDetails(itemToDisplay);
 
-    public static void multiplayerAdvanced(RichPresence.Builder builder)
-    {
-        //to do
+        if(PhaseDiscordConfig.advancedModeShowPlayerHeadUser)
+        {
+            updatePlayerHead(builder);
+        }
+        else
+        {
+            updateSmallImageAdvancedMode(PhaseDiscordConfig.advancedModeLargePic, builder, true, serverIP);
+        }
+
+        String stateParsed;
+        if(client.isPaused())
+        {
+            stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayerPause.replaceFirst("%serverip", serverIP);
+            stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
+            stateParsed = stateParsed.replaceFirst("%servername", serverName);
+            stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+            stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
+            builder.setState(stateParsed);
+        }
+        else
+        {
+            stateParsed = PhaseDiscordConfig.mainAdvancedModeStateMultiplayer.replaceFirst("%serverip", serverIP);
+            stateParsed = stateParsed.replaceFirst("%playercount", String.valueOf(client.level.players().size()));
+            stateParsed = stateParsed.replaceFirst("%servername", serverName);
+            stateParsed = stateParsed.replaceFirst("%rpc", serverIP);
+            stateParsed = stateParsed.replaceFirst("%rpc", String.valueOf(client.level.players().size()));
+            builder.setState(stateParsed);
+        }
+
+        //set dimension stuff
+        setDimensionKey(true, dimensionName, builder, true, serverIP);
+
+        //debug logging
+        LoggerStuff(dimensionName, itemToDisplay, serverIP);
     }
 
     public static void mainMenuMainPresenceLogic(RichPresence.Builder builder)
